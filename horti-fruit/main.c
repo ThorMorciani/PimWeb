@@ -11,11 +11,22 @@
 void login() {
     char login[10];
     char senha[5];
-
+    struct LoginValidado loginValidado;
     printf("Digite seu usuario para fazer login \n");
-    scanf("%s", &login);
+    fgets(login, sizeof(login), stdin);
+    login[strcspn(login, "\n")] = '\0';
     printf("Digite sua senha \n");
-    scanf("%s", &senha);
+    fgets(senha, sizeof(senha), stdin);
+    senha[strcspn(senha, "\n")] = '\0';
+    loginValidado = ValidaLogin(login, senha);
+    // int menu[10] = RetornaMenu(loginValidado.usuario.permissao);
+
+    // for (int i = 0; i < menu.length; i++)
+    // {
+    //     printf(menu[i]);
+    //     scanf("%d", &opcaoMenu);
+    // }
+    
 }
 int main()
 {
