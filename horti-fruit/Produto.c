@@ -4,15 +4,6 @@
 const char *nome_arquivo_produto = "produto.txt";
 FILE *arquivoProduto = NULL;
 
-struct Produto {
-    int id;
-    char nome[50];
-    float valorProduto;
-    float valorMinimo;
-    int tipoProduto;
-    int quantidadeEstoque;
-};
-
 void abrirArquivoProduto() {
     arquivoProduto = fopen(nome_arquivo_produto, "a");
     if (arquivoProduto == NULL) {
