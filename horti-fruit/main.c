@@ -19,13 +19,32 @@ void login() {
     fgets(senha, sizeof(senha), stdin);
     senha[strcspn(senha, "\n")] = '\0';
     loginValidado = ValidaLogin(login, senha);
-    // int menu[10] = RetornaMenu(loginValidado.usuario.permissao);
+    system("clear");
+    char** opcoesMenu = retornaOpcoesMenu(loginValidado.usuario.permissao);
+    int qtdOpcoes = retornaQtdOpcoes(loginValidado.usuario.permissao);
+    int opcaoEscolhida;
 
-    // for (int i = 0; i < menu.length; i++)
-    // {
-    //     printf(menu[i]);
-    //     scanf("%d", &opcaoMenu);
-    // }
+    for (int i = 0; i < qtdOpcoes; i++)
+    {
+        printf("%s\n", opcoesMenu[i]);
+    }
+    printf("Escolha uma das opções acima: \n");
+    scanf("%d", &opcaoEscolhida);
+    
+    switch (loginValidado.usuario.permissao)
+    {
+    case 1:
+        ManipularOpcaoSelecionada(opcaoEscolhida);
+        break;
+    case 2: // TO DO: ALTERAR PARA MÉTODO CORRESPONDENTE DA CLASSE DO GERENTE
+        ManipularOpcaoSelecionada(opcaoEscolhida);
+        break;
+    case 3: // TO DO: ALTERAR PARA MÉTODO CORRESPONDENTE DA CLASSE DO FUNCIONÁRIO
+        ManipularOpcaoSelecionada(opcaoEscolhida);
+        break;
+    default:
+        break;
+    }
     
 }
 int main()
