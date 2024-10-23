@@ -7,20 +7,6 @@
 const char *nome_arquivo_usuario = "usuario.txt";
 FILE *arquivoUsuario = NULL;
 
-// struct Usuario {
-//     int id;
-//     char nome[20];
-//     char documento[20];
-//     int permissao;
-//     char login[10];
-//     char senha[5];
-// };
-
-// struct LoginValidado {
-//     struct Usuario usuario;
-//     bool validado;
-// };
-
 void abrirArquivoUsuarioEscrita() {
     arquivoUsuario = fopen(nome_arquivo_usuario, "a");
     if (arquivoUsuario == NULL) {
@@ -86,7 +72,7 @@ void criarUsuarioAdmin() {
     printf("Digite seu CPF \n");
     fgets(usuarioAdmin.documento, sizeof(usuarioAdmin.documento), stdin);
     usuarioAdmin.documento[strcspn(usuarioAdmin.documento, "\n")] = '\0';
-    printf("Digite o nome de usuário que será usado para fazer login \n");
+    printf("Digite login \n");
     fgets(usuarioAdmin.login, sizeof(usuarioAdmin.login), stdin);
     usuarioAdmin.login[strcspn(usuarioAdmin.login, "\n")] = '\0';
     printf("Digite a senha \n");
@@ -96,7 +82,7 @@ void criarUsuarioAdmin() {
     fecharArquivoUsuario();
 }
 
- struct LoginValidado ValidaLogin(char login[10], char senha[5]) {
+struct LoginValidado ValidaLogin(char login[10], char senha[5]) {
     abrirArquivoUsuarioLeitura();
     char linha[50];
     struct LoginValidado loginValidado;
@@ -113,14 +99,131 @@ void criarUsuarioAdmin() {
     return loginValidado;
 }
 
-// void RetornaMenu(int permissao) {
-//     switch (permissao)
-//     {
-//     case 1:
-//         return char menus = ["1 - Cadastrar Funcionário", "2 - Relatorio de Usuarios", "3 - Relatório de vendas"];
-//         break;
-    
-//     default:
-//         break;
-//     }
-// }
+void criarUsuario() {
+    struct Usuario usuario;
+    printf("Escolha o tipo de permissão do usuário\n");
+    printf("2 - Gerente\n");
+    printf("3 - Funcionário\n");
+    scanf("%d", &usuario.permissao);
+    printf("Digite o nome");
+    fgets(usuario.nome, sizeof(usuario.nome), stdin);
+    usuario.nome[strcspn(usuario.nome, "\n")] = '\0';
+    printf("Digite o CPF \n");
+    fgets(usuario.documento, sizeof(usuario.documento), stdin);
+    usuario.documento[strcspn(usuario.documento, "\n")] = '\0';
+    printf("Digite o login \n");
+    fgets(usuario.login, sizeof(usuario.login), stdin);
+    usuario.login[strcspn(usuario.login, "\n")] = '\0';
+    printf("Digite a senha \n");
+    fgets(usuario.senha, sizeof(usuario.senha), stdin);
+    usuario.senha[strcspn(usuario.senha, "\n")] = '\0';
+
+    // COLOCAR FUNÇÃO QUE BUSCA O ULTIMO ID E INCREMENTAR +1
+    usuario.id = 2;
+
+    gravarDadosEmArquivo(usuario);
+}
+
+char* PermissaoString(int permissao) {
+    switch (permissao)
+    {
+    case 1:
+        return "Administrador";
+        break;
+    case 2:
+        return "Gerente";
+        break;
+    case 3:
+        return "Funcionário";
+        break;
+    }
+}
+
+void RelatorioUsuarios() {
+    abrirArquivoUsuarioLeitura();
+    struct Usuario *usuarios = NULL;
+    char linha[50];
+    int quantidade = 0;
+    int capacidade = 2; 
+    usuarios = (struct Usuario *)malloc(capacidade * sizeof(struct Usuario));
+    if (usuarios == NULL) {
+        printf("Erro ao alocar memória!\n");
+    }
+
+    while (!feof(arquivoUsuario))
+    {
+        if (quantidade == capacidade) {
+            capacidade *= 2;
+            usuarios = (struct Usuario *)realloc(usuarios, capacidade * sizeof(struct Usuario));
+            if (usuarios == NULL) {
+                printf("Erro ao realocar memória!\n");
+            }
+        }
+
+        struct Usuario usuario;
+        fscanf(arquivoUsuario,"%d,%[^,],%[^,],%d,%[^,],%[^\n]",&usuario.id, usuario.nome, usuario.documento, &usuario.permissao, usuario.login, usuario.senha);
+
+        usuarios[quantidade] = usuario;
+        quantidade++;
+    }
+    fclose(arquivoUsuario);
+
+    for (int i = 0; i < quantidade; i++)
+    {
+        printf("Id: %d, Nome: %s, Documento: %s, Permissão: %s, Login: %s\n", 
+            usuarios[i].id, usuarios[i].nome, usuarios[i].documento, PermissaoString(usuarios[i].permissao), usuarios[i].login);
+    }
+}
+
+char** retornaOpcoesMenu(int permissao) {
+    switch (permissao) {
+        case 1:
+            {
+                return menuAdmin;
+            }
+        break;
+        case 2:
+            {
+                return menuGerente;
+            }
+        break;
+        case 3:
+            {
+                return menuFuncionario;
+            }
+        break;
+    }
+}
+
+int retornaQtdOpcoes(int permissao) {
+    if (permissao == 1)
+        return 5;
+    else if (permissao == 2)
+        return 4;
+    else
+        return 1;  
+}
+
+void ManipularOpcaoSelecionada(int opcaoEscolhida) {
+    switch (opcaoEscolhida)
+    {
+    case 1:
+        criarUsuario();
+        break;
+    case 2:
+        printf("Função Indisponível.");
+        break;
+    case 3:
+        RelatorioUsuarios();
+        break;
+    case 4:
+        printf("Função Indisponível.");
+        break;
+    case 5:
+        printf("Função Indisponível.");
+        break;
+    default:
+        printf("Função Indisponível.");
+        break;
+    }
+}
