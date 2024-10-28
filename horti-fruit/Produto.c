@@ -19,7 +19,7 @@ void abrirArquivoProdutoLeitura() {
         arquivoProduto = fopen(nome_arquivo_produto, "wb");
         if (arquivoProduto == NULL) {
             printf("Erro ao criar o arquivo.\n");
-            return;    
+            return;
         }
         fclose(arquivoProduto);
         arquivoProduto = fopen(nome_arquivo_produto, "rb");
@@ -35,4 +35,199 @@ void fecharArquivoProduto() {
         fclose(arquivoProduto);
         arquivoProduto = NULL;
     }
+}
+
+void gravarDadosEmArquivoProduto(struct Produto produto) {
+    fprintf(arquivoProduto, "%d;%s;%f;%f;%d;%d\n", produto.id, produto.nome, produto.valorProduto, produto.valorMinimo, produto.tipoProduto, produto.quantidadeEstoque);
+}
+
+void cadastrarProduto(){
+    struct Produto produto;
+    int c;
+    abrirArquivoProdutoEscrita();
+
+    printf("Digite o id do produto\n");
+    scanf("%d", &produto.id);
+
+    printf("Digite o nome do produto:\n");
+    while ((c = getchar()) != '\n' && c != EOF);
+    fgets(produto.nome, sizeof(produto.nome), stdin);
+    produto.nome[strcspn(produto.nome, "\n")] = '\0';
+
+    printf("Digite o valor do produto\n");
+    scanf("%f", &produto.valorProduto);
+
+    printf("Digite o valor minimo do produto\n");
+    scanf("%f", &produto.valorMinimo);
+
+    printf("Digite o tipo do produto\n");
+    scanf("%d", &produto.tipoProduto);
+
+    printf("Digite a quantidade no estoque do produto\n");
+    scanf("%d", &produto.quantidadeEstoque);
+
+    gravarDadosEmArquivoProduto(produto);
+    fecharArquivoProduto();
+}
+
+void relatorioProdutos(){
+
+    abrirArquivoProdutoLeitura();
+    struct Produto *produtos = NULL;
+    int quantidade = 0;
+    int capacidade = 2;
+
+
+    produtos = (struct Produto *)malloc(capacidade * sizeof(struct Produto));
+    if (produtos == NULL) {
+        printf("Erro ao alocar memória!\n");
+        return;
+    }
+
+
+    struct Produto produto;
+    while (fscanf(arquivoProduto, "%d;%[^;];%f;%f;%d;%d\n",
+                  &produto.id,
+                  produto.nome,
+                  &produto.valorProduto,
+                  &produto.valorMinimo,
+                  &produto.tipoProduto,
+                  &produto.quantidadeEstoque) == 6) {
+
+
+        if (quantidade == capacidade) {
+            capacidade *= 2;
+            produtos = (struct Produto *)realloc(produtos, capacidade * sizeof(struct Produto));
+            if (produtos == NULL) {
+                printf("Erro ao realocar memória!\n");
+                fclose(arquivoProduto);
+                return;
+            }
+        }
+
+
+        produtos[quantidade] = produto;
+        quantidade++;
+    }
+
+    fclose(arquivoProduto);
+
+
+    for (int i = 0; i < quantidade; i++) {
+        printf("Id: %d, Nome: %s, Valor do produto: %f, Valor minimo: %f, Tipo do produto: %d, Quantidade em estoque: %d\n",
+               produtos[i].id, produtos[i].nome,
+               produtos[i].valorProduto, produtos[i].valorMinimo,
+               produtos[i].tipoProduto, produtos[i].quantidadeEstoque);
+    }
+    }
+    void vendaProduto() {
+
+    FILE *tempFile;
+    char line[200];
+    int encontrado = 0;
+    int id, quantidadeVendida;
+
+    printf("Digite o ID do produto: ");
+    scanf("%d", &id);
+    printf("Digite a quantidade vendida: ");
+    scanf("%d", &quantidadeVendida);
+
+    abrirArquivoProdutoLeitura();
+    tempFile = fopen("temp.txt", "w");
+    if (tempFile == NULL) {
+        printf("Erro ao abrir o arquivo temporário para escrita.\n");
+        fclose(arquivoProduto);
+        return;
+    }
+
+    while (fgets(line, sizeof(line), arquivoProduto) != NULL) {
+        struct Produto produto;
+        if (sscanf(line, "%d;%[^;];%f;%f;%d;%d",
+                   &produto.id, produto.nome, &produto.valorProduto, &produto.valorMinimo, &produto.tipoProduto, &produto.quantidadeEstoque) == 6) {
+
+            if (produto.id == id) {
+                    if((produto.quantidadeEstoque-quantidadeVendida)<0)
+                    {
+                        printf("Quantidade insuficiente para esta venda");
+                        encontrado = 1;
+                    } else
+                    {
+                        produto.quantidadeEstoque -= quantidadeVendida;
+                        encontrado = 2;
+
+                    }
+          }
+
+            fprintf(tempFile, "%d;%s;%f;%f;%d;%d\n",
+                    produto.id, produto.nome, produto.valorProduto, produto.valorMinimo, produto.tipoProduto, produto.quantidadeEstoque);
+        } else {
+            fputs(line, tempFile);
+        }
+    }
+
+
+    fecharArquivoProduto();
+    fclose(tempFile);
+
+    if (encontrado == 2) {
+        remove(nome_arquivo_produto);
+        rename("temp.txt", nome_arquivo_produto);
+        printf("Quantidade do produto com ID %d atualizada com sucesso.\n", id);
+    }
+     else if((encontrado!=2) && (encontrado!=1)){
+        remove("temp.txt");
+        printf("Produto com ID %d não encontrado.\n", id);
+    }
+
+    }
+void adicionarEstoqueProduto() {
+
+    FILE *tempFile;
+    char line[200];
+    int encontrado = 0;
+
+    int id, quantidadeAcrescentada;
+
+    printf("Digite o ID do produto: ");
+    scanf("%d", &id);
+    printf("Digite a quantidade a ser acrescentada: ");
+    scanf("%d", &quantidadeAcrescentada);
+
+    abrirArquivoProdutoLeitura();
+    tempFile = fopen("temp.txt", "w");
+    if (tempFile == NULL) {
+        printf("Erro ao abrir o arquivo temporário para escrita.\n");
+        fclose(arquivoProduto);
+        return;
+    }
+
+    while (fgets(line, sizeof(line), arquivoProduto) != NULL) {
+        struct Produto produto;
+
+        if (sscanf(line, "%d;%[^;];%f;%f;%d;%d",
+                   &produto.id, produto.nome, &produto.valorProduto, &produto.valorMinimo, &produto.tipoProduto, &produto.quantidadeEstoque) == 6) {
+
+            if (produto.id == id) {
+                produto.quantidadeEstoque += quantidadeAcrescentada;
+                encontrado = 1;
+            }
+            fprintf(tempFile, "%d;%s;%f;%f;%d;%d\n",
+                    produto.id, produto.nome, produto.valorProduto, produto.valorMinimo, produto.tipoProduto, produto.quantidadeEstoque);
+        } else {
+            fputs(line, tempFile);
+        }
+    }
+
+    fecharArquivoProduto();
+    fclose(tempFile);
+
+    if (encontrado) {
+        remove(nome_arquivo_produto);
+        rename("temp.txt", nome_arquivo_produto);
+        printf("Quantidade do produto com ID %d atualizada com sucesso.\n", id);
+    } else {
+        remove("temp.txt");
+        printf("Produto com ID %d não encontrado.\n", id);
+    }
+
 }

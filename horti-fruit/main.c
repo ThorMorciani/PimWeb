@@ -30,7 +30,7 @@ void login() {
     }
     printf("Escolha uma das opções acima: \n");
     scanf("%d", &opcaoEscolhida);
-    
+
     switch (loginValidado.usuario.permissao)
     {
     case 1:
@@ -45,19 +45,33 @@ void login() {
     default:
         break;
     }
-    
+
 }
 int main()
 {
     setlocale(LC_ALL,"PORTUGUESE");
 
     printf("Seja bem-vindo! \n");
-    bool adminUserExiste = validarUserAdmin();
+    /* bool adminUserExiste = validarUserAdmin();
 
     if (adminUserExiste)
         login();
     else
         criarUsuarioAdmin();
-        
+        */
+        int x;
+    printf("DESEJA CADASTRAR OU VER PRODUTOS? 1- CADASTRAR 2- VER 3- VENDA 4- ADICIONAR ESTOQUE ");
+    scanf("%d",&x);
+    switch(x){
+        case 1: cadastrarProduto();
+        break;
+        case 2: relatorioProdutos();
+        break;
+        case 3: vendaProduto();
+        break;
+        case 4: adicionarEstoqueProduto();
+        break;
+    }
+
     return 0;
 }
