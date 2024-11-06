@@ -231,3 +231,121 @@ void adicionarEstoqueProduto() {
     }
 
 }
+
+void alterarValorProduto() {
+
+    FILE *tempFile;
+    char line[200];
+    int encontrado = 0;
+
+    int id;
+    float novoValor;
+
+    printf("Digite o ID do produto: ");
+    scanf("%d", &id);
+    printf("Digite o novo valor: ");
+    scanf("%f", &novoValor);
+
+    abrirArquivoProdutoLeitura();
+    tempFile = fopen("temp.txt", "w");
+    if (tempFile == NULL) {
+        printf("Erro ao abrir o arquivo temporário para escrita.\n");
+        fclose(arquivoProduto);
+        return;
+    }
+
+    while (fgets(line, sizeof(line), arquivoProduto) != NULL) {
+        struct Produto produto;
+
+        if (sscanf(line, "%d;%[^;];%f;%f;%d;%d",
+                   &produto.id, produto.nome, &produto.valorProduto, &produto.valorMinimo, &produto.tipoProduto, &produto.quantidadeEstoque) == 6) {
+
+            if ((produto.id == id) && (novoValor >= produto.valorMinimo)) {
+                produto.valorProduto = novoValor;
+                encontrado = 1;
+            } else if ((produto.id == id) && (novoValor < produto.valorMinimo))
+            {
+                encontrado = 2;
+            } else
+            {
+                encontrado = 0;
+            }
+            fprintf(tempFile, "%d;%s;%f;%f;%d;%d\n",
+                    produto.id, produto.nome, produto.valorProduto, produto.valorMinimo, produto.tipoProduto, produto.quantidadeEstoque);
+        } else {
+            fputs(line, tempFile);
+        }
+    }
+
+    fecharArquivoProduto();
+    fclose(tempFile);
+
+    if (encontrado == 1)
+    {
+        remove(nome_arquivo_produto);
+        rename("temp.txt", nome_arquivo_produto);
+        printf("valor do produto com ID %d atualizada com sucesso.\n", id);
+    } else if(encontrado == 2)
+    {
+        remove("temp.txt");
+        printf("Valor abaixo do valor minimo predefinido");
+    } else
+    {
+        printf("Produto com ID %d não encontrado", id);
+    }
+
+}
+
+void excluirProduto() {
+
+    FILE *tempFile;
+    char line[200];
+    int encontrado = 0;
+
+    int id;
+
+    printf("Digite o ID do produto: ");
+    scanf("%d", &id);
+
+    abrirArquivoProdutoLeitura();
+    tempFile = fopen("temp.txt", "w");
+    if (tempFile == NULL) {
+        printf("Erro ao abrir o arquivo temporário para escrita.\n");
+        fclose(arquivoProduto);
+        return;
+    }
+
+    while (fgets(line, sizeof(line), arquivoProduto) != NULL) {
+        struct Produto produto;
+
+        if (sscanf(line, "%d;%[^;];%f;%f;%d;%d",
+                   &produto.id, produto.nome, &produto.valorProduto, &produto.valorMinimo, &produto.tipoProduto, &produto.quantidadeEstoque) == 6) {
+
+            if (produto.id == id)
+            {
+                encontrado = 1;
+                continue;
+            }
+            fprintf(tempFile, "%d;%s;%f;%f;%d;%d\n",
+                    produto.id, produto.nome, produto.valorProduto, produto.valorMinimo, produto.tipoProduto, produto.quantidadeEstoque);
+        } else {
+            fputs(line, tempFile);
+        }
+
+
+    fecharArquivoProduto();
+    fclose(tempFile);
+
+    if (encontrado)
+    {
+        remove(nome_arquivo_produto);
+        rename("temp.txt", nome_arquivo_produto);
+        printf("Produto com ID %d deletado com sucesso.\n", id);
+    }else
+    {
+        printf("Produto com ID %d não encontrado", id);
+    }
+
+}
+}
+

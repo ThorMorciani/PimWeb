@@ -18,5 +18,7 @@ void cadastrarProduto();
 void estoqueProdutos();
 void vendaProduto();
 void adicionarEstoqueProduto();
+void alterarValorProduto();
+void excluirProduto();
 
 #endif
