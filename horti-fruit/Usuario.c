@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "Headers/Usuario.h"
 #include "Headers/Produto.h"
+#include "Headers/Vendas.h"
 
 const char *nome_arquivo_usuario = "usuario.txt";
 FILE *arquivoUsuario = NULL;
@@ -232,7 +233,7 @@ void ManipularOpcaoSelecionada(int opcaoEscolhida) {
         RelatorioUsuarios();
         break;
     case 4:
-        
+        exibirRelatorioVendas();
         break;
     case 5:
         relatorioProdutos();
