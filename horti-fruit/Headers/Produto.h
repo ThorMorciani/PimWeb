@@ -12,6 +12,7 @@ struct Produto {
 };
 
 void abrirArquivoProduto();
+void abrirArquivoProdutoLeitura();
 void fecharArquivoProduto();
 void gravarDadosEmArquivoProduto(struct Produto produto);
 void cadastrarProduto();
@@ -20,5 +21,7 @@ void vendaProduto();
 void adicionarEstoqueProduto();
 void alterarValorProduto();
 void excluirProduto();
+struct Produto buscarProdutoPorId(int id);
+void removerEstoqueProduto(int id, int qtdVentida);
 
 #endif

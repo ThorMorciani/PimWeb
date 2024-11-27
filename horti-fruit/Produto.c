@@ -3,6 +3,8 @@
 
 const char *nome_arquivo_produto = "produto.txt";
 FILE *arquivoProduto = NULL;
+struct Produto produtos[100];
+int total_produtos = 0;
 
 void abrirArquivoProduto() {
     arquivoProduto = fopen(nome_arquivo_produto, "a");
@@ -120,7 +122,7 @@ void relatorioProdutos(){
                produtos[i].tipoProduto, produtos[i].quantidadeEstoque);
     }
     }
-    void vendaProduto() {
+void vendaProduto() {
 
     FILE *tempFile;
     char line[200];
@@ -179,7 +181,7 @@ void relatorioProdutos(){
         printf("Produto com ID %d não encontrado.\n", id);
     }
 
-    }
+}
 void adicionarEstoqueProduto() {
 
     FILE *tempFile;
@@ -227,6 +229,48 @@ void adicionarEstoqueProduto() {
         printf("Quantidade do produto com ID %d atualizada com sucesso.\n", id);
     } else {
         remove("temp.txt");
+        printf("Produto com ID %d não encontrado.\n", id);
+    }
+
+}
+
+void removerEstoqueProduto(int id, int qtdVentida) {
+
+    FILE *tempFile;
+    char line[200];
+    int encontrado = 0;
+
+    int id, quantidadeAcrescentada;
+
+    abrirArquivoProdutoLeitura();
+    struct Produto produto = buscarProdutoPorId(id);
+
+    fecharArquivoProduto();
+    abrirArquivoProduto();
+
+    while (fgets(line, sizeof(line), arquivoProduto) != NULL) {
+        struct Produto produto;
+
+        if (sscanf(line, "%d;%[^;];%f;%f;%d;%d",
+                   &produto.id, produto.nome, &produto.valorProduto, &produto.valorMinimo, &produto.tipoProduto, &produto.quantidadeEstoque) == 6) {
+
+            if (produto.id == id) {
+                produto.quantidadeEstoque = qtdVentida;
+                encontrado = 1;
+            }
+            gravarDadosEmArquivoProduto(produto);
+        } else {
+            fputs(line, arquivoProduto);
+        }
+    }
+
+    fecharArquivoProduto();
+
+    if (encontrado) {
+        remove(nome_arquivo_produto);
+        rename("temp.txt", nome_arquivo_produto);
+        printf("Quantidade do produto com ID %d atualizada com sucesso.\n", id);
+    } else {
         printf("Produto com ID %d não encontrado.\n", id);
     }
 
@@ -344,4 +388,29 @@ void excluirProduto() {
             printf("Produto com ID %d não encontrado", id);
         }
     }
+}
+
+void carregarProdutos() {
+    abrirArquivoProdutoLeitura();
+
+    while (fscanf(arquivoProduto, "%d;%49[^;];%f;%f;%d;%d\n",
+                  &produtos[total_produtos].id,
+                  produtos[total_produtos].nome,
+                  &produtos[total_produtos].valorProduto,
+                  &produtos[total_produtos].valorMinimo,
+                  &produtos[total_produtos].tipoProduto,
+                  &produtos[total_produtos].quantidadeEstoque) != EOF) {
+        total_produtos++;
+    }
+
+    fecharArquivoProduto();
+}
+
+struct Produto buscarProdutoPorId(int id) {
+    for (int i = 0; i < total_produtos; i++) {
+        if (produtos[i].id == id) {
+            produtos[i];
+        }
+    }
+    return ;
 }
