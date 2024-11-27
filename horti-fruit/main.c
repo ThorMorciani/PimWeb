@@ -21,6 +21,7 @@ void login() {
     loginValidado = ValidaLogin(login, senha);
     system("clear");
     char** opcoesMenu = retornaOpcoesMenu(loginValidado.usuario.permissao);
+    printf("login permissão: %d \n", loginValidado.usuario.permissao);
     int qtdOpcoes = retornaQtdOpcoes(loginValidado.usuario.permissao);
     int opcaoEscolhida;
 

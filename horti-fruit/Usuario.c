@@ -55,7 +55,7 @@ bool validarUserAdmin() {
 }
 
 void gravarDadosEmArquivo(struct Usuario usuario) {
-    fprintf(arquivoUsuario, "%d,%s,%s,%d,%s,%s", usuario.id, usuario.nome, usuario.documento, usuario.permissao, usuario.login, usuario.senha);
+    fprintf(arquivoUsuario, "\n%d,%s,%s,%d,%s,%s\n", usuario.id, usuario.nome, usuario.documento, usuario.permissao, usuario.login, usuario.senha);
 }
 
 void criarUsuarioAdmin() {
@@ -90,10 +90,13 @@ struct LoginValidado ValidaLogin(char login[10], char senha[5]) {
     while (!feof(arquivoUsuario))
     {
         fscanf(arquivoUsuario,"%d,%[^,],%[^,],%d,%[^,],%[^\n]",&loginValidado.usuario.id,loginValidado.usuario.nome, loginValidado.usuario.documento, &loginValidado.usuario.permissao, loginValidado.usuario.login, loginValidado.usuario.senha);
-        if (strcmp(loginValidado.usuario.login, login) == 0 && strcmp(loginValidado.usuario.senha, senha) == 0)
+        if (strcmp(loginValidado.usuario.login, login) == 0 && strcmp(loginValidado.usuario.senha, senha) == 0){
             loginValidado.validado = true;
+            break;
+        }
         else
-            printf("Login inválido \n");    
+            printf("Login inválido \n");   
+            break; 
     }
     fclose(arquivoUsuario);
     return loginValidado;
@@ -105,7 +108,7 @@ void criarUsuario() {
     printf("2 - Gerente\n");
     printf("3 - Funcionário\n");
     scanf("%d", &usuario.permissao);
-    printf("Digite o nome");
+    printf("Digite o nome \n");
     fgets(usuario.nome, sizeof(usuario.nome), stdin);
     usuario.nome[strcspn(usuario.nome, "\n")] = '\0';
     printf("Digite o CPF \n");
@@ -118,10 +121,20 @@ void criarUsuario() {
     fgets(usuario.senha, sizeof(usuario.senha), stdin);
     usuario.senha[strcspn(usuario.senha, "\n")] = '\0';
 
-    // COLOCAR FUNÇÃO QUE BUSCA O ULTIMO ID E INCREMENTAR +1
-    usuario.id = 2;
+    abrirArquivoUsuarioLeitura();
+    char line[100];
+    while (fgets(line, sizeof(line), arquivoUsuario) != NULL) {
+        fscanf(arquivoUsuario, "%s", line);
+    }
+    int id = line[0] - '0';
+    usuario.id = id + 1;
+    fecharArquivoUsuario();
 
+    abrirArquivoUsuarioEscrita();
     gravarDadosEmArquivo(usuario);
+    fecharArquivoUsuario();
+
+    printf("\nUsuário cadastrado com sucesso.");
 }
 
 char* PermissaoString(int permissao) {
@@ -176,6 +189,7 @@ void RelatorioUsuarios() {
 }
 
 char** retornaOpcoesMenu(int permissao) {
+    printf("permissão: %d \n", permissao);
     switch (permissao) {
         case 1:
             {
