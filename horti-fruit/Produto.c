@@ -333,19 +333,15 @@ void excluirProduto() {
         }
 
 
-    fecharArquivoProduto();
-    fclose(tempFile);
+        fecharArquivoProduto();
+        fclose(tempFile);
 
-    if (encontrado)
-    {
-        remove(nome_arquivo_produto);
-        rename("temp.txt", nome_arquivo_produto);
-        printf("Produto com ID %d deletado com sucesso.\n", id);
-    }else
-    {
-        printf("Produto com ID %d não encontrado", id);
+        if (encontrado) {
+            remove(nome_arquivo_produto);
+            rename("temp.txt", nome_arquivo_produto);
+            printf("Produto com ID %d deletado com sucesso.\n", id);
+        } else {
+            printf("Produto com ID %d não encontrado", id);
+        }
     }
-
 }
-}
-
