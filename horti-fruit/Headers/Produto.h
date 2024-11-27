@@ -23,5 +23,6 @@ void alterarValorProduto();
 void excluirProduto();
 struct Produto buscarProdutoPorId(int id);
 void removerEstoqueProduto(int id, int qtdVentida);
+void relatorioProdutos();
 
 #endif

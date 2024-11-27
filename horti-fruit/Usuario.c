@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "Headers/Usuario.h"
+#include "Headers/Produto.h"
 
 const char *nome_arquivo_usuario = "usuario.txt";
 FILE *arquivoUsuario = NULL;
@@ -225,16 +226,16 @@ void ManipularOpcaoSelecionada(int opcaoEscolhida) {
         criarUsuario();
         break;
     case 2:
-        printf("Função Indisponível.");
+        cadastrarProduto();
         break;
     case 3:
         RelatorioUsuarios();
         break;
     case 4:
-        printf("Função Indisponível.");
+        
         break;
     case 5:
-        printf("Função Indisponível.");
+        relatorioProdutos();
         break;
     default:
         printf("Função Indisponível.");

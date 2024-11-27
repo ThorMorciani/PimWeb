@@ -109,7 +109,6 @@ void gerar_relatorio_na_data(const char *date) {
     }
 }
 
-
 int validar_data(const char *date) {
     if (strlen(date) != 10) return 0;
     if (date[2] != '/' || date[5] != '/') return 0;
