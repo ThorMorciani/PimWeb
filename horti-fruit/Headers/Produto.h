@@ -13,4 +13,12 @@ struct Produto {
 
 void abrirArquivoProduto();
 void fecharArquivoProduto();
+void gravarDadosEmArquivoProduto(struct Produto produto);
+void cadastrarProduto();
+void estoqueProdutos();
+void vendaProduto();
+void adicionarEstoqueProduto();
+void alterarValorProduto();
+void excluirProduto();
+
 #endif
