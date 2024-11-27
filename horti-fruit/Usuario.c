@@ -191,7 +191,6 @@ void RelatorioUsuarios() {
 }
 
 char** retornaOpcoesMenu(int permissao) {
-    printf("permissão: %d \n", permissao);
     switch (permissao) {
         case 1:
             {
@@ -220,7 +219,7 @@ int retornaQtdOpcoes(int permissao) {
         return 1;  
 }
 
-void ManipularOpcaoSelecionada(int opcaoEscolhida) {
+void ManipularOpcaoSelecionadaAdmin(int opcaoEscolhida) {
     switch (opcaoEscolhida)
     {
     case 1:
@@ -237,6 +236,39 @@ void ManipularOpcaoSelecionada(int opcaoEscolhida) {
         break;
     case 5:
         relatorioProdutos();
+        break;
+    default:
+        printf("Função Indisponível.");
+        break;
+    }
+}
+
+void ManipularOpcaoSelecionadaGerente(int opcaoEscolhida) {
+    switch (opcaoEscolhida)
+    {
+    case 1:
+        cadastrarProduto();
+        break;
+    case 2:
+        exibirRelatorioVendas();
+        break;
+    case 3:
+        relatorioProdutos();
+        break;
+    case 4:
+        cadastrarVenda();
+        break;
+    default:
+        printf("Função Indisponível.");
+        break;
+    }
+}
+
+void ManipularOpcaoSelecionadaFunc(int opcaoEscolhida) {
+    switch (opcaoEscolhida)
+    {
+    case 1:
+        cadastrarVenda();
         break;
     default:
         printf("Função Indisponível.");

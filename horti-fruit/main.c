@@ -21,7 +21,6 @@ void login() {
     loginValidado = ValidaLogin(login, senha);
     system("clear");
     char** opcoesMenu = retornaOpcoesMenu(loginValidado.usuario.permissao);
-    printf("login permissão: %d \n", loginValidado.usuario.permissao);
     int qtdOpcoes = retornaQtdOpcoes(loginValidado.usuario.permissao);
     int opcaoEscolhida;
 
@@ -35,15 +34,16 @@ void login() {
     switch (loginValidado.usuario.permissao)
     {
     case 1:
-        ManipularOpcaoSelecionada(opcaoEscolhida);
+        ManipularOpcaoSelecionadaAdmin(opcaoEscolhida);
         break;
-    case 2: // TO DO: ALTERAR PARA MÉTODO CORRESPONDENTE DA CLASSE DO GERENTE
-        ManipularOpcaoSelecionada(opcaoEscolhida);
+    case 2:
+        ManipularOpcaoSelecionadaGerente(opcaoEscolhida);
         break;
-    case 3: // TO DO: ALTERAR PARA MÉTODO CORRESPONDENTE DA CLASSE DO FUNCIONÁRIO
-        ManipularOpcaoSelecionada(opcaoEscolhida);
+    case 3:
+        ManipularOpcaoSelecionadaFunc(opcaoEscolhida);
         break;
     default:
+        printf("Permissão desconhecida");
         break;
     }
 
@@ -53,26 +53,11 @@ int main()
     setlocale(LC_ALL,"PORTUGUESE");
 
     printf("Seja bem-vindo! \n");
-    /* bool adminUserExiste = validarUserAdmin();
-
+    bool adminUserExiste = validarUserAdmin();
     if (adminUserExiste)
         login();
     else
         criarUsuarioAdmin();
-        */
-        int x;
-    printf("DESEJA CADASTRAR OU VER PRODUTOS? 1- CADASTRAR 2- VER 3- VENDA 4- ADICIONAR ESTOQUE ");
-    scanf("%d",&x);
-    switch(x){
-        case 1: cadastrarProduto();
-        break;
-        case 2: relatorioProdutos();
-        break;
-        case 3: vendaProduto();
-        break;
-        case 4: adicionarEstoqueProduto();
-        break;
-    }
 
     return 0;
 }

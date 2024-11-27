@@ -47,5 +47,7 @@ struct LoginValidado ValidaLogin(char login[10], char senha[10]);
 void RelatorioUsuarios();
 char** retornaOpcoesMenu(int permissao);
 int retornaQtdOpcoes(int permissao);
-void ManipularOpcaoSelecionada(int opcaoEscolhida);
+void ManipularOpcaoSelecionadaAdmin(int opcaoEscolhida);
+void ManipularOpcaoSelecionadaGerente(int opcaoEscolhida);
+void ManipularOpcaoSelecionadaFunc(int opcaoEscolhida);
 #endif

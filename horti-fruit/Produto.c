@@ -1,5 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 #include "Headers/Produto.h"
+
 
 const char *nome_arquivo_produto = "produto.txt";
 FILE *arquivoProduto = NULL;
@@ -46,7 +50,7 @@ void gravarDadosEmArquivoProduto(struct Produto produto) {
 void cadastrarProduto(){
     struct Produto produto;
     int c;
-    abrirArquivoProdutoEscrita();
+    abrirArquivoProduto();
 
     printf("Digite o id do produto\n");
     scanf("%d", &produto.id);
@@ -63,6 +67,8 @@ void cadastrarProduto(){
     scanf("%f", &produto.valorMinimo);
 
     printf("Digite o tipo do produto\n");
+    printf("1 - Granel\n");
+    printf("2 - Kilo\n");
     scanf("%d", &produto.tipoProduto);
 
     printf("Digite a quantidade no estoque do produto\n");
@@ -240,8 +246,6 @@ void removerEstoqueProduto(int id, int qtdVentida) {
     char line[200];
     int encontrado = 0;
 
-    int id, quantidadeAcrescentada;
-
     abrirArquivoProdutoLeitura();
     struct Produto produto = buscarProdutoPorId(id);
 
@@ -407,10 +411,10 @@ void carregarProdutos() {
 }
 
 struct Produto buscarProdutoPorId(int id) {
+    carregarProdutos();
     for (int i = 0; i < total_produtos; i++) {
         if (produtos[i].id == id) {
-            produtos[i];
+            return produtos[i];
         }
     }
-    return ;
 }

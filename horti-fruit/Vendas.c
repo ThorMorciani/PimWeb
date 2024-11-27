@@ -119,25 +119,6 @@ int validar_data(const char *date) {
     return 1;
 }
 
-int main() {
-    char date[11];
-
-    printf("Digite a data no formato DD/MM/YYYY: ");
-    scanf("%10s", date);
-
-    if (!validar_data(date)) {
-        printf("Erro: formato de data inválido.\n");
-        return 1;
-    }
-
-    printf("\n\nVendas da data %s:\n\n", date);
-    ler_linhas_pela_data(date);
-
-    gerar_relatorio_na_data(date);
-
-    return 0;
-}
-
 void gravarDadosEmArquivoVendas(struct Produto produto, int quantidade, struct Venda venda) {
     abrirArquivoVendas();
     if (arquivoVendas != NULL) {

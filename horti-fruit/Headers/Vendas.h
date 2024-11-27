@@ -12,5 +12,6 @@ struct Venda {
 void abrirArquivoVendas();
 void fecharArquivoVendas();
 void exibirRelatorioVendas();
+void cadastrarVenda();
 
 #endif
