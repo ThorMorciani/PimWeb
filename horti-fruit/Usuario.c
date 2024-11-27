@@ -19,12 +19,12 @@ void abrirArquivoUsuarioEscrita() {
 void abrirArquivoUsuarioLeitura() {
     arquivoUsuario = fopen(nome_arquivo_usuario, "r");
     if (arquivoUsuario == NULL) {
-        printf("O arquivo '%s' não existe. Criando o arquivo...\n", nome_arquivo_usuario);
+        printf("O arquivo '%s' n„o existe. Criando o arquivo...\n", nome_arquivo_usuario);
 
         arquivoUsuario = fopen(nome_arquivo_usuario, "a");
         if (arquivoUsuario == NULL) {
             printf("Erro ao criar o arquivo.\n");
-            return;    
+            return;
         }
         fclose(arquivoUsuario);
         arquivoUsuario = fopen(nome_arquivo_usuario, "r");
@@ -57,7 +57,7 @@ bool validarUserAdmin() {
 }
 
 void gravarDadosEmArquivo(struct Usuario usuario) {
-    fprintf(arquivoUsuario, "\n%d,%s,%s,%d,%s,%s\n", usuario.id, usuario.nome, usuario.documento, usuario.permissao, usuario.login, usuario.senha);
+    fprintf(arquivoUsuario, "\n%d,%s,%s,%d,%s,%s", usuario.id, usuario.nome, usuario.documento, usuario.permissao, usuario.login, usuario.senha);
 }
 
 void criarUsuarioAdmin() {
@@ -84,25 +84,38 @@ void criarUsuarioAdmin() {
     fecharArquivoUsuario();
 }
 
+
 struct LoginValidado ValidaLogin(char login[10], char senha[5]) {
     abrirArquivoUsuarioLeitura();
     char linha[50];
     struct LoginValidado loginValidado;
 
-    while (!feof(arquivoUsuario))
-    {
-        fscanf(arquivoUsuario,"%d,%[^,],%[^,],%d,%[^,],%[^\n]",&loginValidado.usuario.id,loginValidado.usuario.nome, loginValidado.usuario.documento, &loginValidado.usuario.permissao, loginValidado.usuario.login, loginValidado.usuario.senha);
-        if (strcmp(loginValidado.usuario.login, login) == 0 && strcmp(loginValidado.usuario.senha, senha) == 0){
+    loginValidado.validado = false;
+
+    while (!feof(arquivoUsuario)) {
+        fscanf(arquivoUsuario, "%d,%[^,],%[^,],%d,%[^,],%[^\n]",
+               &loginValidado.usuario.id,
+               loginValidado.usuario.nome,
+               loginValidado.usuario.documento,
+               &loginValidado.usuario.permissao,
+               loginValidado.usuario.login,
+               loginValidado.usuario.senha);
+
+
+        if (strcmp(loginValidado.usuario.login, login) == 0 && strcmp(loginValidado.usuario.senha, senha) == 0) {
             loginValidado.validado = true;
             break;
         }
-        else
-            printf("Login inválido \n");   
-            break; 
+    }
+
+
+    if (!loginValidado.validado) {
+        printf("Login inválido \n");
     }
     fclose(arquivoUsuario);
     return loginValidado;
 }
+
 
 void criarUsuario() {
     struct Usuario usuario;
@@ -110,6 +123,7 @@ void criarUsuario() {
     printf("2 - Gerente\n");
     printf("3 - Funcionário\n");
     scanf("%d", &usuario.permissao);
+    getchar();
     printf("Digite o nome \n");
     fgets(usuario.nome, sizeof(usuario.nome), stdin);
     usuario.nome[strcspn(usuario.nome, "\n")] = '\0';
@@ -129,6 +143,7 @@ void criarUsuario() {
         fscanf(arquivoUsuario, "%s", line);
     }
     int id = line[0] - '0';
+    printf("id %d", id);
     usuario.id = id + 1;
     fecharArquivoUsuario();
 
@@ -149,7 +164,7 @@ char* PermissaoString(int permissao) {
         return "Gerente";
         break;
     case 3:
-        return "Funcionário";
+        return "Funcion·rio";
         break;
     }
 }
@@ -159,7 +174,7 @@ void RelatorioUsuarios() {
     struct Usuario *usuarios = NULL;
     char linha[50];
     int quantidade = 0;
-    int capacidade = 2; 
+    int capacidade = 2;
     usuarios = (struct Usuario *)malloc(capacidade * sizeof(struct Usuario));
     if (usuarios == NULL) {
         printf("Erro ao alocar memória!\n");
@@ -185,7 +200,7 @@ void RelatorioUsuarios() {
 
     for (int i = 0; i < quantidade; i++)
     {
-        printf("Id: %d, Nome: %s, Documento: %s, Permissão: %s, Login: %s\n", 
+        printf("Id: %d, Nome: %s, Documento: %s, Permiss„o: %s, Login: %s\n",
             usuarios[i].id, usuarios[i].nome, usuarios[i].documento, PermissaoString(usuarios[i].permissao), usuarios[i].login);
     }
 }
@@ -214,9 +229,9 @@ int retornaQtdOpcoes(int permissao) {
     if (permissao == 1)
         return 5;
     else if (permissao == 2)
-        return 4;
+        return 6;
     else
-        return 1;  
+        return 1;
 }
 
 void ManipularOpcaoSelecionadaAdmin(int opcaoEscolhida) {
@@ -238,7 +253,7 @@ void ManipularOpcaoSelecionadaAdmin(int opcaoEscolhida) {
         relatorioProdutos();
         break;
     default:
-        printf("Função Indisponível.");
+        printf("Função Indisponíel.");
         break;
     }
 }
@@ -258,8 +273,11 @@ void ManipularOpcaoSelecionadaGerente(int opcaoEscolhida) {
     case 4:
         cadastrarVenda();
         break;
+    case 5:
+        adicionarEstoqueProduto();
+        break;
     default:
-        printf("Função Indisponível.");
+        printf("Função Indisponível");
         break;
     }
 }

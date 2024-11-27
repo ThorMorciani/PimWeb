@@ -20,7 +20,7 @@ void abrirArquivoProduto() {
 void abrirArquivoProdutoLeitura() {
     arquivoProduto = fopen(nome_arquivo_produto, "r");
     if (arquivoProduto == NULL) {
-        printf("O arquivo '%s' não existe. Criando o arquivo...\n", nome_arquivo_produto);
+        printf("O arquivo '%s' n„o existe. Criando o arquivo...\n", nome_arquivo_produto);
 
         arquivoProduto = fopen(nome_arquivo_produto, "wb");
         if (arquivoProduto == NULL) {
@@ -88,7 +88,7 @@ void relatorioProdutos(){
 
     produtos = (struct Produto *)malloc(capacidade * sizeof(struct Produto));
     if (produtos == NULL) {
-        printf("Erro ao alocar memória!\n");
+        printf("Erro ao alocar memÛria!\n");
         return;
     }
 
@@ -107,7 +107,7 @@ void relatorioProdutos(){
             capacidade *= 2;
             produtos = (struct Produto *)realloc(produtos, capacidade * sizeof(struct Produto));
             if (produtos == NULL) {
-                printf("Erro ao realocar memória!\n");
+                printf("Erro ao realocar memÛria!\n");
                 fclose(arquivoProduto);
                 return;
             }
@@ -143,7 +143,7 @@ void vendaProduto() {
     abrirArquivoProdutoLeitura();
     tempFile = fopen("temp.txt", "w");
     if (tempFile == NULL) {
-        printf("Erro ao abrir o arquivo temporário para escrita.\n");
+        printf("Erro ao abrir o arquivo tempor·rio para escrita.\n");
         fclose(arquivoProduto);
         return;
     }
@@ -184,7 +184,7 @@ void vendaProduto() {
     }
      else if((encontrado!=2) && (encontrado!=1)){
         remove("temp.txt");
-        printf("Produto com ID %d não encontrado.\n", id);
+        printf("Produto com ID %d n„o encontrado.\n", id);
     }
 
 }
@@ -204,7 +204,7 @@ void adicionarEstoqueProduto() {
     abrirArquivoProdutoLeitura();
     tempFile = fopen("temp.txt", "w");
     if (tempFile == NULL) {
-        printf("Erro ao abrir o arquivo temporário para escrita.\n");
+        printf("Erro ao abrir o arquivo tempor·rio para escrita.\n");
         fclose(arquivoProduto);
         return;
     }
@@ -235,22 +235,26 @@ void adicionarEstoqueProduto() {
         printf("Quantidade do produto com ID %d atualizada com sucesso.\n", id);
     } else {
         remove("temp.txt");
-        printf("Produto com ID %d não encontrado.\n", id);
+        printf("Produto com ID %d n„o encontrado.\n", id);
     }
 
 }
 
-void removerEstoqueProduto(int id, int qtdVentida) {
+void removerEstoqueProduto(int id, int quantidadeVendida) {
 
-    FILE *tempFile;
+     FILE *tempFile;
     char line[200];
     int encontrado = 0;
 
-    abrirArquivoProdutoLeitura();
-    struct Produto produto = buscarProdutoPorId(id);
 
-    fecharArquivoProduto();
-    abrirArquivoProduto();
+
+    abrirArquivoProdutoLeitura();
+    tempFile = fopen("temp.txt", "w");
+    if (tempFile == NULL) {
+        printf("Erro ao abrir o arquivo tempor·rio para escrita.\n");
+        fclose(arquivoProduto);
+        return;
+    }
 
     while (fgets(line, sizeof(line), arquivoProduto) != NULL) {
         struct Produto produto;
@@ -259,25 +263,27 @@ void removerEstoqueProduto(int id, int qtdVentida) {
                    &produto.id, produto.nome, &produto.valorProduto, &produto.valorMinimo, &produto.tipoProduto, &produto.quantidadeEstoque) == 6) {
 
             if (produto.id == id) {
-                produto.quantidadeEstoque = qtdVentida;
+                produto.quantidadeEstoque -= quantidadeVendida;
                 encontrado = 1;
             }
-            gravarDadosEmArquivoProduto(produto);
+            fprintf(tempFile, "%d;%s;%f;%f;%d;%d\n",
+                    produto.id, produto.nome, produto.valorProduto, produto.valorMinimo, produto.tipoProduto, produto.quantidadeEstoque);
         } else {
-            fputs(line, arquivoProduto);
+            fputs(line, tempFile);
         }
     }
 
     fecharArquivoProduto();
+    fclose(tempFile);
 
     if (encontrado) {
         remove(nome_arquivo_produto);
         rename("temp.txt", nome_arquivo_produto);
         printf("Quantidade do produto com ID %d atualizada com sucesso.\n", id);
     } else {
-        printf("Produto com ID %d não encontrado.\n", id);
+        remove("temp.txt");
+        printf("Produto com ID %d n„o encontrado.\n", id);
     }
-
 }
 
 void alterarValorProduto() {
@@ -297,7 +303,7 @@ void alterarValorProduto() {
     abrirArquivoProdutoLeitura();
     tempFile = fopen("temp.txt", "w");
     if (tempFile == NULL) {
-        printf("Erro ao abrir o arquivo temporário para escrita.\n");
+        printf("Erro ao abrir o arquivo tempor·rio para escrita.\n");
         fclose(arquivoProduto);
         return;
     }
@@ -332,7 +338,7 @@ void alterarValorProduto() {
     {
         remove(nome_arquivo_produto);
         rename("temp.txt", nome_arquivo_produto);
-        printf("valor do produto com ID %d atualizada com sucesso.\n", id);
+        printf("Valor do produto com ID %d atualizada com sucesso.\n", id);
     } else if(encontrado == 2)
     {
         remove("temp.txt");
@@ -389,7 +395,7 @@ void excluirProduto() {
             rename("temp.txt", nome_arquivo_produto);
             printf("Produto com ID %d deletado com sucesso.\n", id);
         } else {
-            printf("Produto com ID %d não encontrado", id);
+            printf("Produto com ID %d n„o encontrado", id);
         }
     }
 }

@@ -31,7 +31,8 @@ static char* menuGerente[] = {
         "1 - Cadastrar Produto",
         "2 - Relatório de Vendas",
         "3 - Relatório de Produtos",
-        "4 - Realizar uma venda"
+        "4 - Realizar uma venda",
+        "5 - Adicionar Produto no Estoque"
 };
 
 static char* menuFuncionario[] = {

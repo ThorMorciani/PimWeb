@@ -18,12 +18,12 @@ void abrirArquivoVendas() {
 void abrirArquivoVendasLeitura() {
     arquivoVendas = fopen(nome_arquivo_vendas, "r");
     if (arquivoVendas == NULL) {
-        printf("O arquivo '%s' não existe. Criando o arquivo...\n", nome_arquivo_vendas);
+        printf("O arquivo '%s' n„o existe. Criando o arquivo...\n", nome_arquivo_vendas);
 
         arquivoVendas = fopen(nome_arquivo_vendas, "wb");
         if (arquivoVendas == NULL) {
             printf("Erro ao criar o arquivo.\n");
-            return;    
+            return;
         }
         fclose(arquivoVendas);
         arquivoVendas = fopen(nome_arquivo_vendas, "rb");
@@ -101,9 +101,9 @@ void gerar_relatorio_na_data(const char *date) {
     double total = soma_valores_na_data(date);
 
   if (total == 0) {
-        printf(" Relatório não pode ser gerado\n");
+        printf(" RelatÛrio n„o pode ser gerado\n");
     } else {
-        printf("\nRelatório de Vendas para a Data %s\n", date);
+        printf("\nRelatário de Vendas para a Data %s\n", date);
         printf("\n=================================\n");
         printf("\nTotal de vendas: %.2f\n", total);
     }
@@ -134,17 +134,17 @@ void gravarDadosEmArquivoVendas(struct Produto produto, int quantidade, struct V
 void cadastrarVenda() {
     int idProduto, quantidade;
     struct Venda venda;
-    
+
     printf("Digite o ID do produto: ");
     scanf("%d", &idProduto);
-    
+
     struct Produto produto = buscarProdutoPorId(idProduto);
 
     printf("Digite a quantidade desejada: ");
     scanf("%d", &quantidade);
 
     if (quantidade > produto.quantidadeEstoque) {
-        printf("Estoque insuficiente. Quantidade disponível: %d\n", produto.quantidadeEstoque);
+        printf("Estoque insuficiente. Quantidade disponÌvel: %d\n", produto.quantidadeEstoque);
         return;
     }
 
@@ -157,9 +157,9 @@ void cadastrarVenda() {
     gravarDadosEmArquivoVendas(produto, quantidade, venda);
     printf("Venda registrada com sucesso!\n");
 
-    produto.quantidadeEstoque -= quantidade;
 
-    removerEstoqueProduto(produto.id, produto.quantidadeEstoque);
+
+    removerEstoqueProduto(produto.id, quantidade);
 }
 
 void exibirRelatorioVendas() {
@@ -169,7 +169,7 @@ void exibirRelatorioVendas() {
         return;
     }
 
-    printf("ID Venda | Vendedor     | Cliente      | Valor Total | ID Produto | Nome Produto       | Valor Unitário | Quantidade\n");
+    printf("ID Venda | Vendedor     | Cliente      | Valor Total | ID Produto | Nome Produto       | Valor Unit·rio | Quantidade\n");
     printf("---------------------------------------------------------------------------------------------------------------\n");
 
     struct Venda venda;
