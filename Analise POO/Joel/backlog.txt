@@ -53,3 +53,11 @@ casos de uso:
 3. seleciona o período e critérios desejado ( tempo médio de atendimento, chamados resolvidos pela IA,
 Ténicos mais eficientes, Tipos de problemas mais recorrentes)
 4. possibilidade de gerar um relatório para analise.
+
+Cadastrar Usuário
+Ator: Admin
+casos de uso:
+1. Usuário faz login
+2. Usuário insere as informações de cadastro do usuário
+3. Ocorre a conferência dos dados para cadastro
+4. Usuário é cadastrado
