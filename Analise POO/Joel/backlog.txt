@@ -54,9 +54,19 @@ casos de uso:
 Ténicos mais eficientes, Tipos de problemas mais recorrentes)
 4. possibilidade de gerar um relatório para analise.
 
+
 Verificar chamados abertos pelo funcionário
 ator: funcionário
 casos de uso:
 1. funcionario acessa o sistema
 2. clica na opção de chamados abertos
 3. opção de filtros para status de chamados e/ou por protocolo
+
+Cadastrar Usuário
+Ator: Admin
+casos de uso:
+1. Usuário faz login
+2. Usuário insere as informações de cadastro do usuário
+3. Ocorre a conferência dos dados para cadastro
+4. Usuário é cadastrado
+
