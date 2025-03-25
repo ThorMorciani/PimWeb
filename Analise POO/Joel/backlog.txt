@@ -1,6 +1,6 @@
 Abrir Chamado
 Ator: Funcionário
-Casos de uso:
+Definição:
 1. Logar no sistema de gerenciamento de chamados
 2. Inserir informações sobre o chamado
 3. Sugestões de solução automática da IA ( caso tenha )
@@ -11,7 +11,7 @@ encontre uma solução eficaz, chamado pode ser encerrado imediatamente pelo fun
 
 Sugestões de solução automatizadas
 Ator: IA
-casos de uso:
+Definição:
 1. funcionário registra chamado
 2. IA consulta o banco de dados e históricos de chamado
 3. Caso haja uma solução compatível, a IA retorna a mesma solução.
@@ -20,7 +20,7 @@ casos de uso:
 
 Encaminhamento de chamado ao Técnico adequado
 ator: IA
-casos de uso:
+Definição:
 1. A IA analisa a descrição e categoria do chamado
 2. Com base no histórico de atendimentos o sistema seleciona o técnico com a especialização mais adequada
 3. Chamado chega ao técnico via notificação
@@ -28,7 +28,7 @@ casos de uso:
 
 Acompanhamento do status do chamado
 Ator: Funcionário
-casos de uso:
+Definição:
 1. Funcionário acessa o sistema
 2. Consulta a lista de chamados abertos
 3. Visualiza os status (Aberto, Em andamento, Resolvida, Fechado)
@@ -36,7 +36,7 @@ casos de uso:
 
 Atualizar e fechar chamado
 Ator: Técnico
-casos de uso:
+Definição:
 1. o técnico acessa o sistema
 2. visualiza os chamados que foram enviados a ele
 3. Atualiza o status do atendimento realizado
@@ -47,7 +47,7 @@ casos de uso:
 
 Gerar relatórios
 ator: ADM
-casos de uso:
+Definição:
 1. adm acessa o sistema
 2. acessa o painel de administração
 3. seleciona o período e critérios desejado ( tempo médio de atendimento, chamados resolvidos pela IA,
@@ -57,14 +57,14 @@ Ténicos mais eficientes, Tipos de problemas mais recorrentes)
 
 Verificar chamados abertos pelo funcionário
 ator: funcionário
-casos de uso:
+Definição:
 1. funcionario acessa o sistema
 2. clica na opção de chamados abertos
 3. opção de filtros para status de chamados e/ou por protocolo
 
 Cadastrar Usuário
 Ator: Admin
-casos de uso:
+Definição:
 1. Usuário faz login
 2. Usuário insere as informações de cadastro do usuário
 3. Ocorre a conferência dos dados para cadastro
