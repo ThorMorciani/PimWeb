@@ -1,5 +1,5 @@
 ## Integrantes
-- Thor de Oliveira Morciani - G96DFD3
+- [Thor de Oliveira Morciani - G96DFD3] (https://github.com/ThorMorciani)
 - Caio Henrique Barbosa Santos - G976690
 - Daniel Fagundes da Mota Filho - G97BJA0
 - Murilo Câmara da Silva – G9843G0
