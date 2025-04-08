@@ -6,7 +6,7 @@
 - [Joel Rodrigues Pereira - R0507H0](https://github.com/JoelRP00)
 - [João Pedro Costa Vieira - G956HJ7](https://github.com/JoaoPcvv)
 
-## --- Backlog ---
+## --- User Stories ---
 
 ## User Story: Abrir Chamado
 Definição:
@@ -71,6 +71,38 @@ Definição:
 2. Usuário insere as informações de cadastro do usuário
 3. Ocorre a conferência dos dados para cadastro
 4. Usuário é cadastrado
+
+## --- FIM User Stories ---
+
+## --- Backlog ---
+
+1. Criar tabelas no banco de dados
+2. Criar tela de Login
+3. Criar tela de Listagem de Chamados
+4. Criar fluxo de Cadastro de Chamados
+5. Criar tela de Visualização de Chamados
+6. Criar tela de Cadastro de Usuários
+7. Criar tela de Listagem de Usuários
+8. Criar tela de Cadastro de Criticidades
+9. Criar tela de Listagem de Criticidades
+10. Criar tela de Cadastro de Status
+11. Criar tela de Listagem de Status
+11. Criar tela de Visualização de Logs
+12. Criar tela de Cadastro de Causas Raiz
+13. Criar tela de Listagem de Causas Raiz
+15. Criar tela de Cadastro de Perfis
+16. Criar tela de Listagem de Perfis
+17. Criar tela de Cadastro de Funcionalidades
+18. Criar tela de Listagem de Funcionalidades
+19. Criar serviço de CRUD para Usuários
+20. Criar serviço de Login
+21. Criar serviço de CRUD de Funcionalidades
+22. Criar serviço de CRUD de Perfis
+23. Criar serviço de CRUD de Criticidades
+24. Criar serviço de CRUD de Causas Raiz
+25. Criar serviço de CRUD de Status
+26. Criar serviço de inserção de Logs
+27. Criar serviço de CRUD de Chamados
 
 ## --- FIM Backlog ---
 
