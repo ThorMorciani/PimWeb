@@ -1,10 +1,10 @@
 ## Integrantes
-- Thor de Oliveira Morciani - G96DFD3
-- Caio Henrique Barbosa Santos - G976690
-- Daniel Fagundes da Mota Filho - G97BJA0
-- Murilo Câmara da Silva – G9843G0
-- Joel Rodrigues Pereira - R0507H0
-- João Pedro Costa Vieira - G956HJ7 
+- [Thor de Oliveira Morciani - G96DFD3](https://github.com/ThorMorciani)
+- [Caio Henrique Barbosa Santos - G976690](https://github.com/CaioHennrique)
+- [Daniel Fagundes da Mota Filho - G97BJA0](https://github.com/DANFAGUNDES0)
+- [Murilo Câmara da Silva – G9843G0](https://github.com/MuriloCSilva)
+- [Joel Rodrigues Pereira - R0507H0](https://github.com/JoelRP00)
+- [João Pedro Costa Vieira - G956HJ7](https://github.com/JoaoPcvv)
 
 ## --- Backlog ---
 
