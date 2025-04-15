@@ -76,33 +76,45 @@ Definição:
 
 ## --- Backlog ---
 
-1. Criar tabelas no banco de dados
-2. Criar tela de Login
-3. Criar tela de Listagem de Chamados
-4. Criar fluxo de Cadastro de Chamados
-5. Criar tela de Visualização de Chamados
-6. Criar tela de Cadastro de Usuários
-7. Criar tela de Listagem de Usuários
-8. Criar tela de Cadastro de Criticidades
-9. Criar tela de Listagem de Criticidades
-10. Criar tela de Cadastro de Status
-11. Criar tela de Listagem de Status
-11. Criar tela de Visualização de Logs
-12. Criar tela de Cadastro de Causas Raiz
-13. Criar tela de Listagem de Causas Raiz
-15. Criar tela de Cadastro de Perfis
-16. Criar tela de Listagem de Perfis
-17. Criar tela de Cadastro de Funcionalidades
-18. Criar tela de Listagem de Funcionalidades
-19. Criar serviço de CRUD para Usuários
-20. Criar serviço de Login
-21. Criar serviço de CRUD de Funcionalidades
-22. Criar serviço de CRUD de Perfis
-23. Criar serviço de CRUD de Criticidades
-24. Criar serviço de CRUD de Causas Raiz
-25. Criar serviço de CRUD de Status
-26. Criar serviço de inserção de Logs
-27. Criar serviço de CRUD de Chamados
+## Sprint 1
+Período: 31/03/2025 - 07/04/2025
+Tarefas:
+    1. Levantar os requisitos funcionais e não funcionais do projeto.
+    2. Criar os repositórios no Git.
+    3. Iníciar a documentação do sistema.
+
+## Sprint 2
+Período: 07/04/2025 - 14/04/2025
+Tarefas:
+    1. Criar o diagrama de banco de dados.
+    2. Criar o diagrama de casos de uso.
+
+## Sprint 3
+Período: 14/04/2025 - 21/04/2025
+Tarefas:
+    1. Criar o diagrama de classes.
+    2. Corrigir casos de uso.
+    3. Validar documentação com os professores. 
+
+## Sprint 4
+Período: 21/04/2025 - 28/04/2025
+Tarefas:
+    1. Criar o diagrama de casos de uso descritivos.
+    2. Criar diagrama de sequência.
+    3. Validar documentação com os professores.
+
+## Sprint 5
+Período: 28/04/2025 - 05/05/2025
+Tarefas:
+    1. Criar a planilha de testes unitários.
+    2. Validar protótipo com professor responsável.
+    3. Validar documentação com os professores.
+
+## Sprint 6
+Período: 05/05/2025 - 12/05/2025
+Tarefas:
+    1. Validar protótipo com professor responsável.
+    2. Validar documentação com os professores.
 
 ## --- FIM Backlog ---
 
