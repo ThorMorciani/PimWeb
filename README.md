@@ -104,7 +104,7 @@ Tarefas:
     3. Validar documentação com os professores.
 
 ## Sprint 5
-Período: 28/04/2025 - 05/05/2025
+Período: 28/04/2025 - 05/05/2025 /n
 Tarefas:
 1. Criar a planilha de testes unitários.
 2. Validar protótipo com professor responsável.
