@@ -76,36 +76,31 @@ Definição:
 
 ## --- Backlog ---
 
-## Sprint 1
-Período: 31/03/2025 - 07/04/2025
-Tarefas:
-    1. Levantar os requisitos funcionais e não funcionais do projeto.
-    2. Criar os repositórios no Git.
-    3. Iníciar a documentação do sistema.
+## Sprint 1: 31/03/2025 - 07/04/2025
+## Tarefas:
+1. Levantar os requisitos funcionais e não funcionais do projeto.
+2. Criar os repositórios no Git.
+3. Iníciar a documentação do sistema.
 
-## Sprint 2
-Período: 07/04/2025 - 14/04/2025
-Tarefas:
-    1. Criar o diagrama de banco de dados.
-    2. Criar o diagrama de casos de uso.
+## Sprint 2: 07/04/2025 - 14/04/2025
+## Tarefas:
+1. Criar o diagrama de banco de dados.
+2. Criar o diagrama de casos de uso.
 
-## Sprint 3
-Período: 14/04/2025 - 21/04/2025
-Tarefas:
-    1. Criar o diagrama de classes.
-    2. Corrigir casos de uso.
-    3. Validar documentação com os professores. 
+## Sprint 3: 14/04/2025 - 21/04/2025
+## Tarefas:
+1. Criar o diagrama de classes.
+2. Corrigir casos de uso.
+3. Validar documentação com os professores. 
 
-## Sprint 4
-Período: 21/04/2025 - 28/04/2025
-Tarefas:
-    1. Criar o diagrama de casos de uso descritivos.
-    2. Criar diagrama de sequência.
-    3. Validar documentação com os professores.
+## Sprint 4: 21/04/2025 - 28/04/2025
+## Tarefas:
+1. Criar o diagrama de casos de uso descritivos.
+2. Criar diagrama de sequência.
+3. Validar documentação com os professores.
 
-## Sprint 5
-Período: 28/04/2025 - 05/05/2025 /n
-Tarefas:
+## Sprint 5: 28/04/2025 - 05/05/2025 /n
+## Tarefas:
 1. Criar a planilha de testes unitários.
 2. Validar protótipo com professor responsável.
 3. Validar documentação com os professores.
