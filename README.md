@@ -110,8 +110,7 @@ Tarefas:
 2. Validar protótipo com professor responsável.
 3. Validar documentação com os professores.
 
-## Sprint 6
-## Período: 05/05/2025 - 12/05/2025
+## Sprint 6: 05/05/2025 - 12/05/2025
 ## Tarefas:
 1. Validar protótipo com professor responsável.
 2. Validar documentação com os professores.
