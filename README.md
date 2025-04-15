@@ -106,15 +106,15 @@ Tarefas:
 ## Sprint 5
 Período: 28/04/2025 - 05/05/2025
 Tarefas:
-    1. Criar a planilha de testes unitários.
-    2. Validar protótipo com professor responsável.
-    3. Validar documentação com os professores.
+1. Criar a planilha de testes unitários.
+2. Validar protótipo com professor responsável.
+3. Validar documentação com os professores.
 
 ## Sprint 6
-Período: 05/05/2025 - 12/05/2025
-Tarefas:
-    1. Validar protótipo com professor responsável.
-    2. Validar documentação com os professores.
+## Período: 05/05/2025 - 12/05/2025
+## Tarefas:
+1. Validar protótipo com professor responsável.
+2. Validar documentação com os professores.
 
 ## --- FIM Backlog ---
 
