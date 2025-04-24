@@ -1,0 +1,25 @@
+## --- Requisitos Funcionais ---
+
+1. O sistema deverá possuir um gerenciamento de usuários com perfis e permissões.
+2. O sistema deverá utilizar um módulo de IA para sugerir soluções rápidas para os chamados.
+3. Deverão existir métodos de extração de relatórios do histórico de chamados e usuários.
+4. O sistema deve permitir que um funcionário possa atender mais de um chamado ao mesmo tempo.
+5. Uma notificação deverá ser enviada toda vez que um chamado for atribuído à um usuário.
+6. O requerente receberá uma notificação toda vez que seu chamado tiver alguma atualização.
+7. O sistema não deve permitir que chamados sejam abertos por meio da plataforma mobile.
+8. O cadastro de novos usuários e extração de relatórios deverão ser feitos somente por usuários que possuem permissão.
+9. O requerente não poderá alterar as informações do chamada após a abertura do mesmo.
+10. Todo chamado deverá ser armazenado em um banco de dados para fins de histórico.
+
+## --- FIM Requisitos Funcionais ---
+
+## --- Requisitos Não Funcionais ---
+
+1. O código deve seguir boas práticas de desenvolvimento para facilitar futuras manutenções.
+2. O sistema deve permitir fácil atualização de modelos de IA sem necessidade de interrupção do serviço.
+3. Documentação técnica e de usuário deve estar sempre atualizada.
+4. Deve ser compatível com múltiplos navegadores modernos (Chrome, Edge, Firefox, Safari).
+5. A interface deve ser responsiva e acessível em dispositivos móveis e desktops.
+6. O tempo de resposta da categorização automática não deve ultrapassar 5 segundos.
+
+## --- FIM Requisitos Não Funcionais ---

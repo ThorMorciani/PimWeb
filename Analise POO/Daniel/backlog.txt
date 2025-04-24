@@ -1,7 +1,0 @@
-*FUNCIONAIS*
-cadastro de user
-autorização de dados
-categorias
-
-*NÃO FUNCIONAIS*
-segurança
