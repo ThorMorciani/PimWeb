@@ -6,7 +6,7 @@
 - [Joel Rodrigues Pereira - R0507H0](https://github.com/JoelRP00)
 - [João Pedro Costa Vieira - G956HJ7](https://github.com/JoaoPcvv)
 
-## [Casos de Uso](https://github.com/ThorMorciani/PimWeb/blob/main/Analise%20POO/User%20Stories.txt)
+## [User Stories](https://github.com/ThorMorciani/PimWeb/blob/main/Analise%20POO/User%20Stories.txt)
 
 ## [Requisitos](https://github.com/ThorMorciani/PimWeb/blob/main/Analise%20POO/Requisitos.txt)
 
