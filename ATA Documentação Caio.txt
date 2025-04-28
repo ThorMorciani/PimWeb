@@ -1,0 +1,47 @@
+------------------ 23/04 ------------------
+
+O teste unitário é uma técnica fundamental em um processo de 
+desenvolvimento de software que visa verificar o funcionamento 
+correto de unidades individuais do código-fonte, como funções, 
+métodos ou classes. além de assegurar a qualidade e a confiabilidade
+ do sistema, essa prática permite a detecção precoce de falhas,
+ tornando o processo de correção mais simples e menos custoso. 
+
+Ao isolar uma unidade e fornecer entradas específicas, é possível
+ validar se a saída gerada está de acordo com o comportamento 
+esperado, Outro aspecto importante é que os testes unitários 
+oferecem maior segurança para os desenvolvedores ao realizar 
+alterações no código, já que os testes automatizados indicam 
+imediatamente se houve quebra de alguma funcionalidade existente.
+
+
+OBS : Tirei dúvida com o professor sobre a documentação da matéria
+ dele para iniciá-la
+
+------------------ 28/04 ------------------
+
+Um caso de uso tem como principal objetivo relatar como um sistema 
+interage com os usuários ou demais sistemas externos. E ele oferece
+ uma visão geral sobre as funcionalidades do sistema, ressaltando 
+os principais cenários de uso e são ainda uma ferramenta importante
+para identificar e documentar as funcionalidades específicas que o 
+sistema precisa oferecer para seus usuários.
+
+
+1.Abrir Chamado 
+ Definição:
+
+1. Logar no sistema de gerenciamento de chamados
+pré condição
+2. Inserir informações sobre o chamado
+3. Sugestões de solução automática da IA ( caso tenha )
+4. Realizar o chamado
+5. Sistema gera número de protocolo e salva o chamado
+6. Caso a IA não resolva, encaminhar a um técnico especializado ( caso a IA 
+encontre uma solução eficaz, chamado pode ser encerrado imediatamente pelo funcionário )
+7. tecnico especializado propõe uma solução eficaz.
+pos condição
+8. finalização do chamado com a solução.
+
+extend
+9. o funcionario pode acessar o historico de chamados dele
