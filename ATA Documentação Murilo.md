@@ -1,13 +1,13 @@
 # Telas criadas até o momento:
 
 Tela de autenticação
-https://i.imgur.com/2b0ysIm.png
+![image](https://github.com/user-attachments/assets/118c9463-295c-4723-82f0-2721ead2ef95)
 
 Tela de boas vindas
-https://i.imgur.com/FLtHaSb.png
+![image](https://github.com/user-attachments/assets/ae7b2d8b-4c1d-493a-b857-91efa0094cf1)
 
 Tela visualização de tickets
-https://i.imgur.com/165Jg4z.png
+![image](https://github.com/user-attachments/assets/893b392e-d3a0-47f8-b95f-185fe5f5eeec)
 
 Tela ticket
 
