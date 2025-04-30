@@ -112,7 +112,7 @@ OBS: Subi a documentação no git e validei a documentação com o professor
 
 OBS: Ajustei a documentação, adicionei citações ( pouco de dificuldade de 
 pesquisar citações ) e casos de uso descritivos, estou com um pouco de 
-duvida 29/04
+duvida nos casos de uso 29/04
 
 
 
