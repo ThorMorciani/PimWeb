@@ -1,0 +1,118 @@
+------------------ 23/04 ------------------
+
+O teste unitário é uma técnica fundamental em um processo de 
+desenvolvimento de software que visa verificar o funcionamento 
+correto de unidades individuais do código-fonte, como funções, 
+métodos ou classes. Segundo Pressman (2016)"A realização de 
+testes em nível de unidade permite que erros sejam detectados
+precocemente, o que reduz significativamente o custo de correção."
+aumentando a qualidade e a confiabilidade.
+
+Segundo Sommerville(2011)"Os testes unitários têm como objetivo 
+validar cada componente individual do software de forma isolada,
+garantindo que ele execute corretamente suas funções previstas."
+Outro aspecto importante é que os testes unitários oferecem 
+maior segurança para os desenvolvedores ao realizar alterações 
+no código, já que os testes automatizados indicam imediatamente 
+se houve quebra de alguma funcionalidade existente.
+
+(SOMMERVILLE, Ian. Engenharia de Software. 9. ed. Pearson, 2011.)
+
+(PRESSMAN, Roger S.; MAXIM, Bruce R. Engenharia de Software: uma 
+abordagem profissional. 8. ed. AMGH Editora, 2016.)
+
+
+------------------ 28/04 ------------------
+
+Um caso de uso tem como principal objetivo relatar como um sistema 
+interage com os usuários ou demais sistemas externos, segundo Dennis, 
+Wixom e Roth (2013) “Os casos de uso descrevem como o usuário interage com 
+o sistema para realizar uma tarefa ou alcançar um objetivo específico.”
+E ele oferece uma visão geral sobre as funcionalidades do sistema, 
+ressaltando os principais cenários de uso e são ainda uma ferramenta 
+importante para identificar e documentar as funcionalidades específicas
+que o sistema precisa oferecer para seus usuários. 
+
+(DENNIS, Alan; WIXOM, Barbara Haley; ROTH, Roberta M. Análise e Projeto de 
+Sistemas. 5. ed. Bookman, 2013.)
+
+
+
+------------------ 29/04 ------------------
+
+Casos de uso descritivos
+
+
+1.Abrir Chamado:
+
+pré condição
+1. Logar no sistema de gerenciamento de chamados
+
+fluxo normal
+2. Inserir informações sobre o chamado
+3. Realizar abertura do chamado 
+4. Sistema gera número de protocolo e salva o chamado
+5. Sugestões de solução automática da IA ( caso tenha )
+6. Caso a IA encontre uma solução eficaz, chamado pode
+ser encerrado imediatamente pelo funcionário
+7. finalização do chamado com a solução.
+
+pos condição
+8. o funcionario pode acessar o historico de chamados dele ou
+abrir um novo chamado
+
+extend
+1. Caso a IA não resolva, encaminhar a um técnico especializado
+2. tecnico especializado propõe uma solução eficaz.
+3. finalização do chamado com a solução.
+
+--------------------------------------------------------------
+
+2.Atualizar e fechar chamado:
+
+pre-condição
+1. o técnico realiza o login no sistema
+
+fluxo normal
+2. visualiza os chamados que foram enviados a ele
+3. Atualiza o status do atendimento realizado
+4. Registra a solução
+5. Define o chamado como Resolvido
+6. Funcionário recebe notificação para validar a resolução
+7. Se a solução foi eficiente, chamado pode ser fechado
+
+pos-condição
+8. Chamado e armazenado e pode ser visto no historico
+
+---------------------------------------------------------------
+
+3.Sugestões de solução automatizadas
+
+pre-condição
+1. funcionario realiza o login no sistema
+
+fluxo normal
+2. funcionário registra chamado
+3. IA consulta o banco de dados e históricos de chamado
+4. Caso haja uma solução compatível, a IA retorna a mesma solução.
+5. Funcionário testa a solução sugerida
+6. Caso resolva o problema, o chamado já pode ser encerrado.
+
+pos-condição
+7. IA armazena no banco de dados a solução que funcionou
+ 
+
+Documentação do processos:
+
+OBS: Tirei dúvida com o professor sobre a documentação da matéria
+dele para iniciá-la 23/04
+
+OBS: Subi a documentação no git e validei a documentação com o professor
+28/04
+
+OBS: Ajustei a documentação, adicionei citações ( pouco de dificuldade de 
+pesquisar citações ) e casos de uso descritivos, estou com um pouco de 
+duvida nos casos de uso 29/04
+
+
+
