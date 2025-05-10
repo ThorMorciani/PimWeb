@@ -1,0 +1,48 @@
+Análise da Programação Orientada a Objetos no Sistema de Chamados
+
+1. Introdução
+A Programação Orientada a Objetos (POO) é um paradigma amplamente adotado no desenvolvimento de sistemas modernos devido à sua capacidade de modelar soluções complexas de forma organizada,
+reutilizável e escalável. Este capítulo tem como objetivo analisar a aplicação prática da POO no desenvolvimento do sistema de gerenciamento de chamados proposto por este trabalho,
+evidenciando como os conceitos e princípios fundamentais
+deste paradigma contribuem diretamente para o atendimento dos requisitos funcionais e não funcionais definidos previamente.
+
+2. Conceitos Fundamentais da POO
+A POO se baseia em quatro pilares principais: abstração, encapsulamento, herança e polimorfismo. A seguir, esses conceitos são abordados à luz da estrutura do sistema desenvolvido.
+
+2.1 Abstração
+A abstração consiste na modelagem das entidades do mundo real de maneira simplificada, escondendo os detalhes técnicos e expondo apenas as funcionalidades essenciais. No sistema de chamados,
+a abstração é aplicada ao permitir que usuários interajam com funcionalidades de abertura, consulta e acompanhamento de chamados sem conhecimento da lógica de banco de dados, processamento
+da IA ou rotinas de back-end. Classes como Chamado, Usuário e IA_Solucionador representam abstrações fundamentais, cada uma com atributos e métodos que
+encapsulam comportamentos específicos do domínio do sistema.
+
+2.2 Encapsulamento
+O encapsulamento garante que os atributos dos objetos sejam acessíveis apenas por meio de métodos controlados, protegendo os dados contra alterações indevidas. Essa técnica está fortemente
+presente no controle de permissões do sistema: Apenas usuários com perfis específicos (como administradores) podem acessar ou modificar dados sensíveis, como relatórios e cadastros de novos usuários.
+Requerentes não podem alterar o conteúdo de um chamado após sua criação, o que reforça a integridade da informação.
+As atualizações e encerramentos dos chamados são possíveis apenas por usuários técnicos designados.
+Esse controle é implementado com métodos públicos de acesso (getters e setters) e atributos privados em cada classe.
+
+2.3 Herança
+A herança permite a criação de hierarquias de classes, promovendo a reutilização de código e especialização de comportamentos. No sistema de chamados, a classe abstrata Usuário é utilizada
+como base para as subclasses Técnico, Funcionário e Administrador. Cada subclasse herda atributos comuns como nome, email e senha, e implementa comportamentos específicos, como:
+
+*  Técnicos: métodos para assumir, atualizar e resolver chamados;
+*  Administradores: acesso a funcionalidades administrativas como geração de relatórios e cadastro de usuários;
+*  Funcionários: funcionalidades relacionadas à abertura e acompanhamento de chamados.
+
+2.4 Polimorfismo
+O polimorfismo permite que métodos com o mesmo nome se comportem de formas diferentes, de acordo com a classe que os implementa. Isso é observado, por exemplo, na função gerarRelatorio(),
+que pode ser implementada de forma distinta para gerar diferentes tipos de relatórios, como por técnico, por período ou por categoria de chamado. Outro exemplo é o método sugerirSolucao(),
+que pode ter múltiplas variações com base nos modelos de IA utilizados, permitindo a substituição ou atualização dos modelos sem alterar o restante do sistema
+(conforme um dos requisitos não funcionais).
+
+3. Modelagem Orientada a Objetos do Sistema
+O sistema é composto por diversas classes que representam os elementos centrais do processo de suporte e resolução de chamados. Abaixo, uma visão geral das principais classes e suas responsabilidades:
+*  Usuário: classe abstrata base para todos os tipos de usuários. Possui métodos de autenticação e gerenciamento básico de conta.
+*  Funcionário: pode abrir chamados, acompanhar o status, e validar a resolução.
+*  Técnico: possui métodos para assumir, atualizar e resolver chamados.
+*  Administrador: tem acesso ao painel de administração, podendo gerar relatórios e cadastrar novos usuários.
+*  Chamado: entidade principal do sistema, representa uma ocorrência registrada por um funcionário, contendo informações como status, descrição e protocolo.
+*  IA_Solucionador: módulo de inteligência artificial responsável por sugerir soluções automáticas com base no histórico de chamados.
+*  Relatório: classe responsável por gerar relatórios gerenciais e técnicos.
+*  Notificação: sistema que envia alertas automáticos de atualizações de chamados para usuários envolvidos.
