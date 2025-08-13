@@ -1,0 +1,12 @@
+@import './styles/variables';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.primary-button {
+    background-color: $primary-button-background;
+    color: #ffffff;
+    width: 136px;
+    height: 43px;
+    border-radius: 10px;
+}
