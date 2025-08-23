@@ -1,0 +1,129 @@
+// Variáveis fornecidas
+$primary-button-background: #055DFC;
+$primary-button-text: #ecedf0;
+$default-background: #24282C;
+$seconday-button-background: #E94F54;
+$information-text-color: #B8B8B8;
+$title-text-color: #FFFFFF;
+$modal-background: #1A1C1E;
+$title-text-size: 32px;
+$information-text-size: 14px;
+
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: $default-background;
+  color: $title-text-color;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: $modal-background;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.sidebar-header h2 {
+  color: $title-text-color;
+  margin-bottom: 2rem;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 10px;
+  color: $information-text-color;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: rgba(255,255,255,0.1);
+  }
+}
+
+.menu li.active {
+  background-color: rgba(5, 93, 252, 0.2);
+  color: $title-text-color;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.logout {
+  margin: 20px 0;
+  color: $information-text-color;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-button-background;
+  }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    border-radius: 50%;
+  }
+
+  p {
+    margin: 0;
+    color: $title-text-color;
+    font-weight: bold;
+  }
+
+  span {
+    font-size: $information-text-size;
+    color: $information-text-color;
+  }
+}
+
+.content {
+  flex: 1;
+  text-align: center;
+  padding: 2rem;
+
+  .logo  {
+    color: $primary-button-background;
+    font-size: $title-text-size;
+  }
+
+  h2 {
+    margin: 20px 0;
+    font-size: 24px;
+    color: $title-text-color;
+  }
+
+  p {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    color: $information-text-color;
+    font-size: $information-text-size;
+    line-height: 1.6;
+  }
+
+  .primary-btn {
+    background-color: $primary-button-background;
+    color: $primary-button-text;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Home</h2>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li class="active">Menu Principal</li>
+        <li>Tickets</li>
+        <li>Relatórios</li>
+        <li>Causas Raiz</li>
+        <li>Criticalidades</li>
+        <li>Logs</li>
+        <li>Admin</li>
+      </ul>
+    </nav>
+
+    <div class="logout">Logout</div>
+
+    <div class="user-info">
+      <img src="https://via.placeholder.com/40" alt="Avatar" />
+      <div>
+        <p>{{ userName }}</p>
+        <span>{{ userEmail }}</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+    <h1 class="AIssist">AIssist</h1>
+    <h2>{{ welcomeMessage }}</h2>
+    <p>{{ description }}</p>
+    <button class="primary-btn" (click)="explorar()">Explorar!</button>
+  </main>
+</div>
+
