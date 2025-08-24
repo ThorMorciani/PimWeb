@@ -1,0 +1,46 @@
+@import '../../../styles/variables';
+
+.home-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  min-height: 100vh; 
+  box-sizing: border-box;
+}
+
+.logo {
+  color: $primary-button-background;
+  font-weight: bold;
+}
+
+h2 {
+  margin: 20px 0 15px;
+  font-size: 1.8rem;
+}
+
+p {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.explore-btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: #007bff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.explore-btn:hover {
+  background: #0056b3;
+}
