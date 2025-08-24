@@ -1,0 +1,74 @@
+@import '../../../styles/variables';
+
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  box-sizing: border-box;
+  background: $modal-background;
+  color: $title-text-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 10px;
+  border-right: 1px solid $default-background;
+}
+
+.sidebar h1 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: $title-text-color;
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid $default-background;
+}
+
+.sidebar ul {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin-top: 20%;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.bottom {
+  border-top: 1px solid $default-background;
+}
+
+.sidebar ul li a {
+  color: $information-text-color;
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+  background: $primary-button-background-transparent;
+  color: $primary-button-background;
+}
+
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 15px;
+}
+
+.user p {
+  margin: 0;
+}
+
+.user img {
+  border-radius: 50%;
+}
