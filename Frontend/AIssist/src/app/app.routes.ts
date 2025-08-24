@@ -1,14 +1,21 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { HomeComponent } from './views/home/home.component';
+import { UsuariosComponent } from './views/usuarios/usuarios.component';
+import { TicketsComponent } from './views/tickets/tickets.component';
+import { RelatoriosComponent } from './views/relatorios/relatorios.component';
+import { AssuntosComponent } from './views/assuntos/assuntos.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        loadComponent: () => import('./home/home.component').then(mod => mod.HomeComponent)
-    },
-    {
-        path: '**',
-        loadComponent: () => import('./not-found/not-found.component').then(mod => mod.NotFoundComponent)
-    }
+  {
+    path: '',
+    component: DashboardLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'usuarios', component: UsuariosComponent },
+      { path: 'tickets', component: TicketsComponent },
+      { path: 'relatorios', component: RelatoriosComponent },
+      { path: 'assuntos', component: AssuntosComponent },
+    ],
+  },
 ];
