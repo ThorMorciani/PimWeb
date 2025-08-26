@@ -1,0 +1,62 @@
+@import '../../../styles/variables';
+
+.primary-large-button {
+  background-color: $primary-button-background;
+  color: $primary-button-text;
+  width: 200px;
+  height: 46px;
+  border-radius: 10px;
+}
+
+.primary-small-button {
+  background-color: $primary-button-background;
+  color: $primary-button-text;
+  width: 136px;
+  height: 43px;
+  border-radius: 10px;
+}
+
+.secondary-large-button {
+  background-color: $seconday-button-background;
+  color: $primary-button-text;
+  width: 200px;
+  height: 46px;
+  border-radius: 10px;
+}
+
+.secondary-small-button {
+  background-color: $seconday-button-background;
+  color: $primary-button-text;
+  width: 136px;
+  height: 43px;
+  border-radius: 10px;
+}
+
+.tertiary-button {
+  color: $primary-button-text;
+  width: 136px;
+  height: 43px;
+  border-radius: 10px;
+  border: 1px solid $primary-button-text;
+}
+
+/* Variantes dinâmicas */
+.danger {
+  background-color: red !important;
+  color: white !important;
+}
+
+.block {
+  display: block;
+  width: 100% !important;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.outlined {
+  background-color: transparent !important;
+  border: 2px solid currentColor !important;
+}
