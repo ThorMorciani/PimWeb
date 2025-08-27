@@ -33,7 +33,7 @@
 }
 
 .sidebar ul li {
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 .bottom {
@@ -44,16 +44,21 @@
   color: $information-text-color;
   font-weight: 500;
   text-decoration: none;
-  display: block;
+  display: flex;
   padding: 8px 12px;
   border-radius: 8px;
   transition: 0.2s;
+  align-items: center;
+  gap: 0 10px;
 }
 
-.sidebar ul li a.active,
-.sidebar ul li a:hover {
-  background: $primary-button-background-transparent;
+.sidebar ul li a.active {
   color: $primary-button-background;
+  background: $primary-button-background-transparent;
+}
+.sidebar ul li a:hover {
+  background: none !important;
+  color: $primary-button-text;
 }
 
 
@@ -62,7 +67,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .user p {
