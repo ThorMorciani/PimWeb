@@ -3,14 +3,18 @@
     <h1 class="logo">AIssist</h1>
     <ul>
       <div>
-        <li><a routerLink="/" routerLinkActive="active">🏠 Home</a></li>
-        <li><a routerLink="/usuarios" routerLinkActive="active">👤 Usuários</a></li>
-        <li><a routerLink="/tickets" routerLinkActive="active">🎟️ Tickets</a></li>
-        <li><a routerLink="/relatorios" routerLinkActive="active">📊 Relatórios</a></li>
-        <li><a routerLink="/assuntos" routerLinkActive="active">📄 Assuntos</a></li>
+        <li>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>home</mat-icon> Home
+          </a>
+        </li>
+        <li><a routerLink="/usuarios" routerLinkActive="active"><mat-icon>group</mat-icon> Usuários</a></li>
+        <li><a routerLink="/tickets" routerLinkActive="active"><mat-icon>confirmation_number</mat-icon> Tickets</a></li>
+        <li><a routerLink="/relatorios" routerLinkActive="active"><mat-icon>analytics</mat-icon> Relatórios</a></li>
+        <li><a routerLink="/assuntos" routerLinkActive="active"><mat-icon>topic</mat-icon> Assuntos</a></li>
       </div>
       
-      <li><a routerLink="/assuntos" routerLinkActive="active" class="logoutButton">🚪 Logout</a></li>
+      <li><a routerLink="/assuntos" routerLinkActive="active" class="logoutButton"><mat-icon>logout</mat-icon> Logout</a></li>
     </ul>
   </div>
   
