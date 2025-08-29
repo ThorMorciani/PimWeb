@@ -1,1 +1,27 @@
-<p>usuarios works!</p>
+<div class="container-dashboard">
+    <div class="dashboard-header">
+        <div>
+            <h2 class="page-title">Usuários</h2>
+            <p class="page-subtitle">1234 Usuários criados...</p>
+        </div>
+        <div class="dashboard-header-buttons">
+            <app-button
+                texto="+ Adicionar Filtro"
+                size="large"
+                type="primary"
+                [outlined]="true"
+            />
+            <app-button
+                texto="Novo Usuário"
+                size="large"
+                type="primary"
+            />
+        </div>
+    </div>
+    <app-data-table
+        [data]="usuarios"
+        [page]="paginaAtual"
+        (pageChange)="carregarPagina($event)"
+        (action)="executarAcao($event)">
+    </app-data-table>
+</div>

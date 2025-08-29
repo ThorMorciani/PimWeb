@@ -6,6 +6,7 @@
   width: 200px;
   height: 46px;
   border-radius: 10px;
+  font-weight: bold;
 
   &:hover {
     background-color: $primary-button-background-hover;
@@ -62,6 +63,14 @@
 }
 
 .outlined {
-  background-color: transparent !important;
-  border: 2px solid currentColor !important;
+  background-color: transparent;
+  border: 2px solid $primary-button-background;
+  color: $primary-button-background;
+  &:hover {
+    background-color: $primary-button-background;
+    color: $primary-button-text;
+    border: none;
+    transition: .3s;
+    cursor: pointer;
+  }
 }

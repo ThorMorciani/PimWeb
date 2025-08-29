@@ -1,0 +1,32 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let header of headers">{{ header }}</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let header of headers">{{ row[header] }}</td>
+        <td class="actions">
+          <button class="btn edit" (click)="onAction('edit', row)">✏️</button>
+          <button class="btn delete" (click)="onAction('delete', row)">🗑️</button>
+          <button class="btn toggle" (click)="onAction('toggle', row)">🔄</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginação -->
+  <div class="pagination">
+    <button (click)="changePage(page-1)" [disabled]="page === 1">&lt;</button>
+    <button 
+      *ngFor="let p of [1,2,3,4,5]" 
+      [class.active]="p === page"
+      (click)="changePage(p)">
+      {{ p }}
+    </button>
+    <button (click)="changePage(page+1)">&gt;</button>
+  </div>
+</div>
