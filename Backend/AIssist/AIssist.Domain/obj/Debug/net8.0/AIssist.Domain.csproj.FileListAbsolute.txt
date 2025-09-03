@@ -1,0 +1,13 @@
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/bin/Debug/net8.0/AIssist.Domain.deps.json
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/bin/Debug/net8.0/AIssist.Domain.dll
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/bin/Debug/net8.0/AIssist.Domain.pdb
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/AIssist.Domain.csproj.AssemblyReference.cache
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/AIssist.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/AIssist.Domain.AssemblyInfoInputs.cache
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/AIssist.Domain.AssemblyInfo.cs
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/AIssist.Domain.csproj.CoreCompileInputs.cache
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/AIssist.Domain.sourcelink.json
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/AIssist.Domain.dll
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/refint/AIssist.Domain.dll
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/AIssist.Domain.pdb
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Domain/obj/Debug/net8.0/ref/AIssist.Domain.dll

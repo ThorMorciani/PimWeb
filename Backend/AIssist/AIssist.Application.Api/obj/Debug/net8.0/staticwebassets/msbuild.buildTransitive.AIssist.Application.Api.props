@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/AIssist.Application.Api.props" />
+</Project>

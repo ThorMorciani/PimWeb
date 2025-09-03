@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AIssist.Domain\AIssist.Domain.csproj" />
+    <ProjectReference Include="..\AIssist.Application.Services\AIssist.Application.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Configs\" />
+    <None Remove="Configs\AutoMap\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configs\" />
+    <Folder Include="Configs\AutoMap\" />
+  </ItemGroup>
+</Project>
