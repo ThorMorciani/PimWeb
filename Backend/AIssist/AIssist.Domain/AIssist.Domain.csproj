@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Supabase" Version="1.1.1" />
+    <PackageReference Include="Supabase.Postgrest" Version="4.1.0" />
+    <PackageReference Include="postgrest-csharp" Version="3.5.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Entities\" />
+    <None Remove="Http\" />
+    <None Remove="Http\Request\" />
+    <None Remove="Http\Response\" />
+    <None Remove="Services\" />
+    <None Remove="Http\Request\Criticality\" />
+    <None Remove="Http\Request\Functionality\" />
+    <None Remove="Http\Request\Profile\" />
+    <None Remove="Http\Request\RootCause\" />
+    <None Remove="Http\Request\User\" />
+    <None Remove="Services\Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Http\" />
+    <Folder Include="Http\Request\" />
+    <Folder Include="Http\Response\" />
+    <Folder Include="Services\" />
+    <Folder Include="Http\Request\Criticality\" />
+    <Folder Include="Http\Request\Functionality\" />
+    <Folder Include="Http\Request\Profile\" />
+    <Folder Include="Http\Request\RootCause\" />
+    <Folder Include="Http\Request\User\" />
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+</Project>

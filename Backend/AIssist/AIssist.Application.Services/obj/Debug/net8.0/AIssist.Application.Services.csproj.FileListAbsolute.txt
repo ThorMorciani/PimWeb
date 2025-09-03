@@ -1,0 +1,16 @@
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/bin/Debug/net8.0/AIssist.Application.Services.deps.json
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/bin/Debug/net8.0/AIssist.Application.Services.dll
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/bin/Debug/net8.0/AIssist.Application.Services.pdb
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/bin/Debug/net8.0/AIssist.Domain.dll
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/bin/Debug/net8.0/AIssist.Domain.pdb
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist.Application.Services.csproj.AssemblyReference.cache
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist.Application.Services.GeneratedMSBuildEditorConfig.editorconfig
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist.Application.Services.AssemblyInfoInputs.cache
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist.Application.Services.AssemblyInfo.cs
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist.Application.Services.csproj.CoreCompileInputs.cache
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist.Application.Services.sourcelink.json
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist..99CA3E5F.Up2Date
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist.Application.Services.dll
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/refint/AIssist.Application.Services.dll
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/AIssist.Application.Services.pdb
+/Users/thormorciani/Documents/PimWeb/Backend/AIssist/AIssist.Application.Services/obj/Debug/net8.0/ref/AIssist.Application.Services.dll

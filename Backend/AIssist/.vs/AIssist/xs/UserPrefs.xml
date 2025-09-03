@@ -1,0 +1,7 @@
+﻿<Properties StartupConfiguration="{C462EC8C-9E97-43D8-90B2-FC728A78F310}|https">
+  <MonoDevelop.Ide.ItemProperties.AIssist.Domain FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.AIssist.Application.Services FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.AIssist.Infrastructure.Ioc FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.AIssist.Application.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MultiItemStartupConfigurations />
+</Properties>
