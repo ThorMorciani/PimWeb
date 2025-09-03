@@ -51,3 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 .qodo
+.DS_Store
+obj/
+vs/
