@@ -1,5 +1,4 @@
-﻿using System;
-using AIssist.Application.Services.Interfaces;
+﻿using AIssist.Application.Services.Interfaces;
 using AIssist.Domain.Entities;
 using AIssist.Domain.Http.Request.RootCause;
 using AIssist.Domain.Services.Interfaces;
@@ -18,7 +17,7 @@ namespace AIssist.Application.Services
             _mapper = mapper;
         }
 
-        public Task Add(RootCauseRequest entity)
+        public Task Add(RootCausePostRequest entity)
         {
             var user = _mapper.Map<RootCauses>(entity);
 
@@ -42,7 +41,7 @@ namespace AIssist.Application.Services
             return result;
         }
 
-        public Task Update(RootCauseRequest entity)
+        public Task Update(RootCausePutRequest entity)
         {
             var user = _mapper.Map<RootCauses>(entity);
 

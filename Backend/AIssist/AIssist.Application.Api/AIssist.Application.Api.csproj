@@ -15,13 +15,19 @@
     <PackageReference Include="Supabase" Version="1.1.1" />
     <PackageReference Include="supabase-csharp" Version="0.16.2" />
     <PackageReference Include="Supabase.Postgrest" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.19" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Controllers\" />
+    <None Remove="Services\" />
+    <None Remove="Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AIssist.Domain\AIssist.Domain.csproj">

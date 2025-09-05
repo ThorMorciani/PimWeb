@@ -1,4 +1,6 @@
-﻿using AIssist.Infrastructure.Ioc;
+﻿using AIssist.Application.Api.Services;
+using AIssist.Application.Api.Services.Interfaces;
+using AIssist.Infrastructure.Ioc;
 using Supabase;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddDependencyInjection();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var url = builder.Configuration["supabase:url"];
 var key = builder.Configuration["supabase:key"];

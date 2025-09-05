@@ -3,6 +3,7 @@ using AIssist.Domain.Entities;
 using AIssist.Domain.Http.Request.User;
 using AIssist.Domain.Services.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace AIssist.Application.Services
 {
@@ -17,9 +18,13 @@ namespace AIssist.Application.Services
             _mapper = mapper;
         }
 
-        public Task Add(UserRequest entity)
+        public Task Add(UserPostRequest entity)
         {
             var user = _mapper.Map<Users>(entity);
+
+            var hashedPassword = new PasswordHasher<Users>()
+                .HashPassword(user, entity.Password);
+            user.Password = hashedPassword;
 
             return _userService.Add(user);
         }
@@ -41,7 +46,7 @@ namespace AIssist.Application.Services
             return result;
         }
 
-        public Task Update(UserRequest entity)
+        public Task Update(UserPutRequest entity)
         {
             var user = _mapper.Map<Users>(entity);
 

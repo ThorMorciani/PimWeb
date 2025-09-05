@@ -1,8 +1,7 @@
-﻿using System;
-namespace AIssist.Domain.Http.Request.RootCause
+﻿namespace AIssist.Domain.Http.Request.RootCause
 {
-    public class RootCauseRequest
-    {
+	public class RootCausePutRequest
+	{
         public long Id { get; set; }
         public string? RootCause { get; set; }
         public long CriticalityId { get; set; }

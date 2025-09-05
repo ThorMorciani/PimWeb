@@ -24,7 +24,7 @@ namespace AIssist.Application.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(UserRequest userRequest)
+        public async Task<IActionResult> Add(UserPostRequest userRequest)
         {
             await _userAppService.Add(userRequest);
 
@@ -40,7 +40,7 @@ namespace AIssist.Application.Api.Controllers
         }
 
         [HttpPut()]
-        public async Task<IActionResult> Update(UserRequest userRequest)
+        public async Task<IActionResult> Update(UserPutRequest userRequest)
         {
             await _userAppService.Update(userRequest);
 

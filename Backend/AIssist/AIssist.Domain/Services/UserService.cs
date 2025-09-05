@@ -46,6 +46,16 @@ namespace AIssist.Domain.Services
             return result.Models;
         }
 
+        public async Task<Users> GetByUsername(string username)
+        {
+            var result = await _supabaseclient
+                .From<Users>()
+                .Where(w => w.Username == username)
+                .Single();
+
+            return result;
+        }
+
         public async Task Update(Users entity)
         {
             await _supabaseclient

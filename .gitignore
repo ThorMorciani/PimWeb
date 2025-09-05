@@ -1,6 +1,8 @@
 # Prerequisites
 *.d
 **/.DS_Store
+vs/
+obj/
 
 
 # Object files
@@ -55,4 +57,4 @@ dkms.conf
 .qodo
 .DS_Store
 obj/
-vs/
+

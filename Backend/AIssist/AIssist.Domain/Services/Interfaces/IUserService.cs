@@ -9,6 +9,7 @@ namespace AIssist.Domain.Services.Interfaces
         Task Update(Users user);
         Task<List<Users>> Get();
         Task Inactivate(long entityId);
+        Task<Users> GetByUsername(string username);
     }
 }
 

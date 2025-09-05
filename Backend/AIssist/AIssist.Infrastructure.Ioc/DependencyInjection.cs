@@ -21,7 +21,7 @@ namespace AIssist.Infrastructure.Ioc
         private static void AddAutoMapperConfig(IServiceCollection services)
         {
             var serviceProvider = new ServiceCollection()
-                .AddLogging() // Add logging services
+                .AddLogging()
                 .BuildServiceProvider();
 
             var loggerFactory = serviceProvider.GetService<ILoggerFactory>();

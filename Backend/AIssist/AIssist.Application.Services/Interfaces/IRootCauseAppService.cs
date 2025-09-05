@@ -5,9 +5,9 @@ namespace AIssist.Application.Services.Interfaces
 {
 	public interface IRootCauseAppService
 	{
-        Task Add(RootCauseRequest rootCauseRequest);
+        Task Add(RootCausePostRequest rootCauseRequest);
         Task<List<RootCauses>> GetById(long entityId);
-        Task Update(RootCauseRequest rootCauseRequest);
+        Task Update(RootCausePutRequest rootCauseRequest);
         Task<List<RootCauses>> Get();
         Task Inactivate(long entityId);
     }

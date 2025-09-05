@@ -24,7 +24,7 @@ namespace AIssist.Application.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(RootCauseRequest rootCauseRequest)
+        public async Task<IActionResult> Add(RootCausePostRequest rootCauseRequest)
         {
             await _rootCauseAppService.Add(rootCauseRequest);
 
@@ -40,7 +40,7 @@ namespace AIssist.Application.Api.Controllers
         }
 
         [HttpPut()]
-        public async Task<IActionResult> Update(RootCauseRequest rootCauseRequest)
+        public async Task<IActionResult> Update(RootCausePutRequest rootCauseRequest)
         {
             await _rootCauseAppService.Update(rootCauseRequest);
 
