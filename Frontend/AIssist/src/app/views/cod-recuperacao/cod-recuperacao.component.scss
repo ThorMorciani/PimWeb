@@ -1,0 +1,120 @@
+@import '../../../styles/variables';
+
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: $background-input; 
+  backdrop-filter: blur(2px);
+}
+
+.modal.login-container {
+  position: relative;
+  width: 18rem;
+  height: 70vh;
+  background-color:$modal-background ; 
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 35px rgba(0,0,0,.0);
+  padding: 28px;
+}
+
+.formulario{
+margin-top: 4rem;
+}
+
+h2 {
+  text-align: center;
+  margin: 6px 0 18px;
+  font-size: 40px;
+  font-weight: 800;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  margin-top: 0,5rem;
+
+  span {
+    font-size: 12px;
+    background-color: $modal-background; 
+    margin-top: 29px;
+  }
+
+  small {
+    color: #fda4af;
+    font-size: 12px;
+    min-height: 16px;
+  }
+}
+
+input {
+  width: 90%;
+  background-color: $modal-background;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #e5e7eb;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  margin-top: -8px;
+
+  &::placeholder { color: $text-tertiary; }
+
+  &:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .25);
+  }
+}
+
+button.primary {
+  margin-top: 7rem;
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 600;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: filter .2s, transform .02s;
+
+  &:hover { filter: brightness(1.05); }
+  &:active { transform: translateY(1px); }
+  &:disabled { opacity: .7; cursor: not-allowed; }
+}
+
+.error {
+  text-align: center;
+  color: #fda4af;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+a.password-recovery-link {
+  display: block;       
+  margin-top: 1rem;    
+  text-align: center;   
+  color: $text-tertiary;
+  text-decoration: none;
+
+  &:hover {
+    color: $title-text-color;
+  }
+}
+
+

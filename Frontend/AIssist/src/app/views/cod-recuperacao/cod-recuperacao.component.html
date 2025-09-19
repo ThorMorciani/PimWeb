@@ -1,0 +1,16 @@
+<div class="overlay"></div>
+
+<div class="modal login-container" role="dialog" aria-modal="true" aria-label="Email ou usuário">
+  <h2>AIssist</h2>
+
+  <form class="formulario" [formGroup]="form" (ngSubmit)="recuperacao()" autocomplete="off" novalidate>
+    <label>
+      <span>Email ou usuário</span>
+      <input type="text" formControlName="codigo" placeholder="Insira o código de recuperação..." />
+    </label>
+
+    <button class="primary" type="submit">Confirmar</button>
+        </form>
+    <a class="password-recovery-link" href="/login">
+     Já tem conta? Faça login
+    </a>

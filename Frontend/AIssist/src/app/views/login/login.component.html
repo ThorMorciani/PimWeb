@@ -1,0 +1,27 @@
+<div class="overlay"></div>
+
+<div class="modal login-container" role="dialog" aria-modal="true" aria-label="Login">
+  <h2>AIssist</h2>
+
+  <form class="formulario" [formGroup]="form" (ngSubmit)="login()" autocomplete="off" novalidate>
+    <label>
+      <span>Email ou usuário</span>
+      <input type="email" formControlName="email" placeholder="voce@exemplo.com" />
+      <small *ngIf="f['email'].touched && f['email'].invalid">Email inválido.</small>
+    </label>
+
+    <label>
+      <span>Senha</span>
+      <input type="password" formControlName="password" placeholder="Insira a senha..." />
+      <small *ngIf="f['password'].touched && f['password'].invalid">Mínimo 6 caracteres.</small>
+    </label>
+
+    <button class="primary" type="submit" [disabled]="loading">
+      {{ loading ? 'Entrando...' : 'Login' }}
+    </button>
+
+    <a class="password-recovery-link" href="#">Esqueci minha senha?</a>
+
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  </form>
+</div>
