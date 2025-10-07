@@ -1,0 +1,63 @@
+*RESUMO*
+
+Este projeto propôs a integração de inteligência artificial (IA) com a metodologia ITIL v4 para o desenvolvimento de um sistema
+de help desk interno, visando otimizar o gerenciamento de incidentes na empresa. Embora a solução proposta ainda não tenha sido
+implementada ou testada em ambiente real, os modelos conceituais e os diagramas desenvolvidos indicam que a aplicação de IA pode
+contribuir para a automação de tarefas repetitivas, categorização eficiente de incidentes e direcionamento adequado dos chamados.
+Além disso, a combinação com as práticas do ITIL v4 pode resultar em processos mais ágeis e maior alinhamento estratégico entre
+os serviços de TI e as necessidades da empresa. Contudo, é importante ressaltar que a eficácia da solução depende de fatores como
+qualidade dos dados, infraestrutura tecnológica e aceitação dos usuários. Portanto, recomenda-se a realização de testes
+e avaliações contínuas para validar e ajustar a implementação proposta. Além disso, futuras pesquisas podem explorar
+a aplicação de técnicas avançadas de IA, como aprendizado de máquina e processamento de linguagem natural, para aprimorar
+ainda mais a precisão na categorização e resolução de incidentes. A continuidade deste estudo poderá fornecer retornos
+valiosos para a evolução dos processos de gestão de incidentes em ambientes corporativos, contribuindo para a melhoria
+contínua dos serviços de TI.
+
+*OBJETIVO GERAL*
+
+O projeto acadêmico teve como foco a elaboração de um sistema de categorização e priorização inteligente de chamados,
+com o propósito de reduzir falhas, retrabalhos e otimizar o fluxo de atendimento. A proposta contemplou
+a automatização da priorização e a utilização de inteligência artificial como apoio estratégico na tomada de decisões,
+consolidando a base conceitual e os requisitos necessários para a evolução do sistema. 
+
+Dando continuidade a esse desenvolvimento, o presente trabalho propõe a implementação de um sistema de suporte técnico
+inteligente, ampliando as funcionalidades definidas anteriormente. O sistema contará com FAQs dinâmicas baseadas no
+histórico de chamados, além de ferramentas de apoio ao desenvolvimento integradas à inteligência artificial, proporcionando
+maior agilidade no atendimento e autonomia aos usuários. Ademais, todos os dados pessoais tratados estarão em conformidade
+com a Lei Geral de Proteção de Dados (LGPD), garantindo segurança e aderência às normas legais.
+
+*Objetivos Específicos* 
+
+O projeto desenvolvido teve como foco a consolidação da base técnica e conceitual do sistema, por meio da aplicação
+dos princípios da Programação Orientada a Objetos (POO) no refinamento da arquitetura, da implementação de funcionalidades
+em C# e ASP.NET e do desenvolvimento de interfaces funcionais para desktop, web e mobile, priorizando a experiência
+do usuário. Também foram estabelecidas práticas de gerenciamento de projetos, controle de qualidade, versionamento e testes,
+além da consideração de aspectos relacionados à inclusão e diversidade, viabilidade econômica e sustentabilidade.
+Outro ponto relevante foi a previsão do uso de recursos de Inteligência Artificial como apoio ao desenvolvimento,
+especialmente em funcionalidades voltadas a FAQs e documentação. 
+
+Os objetivos foram expandidos, direcionando o projeto para a implementação de tecnologias de inteligência artificial
+diretamente aplicadas ao gerenciamento de chamados, com ênfase na automação e otimização dos processos. Entre os objetivos
+específicos definidos destacam-se: assegurar a conformidade com a Lei Geral de Proteção de Dados (LGPD), garantindo
+o tratamento seguro e transparente das informações pessoais; aplicar mecanismos de priorização inteligente de tickets
+por meio de IA; manter um controle rigoroso do histórico de chamados, assegurando rastreabilidade, transparência e melhoria
+contínua; e desenvolver um módulo de sugestão de soluções baseado no histórico de atendimentos, proporcionando maior
+eficiência operacional e autonomia aos usuários.
+
+*CONCLUSÃO* 
+
+O desenvolvimento do sistema proposto possibilitou analisar de forma prática como a utilização de tecnologias pode contribuir
+para o aprimoramento do suporte técnico e do gerenciamento de chamados. O problema inicialmente levantado estava relacionado
+às dificuldades na organização, priorização e tratamento de solicitações, o que impactava diretamente a agilidade
+e a eficiência no atendimento. 
+
+As soluções implementadas no projeto, como a automação de processos internos, a categorização estruturada dos chamados
+e a sugestão de respostas para demandas recorrentes, mostraram-se viáveis e trouxeram ganhos significativos para o fluxo
+de trabalho. Além disso, o processo de levantamento de requisitos e ajustes durante o desenvolvimento permitiu compreender
+melhor a realidade do ambiente estudado e propor alternativas que agregassem valor ao sistema. 
+
+A experiência adquirida demonstra que a integração de ferramentas inteligentes em ambientes de suporte técnico não apenas
+resolve parte dos problemas identificados, mas também abre espaço para novas oportunidades de expansão e melhorias.
+Dessa forma, o projeto cumpriu seu objetivo inicial e motiva a continuidade dos estudos, de modo que soluções mais
+completas e robustas possam ser desenvolvidas, ampliando o impacto positivo para empresas de diferentes segmentos
+que enfrentam desafios semelhantes. 
