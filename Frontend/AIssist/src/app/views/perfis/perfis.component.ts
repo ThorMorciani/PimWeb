@@ -6,8 +6,8 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ButtonComponent } from '../../components/button/button.component';
 import { ProfileResponse, ProfileService } from '../../../core/services/profile/profile.service';
-import { FormatDatePipe } from '../../../core/pipes/formatDatePipe.pipe';
-import { booleanToStringPipe } from '../../../core/pipes/booleanToString.pipe';
+import { FormatDatePipe } from '../../shared/pipes/formatDatePipe.pipe';
+import { booleanToStringPipe } from '../../shared/pipes/booleanToString.pipe';
 
 @Component({
   selector: 'app-perfis',
@@ -27,9 +27,7 @@ throw new Error('Method not implemented.');
   displayedColumns: string[] = ['profileName', 'Active', 'UpdatedAt', 'acoes'];
   dataSource = new MatTableDataSource<ProfileResponse>();
 
-  constructor(private profileService: ProfileService) {
-
-  }
+  constructor(private profileService: ProfileService) {}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -39,7 +37,6 @@ throw new Error('Method not implemented.');
     this.profileService.getProfiles().subscribe({
       next: (resp) => {
         this.dataSource = new MatTableDataSource(resp);
-        console.log("teste ", this.dataSource);
 
         this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
           const filterValue = filter.trim().toLowerCase();

@@ -1,0 +1,24 @@
+input {
+    width: 25%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #121212;
+    color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  ::ng-deep .mat-mdc-table {
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    
+  ::ng-deep .mat-mdc-cell, 
+  ::ng-deep .mat-mdc-header-cell {
+      background: transparent !important;
+      color: inherit !important;
+      font-family: inherit !important;
+    }

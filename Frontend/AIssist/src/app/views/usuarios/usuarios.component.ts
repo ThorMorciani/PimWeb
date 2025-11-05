@@ -7,6 +7,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ModalUserComponent } from './modal-user/modal-user.component';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { booleanToStringPipe } from '../../shared/pipes/booleanToString.pipe';
+import { FormatDatePipe } from '../../shared/pipes/formatDatePipe.pipe';
+import { EnumTextMap } from '../../shared/enums/enum-maps';
+import { EnumTextPipe } from '../../shared/pipes/enumToText.pipe';
 
 interface Usuario extends UserResponse {
   created_At?: string;
@@ -16,7 +21,9 @@ interface Usuario extends UserResponse {
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, MatIconModule, MatDialogModule, UserEditDialogComponent, MatTooltipModule, ModalUserComponent],
+  imports: [CommonModule, ButtonComponent, MatTableModule, MatIconModule, MatDialogModule, 
+            UserEditDialogComponent, MatTooltipModule, ModalUserComponent,
+            booleanToStringPipe, FormatDatePipe, EnumTextPipe],
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss']
 })
@@ -28,21 +35,49 @@ export class UsuariosComponent implements OnInit {
   modalAberto = false;
   usuarioAtual: UserResponse | undefined;
   @ViewChild(ModalUserComponent) modalUser!: ModalUserComponent;
+  displayedColumns: string[] = ['Name','Username','Email','Profile', 'Active','CreatedAt', 'UpdatedAt', 'acoes'];
+  dataSource = new MatTableDataSource<UserResponse>();
 
   constructor(
     private userService: UserService,
     private dialog: MatDialog
   ) {}
 
+  onEdit(_t49: any) {
+    throw new Error('Method not implemented.');
+    }
+    onDelete(_t49: any) {
+    throw new Error('Method not implemented.');
+    }
   ngOnInit() {
     this.carregarUsuarios();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   carregarUsuarios() {
     this.userService.getUsers().subscribe({
       next: (res: UserResponse[]) => {
         this.totalUsuarios = res.length;
-        this.usuarios = res;
+        this.dataSource = new MatTableDataSource(res);
+
+        this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
+          const filterValue = filter.trim().toLowerCase();
+          const valuesToSearch = [
+            data.Name,
+            data.Username,
+            data.Profile,
+            data.active ? 'Ativo' : 'Inativo',
+            new Date(data.updatedAt).toLocaleDateString('pt-BR')
+          ];
+  
+          return valuesToSearch.some(value =>
+            value?.toString().toLowerCase().includes(filterValue)
+          );
+        };
       },
       error: (err) => console.error('Erro ao buscar usuários:', err)
     });

@@ -1,47 +1,47 @@
 <div class="container-dashboard">
-    <div style="margin-bottom: 20px;" class="dashboard-header">
-        <h2 class="page-title">Perfis de Usuário</h2>
-      </div>
-  
-    <div class="table-container">
-        <input type="text" (keyup)="applyFilter($event)" placeholder="Digite sua busca..." />
-        <table mat-table [dataSource]="dataSource">
-            <ng-container matColumnDef="profileName">
-              <th mat-header-cell *matHeaderCellDef> Perfil </th>
-              <td mat-cell *matCellDef="let element"> {{element.profileName}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="Active">
-              <th mat-header-cell *matHeaderCellDef> Estado </th>
-              <td mat-cell *matCellDef="let element"> {{element.active | booleanToString}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="UpdatedAt">
-              <th mat-header-cell *matHeaderCellDef> Atualizado Em </th>
-              <td mat-cell *matCellDef="let element"> {{element.updatedAt | formatDateBr}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="acoes">
-                <th mat-header-cell *matHeaderCellDef> Ações </th>
-                <td mat-cell *matCellDef="let element">
-                  <div class="acoes">
-                    <button class="btn edit" matTooltip="Editar perfil" (click)="onEdit(element)">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                    <button class="btn delete" matTooltip="Inativar perfil" (click)="onDelete(element)">
-                      <mat-icon>remove_circle</mat-icon>
-                    </button>
-                  </div>
-                </td>
-              </ng-container>
-          
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          
-            <tr class="mat-row" *matNoDataRow>
-              <td class="mat-cell" colspan="4">No data matching the filter</td>
-            </tr>
-        </table>
-    </div>
+  <div style="margin-bottom: 20px;" class="dashboard-header">
+    <h2 class="page-title">Perfis de Usuário</h2>
   </div>
+  
+  <div class="table-container">
+    <input type="text" (keyup)="applyFilter($event)" placeholder="Digite sua busca..." />
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="profileName">
+          <th mat-header-cell *matHeaderCellDef> Perfil </th>
+          <td mat-cell *matCellDef="let element"> {{element.profileName}} </td>
+        </ng-container>
+          
+        <ng-container matColumnDef="Active">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let element"> {{element.active | booleanToString}} </td>
+        </ng-container>
+          
+        <ng-container matColumnDef="UpdatedAt">
+          <th mat-header-cell *matHeaderCellDef> Atualizado Em </th>
+          <td mat-cell *matCellDef="let element"> {{element.updatedAt | formatDateBr}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="acoes">
+              <button class="btn edit" matTooltip="Editar perfil" (click)="onEdit(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button class="btn delete" matTooltip="Inativar perfil" (click)="onDelete(element)">
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+          
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter</td>
+        </tr>
+      </table>
+  </div>
+</div>
   

@@ -6,12 +6,6 @@
         </div>
         <div class="dashboard-header-buttons">
             <app-button
-                texto="+ Adicionar Filtro"
-                size="large"
-                type="primary"
-                [outlined]="true"
-            />
-            <app-button
                 texto="Novo Usuário"
                 size="large"
                 type="primary"
@@ -20,54 +14,65 @@
         </div>
     </div>
 
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Perfil</th>
-          <th>Ativo</th>
-          <th>Criado em</th>
-          <th>Atualizado em</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let usuario of usuarios">
-          <td>{{ usuario.id }}</td>
-          <td>{{ usuario.name }}</td>
-          <td>{{ usuario.username }}</td>
-          <td>{{ usuario.email }}</td>
-          <td>{{ getProfileName(usuario.profile) }}</td>
-          <td>
-            <span class="badge" [ngClass]="usuario.active ? 'ativo' : 'inativo'">
-                {{ usuario.active ? 'Ativo' : 'Inativo' }}
-            </span>
-          </td>
-          <td>{{ formatarDataLocal(usuario.created_At!) }}</td>
-          <td>{{ formatarDataLocal(usuario.updated_At!) }}</td>
-          <td class="acoes">
-            <button matTooltip="Editar usuário" class="btn edit" (click)="executarAcao({ type: 'edit', row: usuario })">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button matTooltip="Inativar usuário" class="btn delete" (click)="executarAcao({ type: 'delete', row: usuario })">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button class="btn toogle" (click)="executarAcao({ type: 'toggle', row: usuario })">
-              <mat-icon>topic</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <app-user-edit-dialog
-    (fechado)="fecharModal()"
-    [user]="usuarioAtual"
-    [aberto]="modalAberto">
-    </app-user-edit-dialog>
-  </div>
+    <div class="table-container">
+      <input type="text" (keyup)="applyFilter($event)" placeholder="Digite sua busca..." />
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Username">
+            <th mat-header-cell *matHeaderCellDef> Usuário </th>
+            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Profile">
+            <th mat-header-cell *matHeaderCellDef> Perfil </th>
+            <td mat-cell *matCellDef="let element"> {{element.profile | enumText:'ProfileTypes'}} </td>
+          </ng-container>
+            
+          <ng-container matColumnDef="Active">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element"> {{element.active | booleanToString}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="CreatedAt">
+            <th mat-header-cell *matHeaderCellDef> Criado Em </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdAt | formatDateBr}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="UpdatedAt">
+            <th mat-header-cell *matHeaderCellDef> Atualizado Em </th>
+            <td mat-cell *matCellDef="let element"> {{element.updatedAt | formatDateBr}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="acoes">
+                <button class="btn edit" matTooltip="Editar perfil" (click)="onEdit(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button class="btn delete" matTooltip="Inativar perfil" (click)="onDelete(element)">
+                  <mat-icon>remove_circle</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+            
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter</td>
+          </tr>
+        </table>
+    </div>
   <app-modal-user (formSubmitted)="onFormSubmit($event)"></app-modal-user>
 </div>
