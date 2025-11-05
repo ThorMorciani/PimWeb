@@ -82,18 +82,19 @@ namespace AIssist.Application.Services
             return Task.FromResult(result);
         }
 
-        public Task<Users?> GetById(long profileId)
+        public Task<Users?> GetById(long userId)
         {
-            var result = _userService.GetById(profileId);
+            var result = _userService.GetById(userId);
             return result;
         }
 
-        public Task<DefaultResponse> Update(UserPutRequest entity)
+        public async Task<DefaultResponse> Update(UserPutRequest entity)
         {
+            var userToMap = await GetById(entity.Id);
             var response = new DefaultResponse();
-            var user = _mapper.Map<Users>(entity);
+            _mapper.Map(entity, userToMap);
 
-            var userResult = _userService.Update(user);
+            var userResult = _userService.Update(userToMap);
             userResult.Wait();
 
             if (userResult.IsCompletedSuccessfully)
@@ -109,7 +110,7 @@ namespace AIssist.Application.Services
             else
                 response.Message = "Falha ao atualizar registro.";
 
-            return Task.FromResult(response);
+            return response;
         }
     }
 }

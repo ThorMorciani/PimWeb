@@ -17,7 +17,7 @@ namespace AIssist.Application.Api.Controllers
             _authService = authService;
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<ActionResult<LoginResponse>> Login(LoginRequest request)
         {
             var result = await _authService.LoginAsync(request);

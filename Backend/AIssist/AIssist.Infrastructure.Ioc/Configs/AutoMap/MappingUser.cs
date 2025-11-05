@@ -14,11 +14,18 @@ namespace AIssist.Infrastructure.Ioc.Configs.AutoMap
             .ForMember(p => p.Id, o => o.MapFrom(p => p.Id))
             .ForMember(p => p.Name, o => o.MapFrom(p => p.Name))
             .ForMember(p => p.Username, o => o.MapFrom(p => p.Username))
-            .ForMember(p => p.Password, o => o.MapFrom(p => p.Password))
             .ForMember(p => p.Email, o => o.MapFrom(p => p.Email))
             .ForMember(p => p.ProfileId, o => o.MapFrom(p => p.ProfileId))
             .ForMember(p => p.UpdatedAt, o => o.MapFrom(p => DateTime.Now))
-            .ForMember(p => p.Active, o => o.MapFrom(p => true));
+            .ForMember(p => p.Active, o => o.MapFrom(p => true))
+            .ForMember(p => p.Password, o => o.Ignore())
+            .ForAllMembers(opt => opt.Condition((src, dest, srcMember) =>
+            {
+                    if (srcMember == null) return false;
+                    if (srcMember is string s && string.IsNullOrWhiteSpace(s)) return false;
+                    if (srcMember is long l && l == 0) return false;
+                    return true;
+            }));
 
             CreateMap<UserPostRequest, Users>()
             .ForMember(p => p.Name, o => o.MapFrom(p => p.Name))
