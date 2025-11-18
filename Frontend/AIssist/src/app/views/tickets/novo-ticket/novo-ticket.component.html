@@ -3,32 +3,62 @@
     <h2>← Voltar</h2>
     <h1>Criar Ticket</h1>
 
-    <label for="assunto">Selecionar assunto</label>
-    <select id="assunto" [(ngModel)]="assunto">
-      <option *ngFor="let a of assuntosDisponiveis" [value]="a">{{ a }}</option>
+    <label>Selecionar motivo</label>
+    <select [(ngModel)]="assunto">
+      <option *ngFor="let rc of rootCauses" [value]="rc.id">
+        {{ rc.rootCauseName }}
+      </option>
     </select>
 
-    <label for="descricao">Descrição</label>
+    <label>Descrição</label>
     <textarea
-      id="descricao"
       placeholder="Descreva o problema..."
       [(ngModel)]="descricao"
+      (input)="onDescricaoChange()"
     ></textarea>
 
     <div class="buttons">
-      <app-button texto="Criar Ticket" (click)="criarTicket()"></app-button>
-      <app-button texto="Ajuda IA" (click)="ajudaIA()"></app-button>
+      <app-button
+        texto="Criar Ticket"
+        (click)="criarTicket()"
+        [active]="criarTicketAtivo"
+        [bold]="true"
+      >
+      </app-button>
+
+      <app-button
+        texto="Ajuda IA"
+        (click)="ajudaIA()"
+        [active]="true"
+        [bold]="true"
+      >
+      </app-button>
     </div>
   </div>
 
   <div class="ia-section">
     <h2>Dicas Geradas IA</h2>
-    <textarea readonly [value]="dicasIA"></textarea>
+
+    <div class="dicas-ia" [innerHTML]="dicasIA"></div>
 
     <div class="feedback">
       <span>Foi útil?</span>
-      <app-button texto="Sim" (click)="feedbackIA(true)"></app-button>
-      <app-button texto="Não" (click)="feedbackIA(false)"></app-button>
+
+      <app-button
+        texto="Sim"
+        (click)="feedbackIA(true)"
+        [active]="feedbackAtivo"
+        [bold]="true"
+      >
+      </app-button>
+
+      <app-button
+        texto="Não"
+        (click)="feedbackIA(false)"
+        [active]="feedbackAtivo"
+        [bold]="true"
+      >
+      </app-button>
     </div>
   </div>
 </div>
