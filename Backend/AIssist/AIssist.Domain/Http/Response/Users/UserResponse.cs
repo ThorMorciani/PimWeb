@@ -8,7 +8,7 @@
         public string? Email { get; set; }
         public string? Profile { get; set; }
         public bool Active { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
 }

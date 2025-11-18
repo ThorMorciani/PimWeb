@@ -1,4 +1,7 @@
-﻿namespace AIssist.Domain.Http.Response.Tickets
+﻿using AIssist.Domain.Http.Response.RootCause;
+using AIssist.Domain.Http.Response.Users;
+
+namespace AIssist.Domain.Http.Response.Tickets
 {
 	public class TicketResponse
 	{
@@ -8,10 +11,12 @@
 		public string? TicketNumber { get; set; }
 		public string? Status { get; set; }
 		public long StatusId { get; set; }
-		public string? Criticality { get; set; }
-		public long CriticalityId { get; set; }
-        public string? RootCause { get; set; }
+        public long? AssigneeId { get; set; }
+        public long ReporterId { get; set; }
         public long RootCauseId { get; set; }
+        public RootCauseResponse RootCause { get; set; }
+		public UserResponse Reporter { get; set; }
+        public UserResponse? Assignee { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

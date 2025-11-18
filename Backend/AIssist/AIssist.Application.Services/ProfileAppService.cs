@@ -21,86 +21,96 @@ namespace AIssist.Application.Services
             _mapper = mapper;
         }
 
-        public Task<DefaultResponse> Add(ProfileRequest entity)
+        public async Task<DefaultResponse> Add(ProfileRequest entity)
         {
             var response = new DefaultResponse();
             var profile = _mapper.Map<Profiles>(entity);
-            var profileResult = _profileService.Add(profile);
-            profileResult.Wait();
 
-            if (profileResult.IsCompletedSuccessfully)
+            try
             {
-                var logResult = _logAppService.Add("Inserção", JsonSerializer.Serialize(entity));
-                logResult.Wait();
-
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
+                await _profileService.Add(profile);
             }
-            else
+            catch
+            {
                 response.Message = "Falha ao salvar registro.";
+                return response;
+            }
 
-            return Task.FromResult(response);
+            try
+            {
+                await _logAppService.Add("Inserção", JsonSerializer.Serialize(entity));
+                response.Success = true;
+            }
+            catch
+            {
+                response.Message = "Falha ao salvar o log da operação.";
+            }
+
+            return response;
         }
 
-        public Task<DefaultResponse> Inactivate(long entityId)
+        public async Task<DefaultResponse> Inactivate(long entityId)
         {
             var response = new DefaultResponse();
-            var profileResult = _profileService.Inactivate(entityId);
-            profileResult.Wait();
 
-            if (profileResult.IsCompletedSuccessfully)
+            try
             {
-                var logResult = _logAppService.Add("Inativação", JsonSerializer.Serialize(new { id = entityId, entity = "Profile" }));
-                logResult.Wait();
-
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
+                await _profileService.Inactivate(entityId);
             }
-            else
+            catch
+            {
                 response.Message = "Falha ao inativar registro.";
+                return response;
+            }
 
-            return Task.FromResult(response);
+            try
+            {
+                var logData = JsonSerializer.Serialize(new { id = entityId, entity = "Profile" });
+                await _logAppService.Add("Inativação", logData);
+                response.Success = true;
+            }
+            catch
+            {
+                response.Message = "Falha ao salvar o log da operação.";
+            }
+
+            return response;
         }
 
         public Task<List<Profiles>> Get()
-        {
-            var result = _profileService.Get();
-            return result;
-        }
+            => _profileService.Get();
 
         public Task<Profiles?> GetById(long profileId)
-        {
-            var result = _profileService.GetById(profileId);
-            return result;
-        }
+            => _profileService.GetById(profileId);
 
-        public Task<DefaultResponse> Update(ProfilePutRequest entity)
+        public async Task<DefaultResponse> Update(ProfilePutRequest entity)
         {
             var response = new DefaultResponse();
             var profile = _mapper.Map<Profiles>(entity);
 
-            var profileResult = _profileService.Update(profile);
-            profileResult.Wait();
-
-            if (profileResult.IsCompletedSuccessfully)
+            try
             {
-                var logResult = _logAppService.Add("Atualização", JsonSerializer.Serialize(entity));
-                logResult.Wait();
-
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
+                await _profileService.Update(profile);
             }
-            else
+            catch
+            {
                 response.Message = "Falha ao atualizar registro.";
+                return response;
+            }
 
-            return Task.FromResult(response);
+            try
+            {
+                await _logAppService.Add("Atualização", JsonSerializer.Serialize(entity));
+                response.Success = true;
+            }
+            catch
+            {
+                response.Message = "Falha ao salvar o log da operação.";
+            }
+
+            return response;
         }
     }
+
 }
 

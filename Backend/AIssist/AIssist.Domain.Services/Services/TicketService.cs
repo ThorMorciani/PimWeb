@@ -23,7 +23,7 @@ namespace AIssist.Domain.Services
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -31,12 +31,20 @@ namespace AIssist.Domain.Services
 
         public async Task<List<Tickets>> Get()
         {
-            return await _context.Tickets.ToListAsync();
+            return await _context
+                    .Tickets
+                    .Include(t => t.RootCause)
+                    .Include(t => t.Assignee)
+                    .Include(t => t.Reporter)
+                    .ToListAsync();
         }
 
         public async Task<Tickets?> GetByTicketNumber(string ticketNumber)
         {
             return await _context.Tickets
+                    .Include(t => t.RootCause)
+                    .Include(t => t.Assignee)
+                    .Include(t => t.Reporter)
             .FirstOrDefaultAsync(rc => rc.TicketNumber == ticketNumber);
         }
 

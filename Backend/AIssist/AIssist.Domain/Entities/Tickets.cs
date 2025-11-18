@@ -12,7 +12,7 @@ namespace AIssist.Domain.Entities
 
         public string TicketNumber { get; set; } = string.Empty;
 
-        public long AssigneeId { get; set; }
+        public long? AssigneeId { get; set; } = null;
 
         public long ReporterId { get; set; }
 

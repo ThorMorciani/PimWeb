@@ -1,4 +1,6 @@
-﻿namespace AIssist.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AIssist.Domain.Entities
 {
     public class Profiles
     {
@@ -6,6 +8,7 @@
 
         public DateTimeOffset CreatedAt { get; set; }
 
+        [Column("Profile")]
         public string ProfileName { get; set; } = string.Empty;
 
         public string CreatedBy { get; set; } = string.Empty;

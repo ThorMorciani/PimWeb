@@ -179,7 +179,7 @@ namespace AIssist.Infrastructure.Data
                       .HasColumnType("nvarchar(max)");
 
                 entity.Property(e => e.AssigneeId)
-                      .IsRequired()
+                      .IsRequired(false)
                       .HasColumnType("bigint");
 
                 entity.Property(e => e.ReporterId)
