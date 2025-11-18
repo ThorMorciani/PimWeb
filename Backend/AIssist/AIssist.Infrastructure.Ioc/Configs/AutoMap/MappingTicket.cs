@@ -1,4 +1,5 @@
 ﻿using AIssist.Domain.Entities;
+using AIssist.Domain.Enums;
 using AIssist.Domain.Http.Request.Ticket;
 using AIssist.Domain.Http.Response.RootCause;
 using AIssist.Domain.Http.Response.Tickets;
@@ -17,8 +18,8 @@ namespace AIssist.Infrastructure.Ioc.Configs.AutoMap
 				.ForMember(p => p.Solution, o => o.MapFrom(p => p.Solution))
 				.ForMember(p => p.ReporterId, o => o.MapFrom(p => p.ReporterId))
 				.ForMember(p => p.RootCauseId, o => o.MapFrom(p => p.RootCauseId))
-                .ForMember(p => p.Status, o => o.MapFrom(p => Domain.Enums.TicketStatus.Aberto))
-                .ForMember(p => p.CreatedAt, o => o.MapFrom(p => DateTime.Now))
+                .ForMember(p => p.Status, o => o.MapFrom(p => (TicketStatus)p.Status))
+                .ForMember(p => p.CreatedAt, o => o.MapFrom(p => DateTimeOffset.Now))
                 .ForMember(p => p.UpdatedAt, o => o.MapFrom(p => DateTime.Now))
                 .ForMember(p => p.TicketNumber, o => o.MapFrom(p => string.Concat("INC", Guid.NewGuid().ToString("N").Substring(0, 8))));
 
