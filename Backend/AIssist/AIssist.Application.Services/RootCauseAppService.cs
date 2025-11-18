@@ -14,92 +14,92 @@ namespace AIssist.Application.Services
         private readonly ILogAppService _logAppService;
         private readonly IMapper _mapper;
 
-        public RootCauseAppService(IRootCauseService rootCauseService, IMapper mapper, ILogAppService logAppService)
+        public RootCauseAppService(
+            IRootCauseService rootCauseService,
+            IMapper mapper,
+            ILogAppService logAppService)
         {
             _rootCauseService = rootCauseService;
             _logAppService = logAppService;
             _mapper = mapper;
         }
 
-        public Task<DefaultResponse> Add(RootCausePostRequest entity)
+        public async Task<DefaultResponse> Add(RootCausePostRequest entity)
         {
             var response = new DefaultResponse();
             var rootCause = _mapper.Map<RootCause>(entity);
-            var RootCauseresult = _rootCauseService.Add(rootCause);
-            RootCauseresult.Wait();
 
-            if (RootCauseresult.IsCompletedSuccessfully)
+            var rootCauseResult = await _rootCauseService.Add(rootCause);
+
+            if (rootCauseResult)
             {
-                var logResult = _logAppService.Add("Inserção", JsonSerializer.Serialize(entity));
-                logResult.Wait();
-
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
-            }
-            else          
-                response.Message = "Falha ao salvar registro.";
-
-            return Task.FromResult(response);
-        }
-
-        public Task<DefaultResponse> Inactivate(long entityId)
-        {
-            var response = new DefaultResponse();
-            var rootCauseResult = _rootCauseService.Inactivate(entityId);
-            rootCauseResult.Wait();
-
-            if (rootCauseResult.IsCompletedSuccessfully)
-            {
-                var logResult = _logAppService.Add("Inativação", JsonSerializer.Serialize(new {id = entityId, entity = "RootCause"}));
-                logResult.Wait();
-
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
+                await _logAppService.Add("Inserção", JsonSerializer.Serialize(entity));
+                response.Success = true;
             }
             else
-                response.Message = "Falha ao inativar registro.";
+            {
+                response.Message = "Falha ao salvar registro.";
+            }
 
-            return Task.FromResult(response);
+            return response;
+        }
+
+        public async Task<DefaultResponse> Inactivate(long entityId)
+        {
+            var response = new DefaultResponse();
+            var rootCauseResult = await _rootCauseService.Inactivate(entityId);
+
+            if (rootCauseResult)
+            {
+                await _logAppService.Add(
+                    "Inativação",
+                    JsonSerializer.Serialize(new { id = entityId, entity = "RootCause" })
+                );
+
+                response.Success = true;
+            }
+            else
+            {
+                response.Message = "Falha ao inativar registro.";
+            }
+
+            return response;
         }
 
         public Task<List<RootCause>> Get()
         {
-            var result = _rootCauseService.Get();
-            return result;
+            return _rootCauseService.Get();
         }
 
         public Task<RootCause?> GetById(long rootCauseId)
         {
-            var result = _rootCauseService.GetById(rootCauseId);
-            return result;
+            return _rootCauseService.GetById(rootCauseId);
         }
 
-        public Task<DefaultResponse> Update(RootCausePutRequest entity)
+        public async Task<DefaultResponse> Update(RootCausePutRequest entity)
         {
             var response = new DefaultResponse();
             var rootCause = _mapper.Map<RootCause>(entity);
-            var rootCauseResult = _rootCauseService.Update(rootCause);
-            rootCauseResult.Wait();
 
-            if (rootCauseResult.IsCompletedSuccessfully)
+            var rootCauseResult = await _rootCauseService.Update(rootCause);
+
+            if (rootCauseResult)
             {
-                var logResult = _logAppService.Add("Atualização", JsonSerializer.Serialize(entity));
-                logResult.Wait();
+                await _logAppService.Add(
+                    "Atualização",
+                    JsonSerializer.Serialize(entity)
+                );
 
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
+                response.Success = true;
             }
             else
+            {
                 response.Message = "Falha ao atualizar registro.";
+            }
 
-            return Task.FromResult(response);
+            return response;
         }
     }
+
 }
 

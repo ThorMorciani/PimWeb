@@ -16,102 +16,122 @@ namespace AIssist.Application.Services
         private readonly ILogAppService _logAppService;
         private readonly IMapper _mapper;
 
-        public UserAppService(IUserService userService, IMapper mapper, ILogAppService logAppService)
+        public UserAppService(
+            IUserService userService,
+            IMapper mapper,
+            ILogAppService logAppService)
         {
             _userService = userService;
             _logAppService = logAppService;
             _mapper = mapper;
         }
 
-        public Task<DefaultResponse> Add(UserPostRequest entity)
+        public async Task<DefaultResponse> Add(UserPostRequest entity)
         {
             var response = new DefaultResponse();
+
             var user = _mapper.Map<Users>(entity);
-
-            var hashedPassword = new PasswordHasher<Users>()
+            user.Password = new PasswordHasher<Users>()
                 .HashPassword(user, entity.Password);
-            user.Password = hashedPassword;
 
-            var userResult = _userService.Add(user);
-            userResult.Wait();
-
-            if (userResult.IsCompletedSuccessfully)
+            try
             {
-                var logResult = _logAppService.Add("Inserção", JsonSerializer.Serialize(entity));
-                logResult.Wait();
-
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
+                await _userService.Add(user);
             }
-            else
+            catch
+            {
                 response.Message = "Falha ao salvar registro.";
+                return response;
+            }
 
-            return Task.FromResult(response);
+            try
+            {
+                await _logAppService.Add("Inserção", JsonSerializer.Serialize(entity));
+                response.Success = true;
+            }
+            catch
+            {
+                response.Message = "Falha ao salvar o log da operação.";
+            }
+
+            return response;
         }
 
-        public Task<DefaultResponse> Inactivate(long entityId)
+        public async Task<DefaultResponse> Inactivate(long entityId)
         {
             var response = new DefaultResponse();
-            var userResult = _userService.Inactivate(entityId);
-            userResult.Wait();
 
-            if (userResult.IsCompletedSuccessfully)
+            try
             {
-                var logResult = _logAppService.Add("Inativação", JsonSerializer.Serialize(new { id = entityId, entity = "User" }));
-                logResult.Wait();
-
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
+                await _userService.Inactivate(entityId);
             }
-            else
+            catch
+            {
                 response.Message = "Falha ao salvar registro.";
+                return response;
+            }
 
-            return Task.FromResult(response);
+            try
+            {
+                var logData = JsonSerializer.Serialize(new { id = entityId, entity = "User" });
+                await _logAppService.Add("Inativação", logData);
+                response.Success = true;
+            }
+            catch
+            {
+                response.Message = "Falha ao salvar o log da operação.";
+            }
+
+            return response;
         }
 
-        public Task<List<UserResponse>> Get()
+        public async Task<List<UserResponse>> Get()
         {
-            var users = _userService.Get();
-            users.Wait();
-
-            var result = _mapper.Map<List<UserResponse>>(users.Result);
-            return Task.FromResult(result);
-        }
-
-        public Task<Users?> GetById(long userId)
-        {
-            var result = _userService.GetById(userId);
+            var users = await _userService.Get();
+            var result = _mapper.Map<List<UserResponse>>(users);
             return result;
         }
 
+        public Task<Users?> GetById(long userId)
+            => _userService.GetById(userId);
+
         public async Task<DefaultResponse> Update(UserPutRequest entity)
         {
-            var userToMap = await GetById(entity.Id);
             var response = new DefaultResponse();
-            _mapper.Map(entity, userToMap);
 
-            var userResult = _userService.Update(userToMap);
-            userResult.Wait();
+            var user = await GetById(entity.Id);
 
-            if (userResult.IsCompletedSuccessfully)
+            if (user == null)
             {
-                var logResult = _logAppService.Add("Atualização", JsonSerializer.Serialize(entity));
-                logResult.Wait();
-
-                if (logResult.IsCompletedSuccessfully)
-                    response.Success = true;
-                else
-                    response.Message = "Falha ao salvar o log da operação.";
+                response.Message = "Usuário não encontrado.";
+                return response;
             }
-            else
+
+            _mapper.Map(entity, user);
+
+            try
+            {
+                await _userService.Update(user);
+            }
+            catch
+            {
                 response.Message = "Falha ao atualizar registro.";
+                return response;
+            }
+
+            try
+            {
+                await _logAppService.Add("Atualização", JsonSerializer.Serialize(entity));
+                response.Success = true;
+            }
+            catch
+            {
+                response.Message = "Falha ao salvar o log da operação.";
+            }
 
             return response;
         }
     }
+
 }
 

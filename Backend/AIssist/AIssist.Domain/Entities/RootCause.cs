@@ -1,4 +1,5 @@
-﻿using AIssist.Domain.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using AIssist.Domain.Enums;
 
 namespace AIssist.Domain.Entities
 {
@@ -6,6 +7,7 @@ namespace AIssist.Domain.Entities
     {
         public long Id { get; set; }
 
+        [Column("RootCause")]
         public string RootCauseName { get; set; } = string.Empty;
 
         public TicketCriticality Criticality { get; set; }
