@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GeminiClient.cs" />
+    <Compile Remove="IAService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AIssist.Domain\AIssist.Domain.csproj" />
     <ProjectReference Include="..\AIssist.Domain.Services\AIssist.Domain.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.0.1" />
+    <PackageReference Include="Google.GenAI" Version="0.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
