@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GeminiClient.cs" />
+    <Compile Remove="IAService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AIssist.Domain\AIssist.Domain.csproj" />
     <ProjectReference Include="..\AIssist.Domain.Services\AIssist.Domain.Services.csproj" />
   </ItemGroup>
