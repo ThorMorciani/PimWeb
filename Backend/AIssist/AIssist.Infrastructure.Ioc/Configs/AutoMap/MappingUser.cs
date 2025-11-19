@@ -44,7 +44,8 @@ namespace AIssist.Infrastructure.Ioc.Configs.AutoMap
             .ForMember(p => p.Profile, o => o.MapFrom(p => p.ProfileId.ToString()))
             .ForMember(p => p.UpdatedAt, o => o.MapFrom(p => p.UpdatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
             .ForMember(p => p.CreatedAt, o => o.MapFrom(p => p.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
-            .ForMember(p => p.Active, o => o.MapFrom(p => p.Active));
+            .ForMember(p => p.Active, o => o.MapFrom(p => p.Active))
+            .ForMember(p => p.Profile, o => o.MapFrom(p => p.Profile));
         }
     }
 }

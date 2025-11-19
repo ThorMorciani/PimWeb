@@ -28,7 +28,7 @@ export const routes: Routes = [
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'tickets', component: TicketsComponent },
       { path: 'tickets/novo', component: NovoTicketComponent },
-      { path: 'causasRaiz', component: RootCausesComponent },
+      { path: 'assuntos', component: RootCausesComponent },
       { path: 'relatorios', component: RelatoriosComponent },
       { path: 'perfis', component: PerfisComponent },
     ],

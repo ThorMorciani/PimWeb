@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import showdown from 'showdown';
@@ -34,7 +34,8 @@ export class NovoTicketComponent implements OnInit {
   constructor(
     private ticketService: TicketService,
     private sanitizer: DomSanitizer,
-    private http: HttpClient
+    private http: HttpClient,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -53,6 +54,10 @@ export class NovoTicketComponent implements OnInit {
     this.iaUsada = false;
     this.feedbackAtivo = false;
     this.criarTicketAtivo = false;
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   async ajudaIA() {

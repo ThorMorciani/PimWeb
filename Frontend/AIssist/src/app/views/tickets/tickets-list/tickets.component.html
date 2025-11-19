@@ -1,66 +1,74 @@
 <div class="container-dashboard">
-  <!-- Header -->
   <div class="dashboard-header">
-    <div>
-      <h2 class="page-title">Tickets</h2>
-      <p class="page-subtitle">{{ totalTickets }} Tickets registrados...</p>
+        <div>
+            <h2 class="page-title">Tickets</h2>
+            <p class="page-subtitle">{{ totalTickets }} chamados criados.</p>
+        </div>
+        <div class="dashboard-header-buttons">
+          <app-button
+            texto="Novo Ticket"
+            size="large"
+            type="primary"
+            (click)="irParaNovoTicket()">
+          </app-button>
+        </div>
     </div>
-    <div class="dashboard-header-buttons">
-      <app-button
-        texto="+ Adicionar Filtro"
-        size="large"
-        type="primary"
-        [outlined]="true"
-      />
-      <app-button
-        texto="Novo Ticket"
-        size="large"
-        type="primary"
-        (click)="irParaNovoTicket()"
-    ></app-button>
-    </div>
-  </div>
 
-  <!-- Tabela -->
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Número</th>
-          <th>Descrição</th>
-          <th>Solução</th>
-          <th>Responsável</th>
-          <th>Reportado por</th>
-          <th>Status</th>
-          <th>Causa Raiz</th>
-          <th>Criado em</th>
-          <th>Atualizado em</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ticket of tickets">
-          <td>{{ ticket.id }}</td>
-          <td>{{ ticket.ticket_number }}</td>
-          <td>{{ ticket.description }}</td>
-          <td>{{ ticket.solution || '-' }}</td>
-          <td>{{ ticket.assignee_id || '-' }}</td>
-          <td>{{ ticket.reporter_id || '-' }}</td>
-          <td>{{ ticket.status_id || '-' }}</td>
-          <td>{{ ticket.root_cause_id || '-' }}</td>
-          <td>{{ ticket.created_at }}</td>
-          <td>{{ ticket.updated_at }}</td>
-          <td class="acoes">
-            <button class="btn edit" (click)="executarAcao({ type: 'edit', row: ticket })">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button class="btn delete" (click)="executarAcao({ type: 'delete', row: ticket })">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="table-container">
+      <input type="text" (keyup)="applyFilter($event)" placeholder="Digite sua busca..." />
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="Number">
+            <th mat-header-cell *matHeaderCellDef> Número </th>
+            <td mat-cell *matCellDef="let element"> {{element.ticketNumber}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Description">
+            <th mat-header-cell *matHeaderCellDef> Descrição </th>
+            <td class="description" mat-cell *matCellDef="let element">
+              <span class="ellipsis">
+                {{ element.description }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Assignee">
+            <th mat-header-cell *matHeaderCellDef> Responsável </th>
+            <td mat-cell *matCellDef="let element"> {{element.assignee}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="UpdatedAt">
+            <th mat-header-cell *matHeaderCellDef> Atualizado Em </th>
+            <td mat-cell *matCellDef="let element"> {{element.updatedAt | formatDateBr}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="acoes">
+                <button class="btn edit" matTooltip="Editar perfil" (click)="onEdit(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button *ngIf="element.active" class="btn delete" matTooltip="Inativar" (click)="onDelete(element)">
+                  <mat-icon>remove_circle</mat-icon>
+                </button>
+                <button *ngIf="!element.active" class="btn toogle" matTooltip="Ativar" (click)="onDelete(element)">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+            
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Nenhum resultado encontrado.</td>
+          </tr>
+        </table>
+    </div>
 </div>

@@ -1,1 +1,59 @@
-<p>root-causes works!</p>
+<div class="container-dashboard">
+    <div class="dashboard-header">
+          <div>
+              <h2 class="page-title">Causas Raíz</h2>
+          </div>
+      </div>
+  
+      <div class="table-container">
+        <input type="text" (keyup)="applyFilter($event)" placeholder="Digite sua busca..." />
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="rootCauseName">
+              <th mat-header-cell *matHeaderCellDef> Causa Raíz </th>
+              <td mat-cell *matCellDef="let element"> {{element.rootCauseName}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="criticality">
+              <th mat-header-cell *matHeaderCellDef> Criticidade </th>
+              <td mat-cell *matCellDef="let element"> {{element.criticality | enumText:'CriticalityTypes'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef> Estado </th>
+                <td mat-cell *matCellDef="let element"> {{element.active | booleanToString}} </td>
+              </ng-container>
+  
+            <ng-container matColumnDef="updatedAt">
+              <th mat-header-cell *matHeaderCellDef> Atualizado Em </th>
+              <td mat-cell *matCellDef="let element"> {{element.updatedAt}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="acoes">
+              <th mat-header-cell *matHeaderCellDef> Ações </th>
+              <td mat-cell *matCellDef="let element">
+                <div class="acoes">
+                  <button *ngIf="element.active" class="btn delete" matTooltip="Inativar" (click)="openModal(element, 'Deseja realmente inativar esse item?')">
+                    <mat-icon>remove_circle</mat-icon>
+                  </button>
+                  <button *ngIf="!element.active" class="btn toogle" matTooltip="Ativar" (click)="openModal(element, 'Deseja realmente ativar esse item?')">
+                    <mat-icon>add_circle</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+              
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">Nenhum resultado encontrado.</td>
+            </tr>
+          </table>
+      </div>
+  </div>
+  <app-confirm-modal
+  [open]="showModal"
+  message="{{textMessage}}"
+  (confirm)="onConfirmAction()"
+  (cancel)="onCancelAction()"
+></app-confirm-modal>

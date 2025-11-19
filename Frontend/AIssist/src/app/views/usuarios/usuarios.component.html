@@ -34,7 +34,7 @@
 
           <ng-container matColumnDef="Profile">
             <th mat-header-cell *matHeaderCellDef> Perfil </th>
-            <td mat-cell *matCellDef="let element"> {{element.profile | enumText:'ProfileTypes'}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.profile.profileName}} </td>
           </ng-container>
             
           <ng-container matColumnDef="Active">
@@ -56,11 +56,14 @@
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td mat-cell *matCellDef="let element">
               <div class="acoes">
-                <button class="btn edit" matTooltip="Editar perfil" (click)="onEdit(element)">
+                <button class="btn edit" matTooltip="Editar" (click)="onEdit(element)">
                   <mat-icon>edit</mat-icon>
                 </button>
-                <button class="btn delete" matTooltip="Inativar perfil" (click)="onDelete(element)">
+                <button *ngIf="element.active" class="btn delete" matTooltip="Inativar" (click)="onDelete(element)">
                   <mat-icon>remove_circle</mat-icon>
+                </button>
+                <button *ngIf="!element.active" class="btn toogle" matTooltip="Ativar" (click)="onDelete(element)">
+                  <mat-icon>add_circle</mat-icon>
                 </button>
               </div>
             </td>

@@ -1,4 +1,6 @@
-﻿namespace AIssist.Domain.Http.Response.Users
+﻿using AIssist.Domain.Entities;
+
+namespace AIssist.Domain.Http.Response.Users
 {
 	public class UserResponse
 	{
@@ -6,7 +8,7 @@
         public string? Name { get; set; }
         public string? Username { get; set; }
         public string? Email { get; set; }
-        public string? Profile { get; set; }
+        public Profiles? Profile { get; set; }
         public bool Active { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

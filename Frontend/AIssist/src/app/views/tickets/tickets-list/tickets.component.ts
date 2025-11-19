@@ -5,25 +5,41 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { TicketService, TicketResponse } from '../../../../core/services/ticket/ticket.service';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { Router } from '@angular/router';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { FormatDatePipe } from '../../../shared/pipes/formatDatePipe.pipe';
 
 @Component({
   selector: 'app-tickets',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, MatIconModule, MatDialogModule],
+  imports: [CommonModule, ButtonComponent, MatIconModule, MatDialogModule, MatTableModule,
+            FormatDatePipe],
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
+onDelete(_t76: any) {
+throw new Error('Method not implemented.');
+}
+onEdit(_t76: any) {
+throw new Error('Method not implemented.');
+}
   tickets: TicketResponse[] = [];
   totalTickets = 0;
   paginaAtual = 1;
   totalPorPagina = 15;
+  displayedColumns: string[] = ['Number','Description','Assignee','Status', 'UpdatedAt', 'acoes'];
+  dataSource = new MatTableDataSource<TicketResponse>();
 
   constructor(
     private ticketService: TicketService, 
     private dialog: MatDialog,
     private router: Router
   ) {}
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   ngOnInit() {
     this.carregarTickets();
@@ -37,11 +53,22 @@ export class TicketsComponent implements OnInit {
     this.ticketService.getTickets().subscribe({
       next: (res) => {
         this.totalTickets = res.length;
-        this.tickets = res.map(ticket => ({
-          ...ticket,
-          created_at: ticket.created_at ? this.formatarDataLocal(ticket.created_at) : '',
-          updated_at: ticket.updated_at ? this.formatarDataLocal(ticket.updated_at) : ''
-        }));
+        this.dataSource = new MatTableDataSource(res);
+
+        this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
+          const filterValue = filter.trim().toLowerCase();
+          const valuesToSearch = [
+            data.ticketNumber,
+            data.description,
+            data.solution,
+            data.status,
+            new Date(data.updatedAt).toLocaleDateString('pt-BR')
+          ];
+  
+          return valuesToSearch.some(value =>
+            value?.toString().toLowerCase().includes(filterValue)
+          );
+        };
       },
       error: (err) => console.error('Erro ao buscar tickets:', err)
     });
@@ -61,7 +88,6 @@ export class TicketsComponent implements OnInit {
   }
 
   openEditDialog(ticket: TicketResponse) {
-    // Aqui você pode abrir o dialog de edição (igual ao de usuário)
     console.log('Editar ticket:', ticket);
   }
 

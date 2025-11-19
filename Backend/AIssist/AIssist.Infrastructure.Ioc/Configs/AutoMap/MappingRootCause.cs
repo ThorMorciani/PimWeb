@@ -25,7 +25,8 @@ namespace AIssist.Infrastructure.Ioc.Configs.AutoMap
              .ForMember(p => p.CreatedAt, o => o.MapFrom(p => DateTime.Now))
             .ForMember(p => p.Active, o => o.MapFrom(p => true));
 
-            CreateMap<RootCause, RootCauseResponse>();
+            CreateMap<RootCause, RootCauseResponse>()
+                .ForMember(dest => dest.UpdatedAt,opt => opt.MapFrom(src => src.UpdatedAt.ToString("dd/MM/yyyy HH:mm:ss")));
         }
     }
 }

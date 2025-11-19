@@ -36,7 +36,7 @@ namespace AIssist.Domain.Services
                 if (entity == null)
                     return false;
 
-                entity.Active = false;
+                entity.Active = !entity.Active;
                 await _context.SaveChangesAsync();
                 return true;
             }

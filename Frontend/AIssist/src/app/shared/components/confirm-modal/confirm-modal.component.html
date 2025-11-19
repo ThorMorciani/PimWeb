@@ -1,0 +1,16 @@
+<div class="backdrop" *ngIf="open">
+    <div class="modal" *ngIf="open">
+        <div class="modal-header">
+            <h1>Confirmação</h1>
+        </div>
+
+        <div class="modal-body">
+            <p>{{ message }}</p>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 16px;">
+            <button class="submit-button" type="submit" (click)="onConfirm()">Salvar</button>
+            <button class="cancel-button" type="button" (click)="onCancel()">Cancelar</button>
+        </div>
+    </div>
+</div>

@@ -48,7 +48,9 @@ namespace AIssist.Domain.Services
 
         public async Task<List<Users>> Get()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                    .Include(p => p.Profile)
+                    .ToListAsync();
         }
 
         public async Task<Users?> GetById(long userId)

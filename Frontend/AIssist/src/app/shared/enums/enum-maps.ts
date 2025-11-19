@@ -8,7 +8,7 @@ export const EnumTextMap = {
       [ProfileTypes.Tecnico]: 'Técnico',
       [ProfileTypes.Comum]: 'Comum'
     },
-    AccountType: {
+    CriticalityTypes: {
       [CriticalityTypes.Baixo]: 'Baixo',
       [CriticalityTypes.Medio]: 'Médio',
       [CriticalityTypes.Alto]: 'Alto',

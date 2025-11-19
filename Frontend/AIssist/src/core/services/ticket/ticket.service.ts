@@ -7,13 +7,16 @@ export interface TicketResponse {
   id: number;
   description: string;
   solution?: string;
-  assignee_id?: number;
-  reporter_id?: number;
-  status_id?: number;
-  root_cause_id?: number;
-  created_at?: string;
-  updated_at?: string;
-  ticket_number: string;
+  assigneeId?: number;
+  reporterId?: number;
+  statusId?: number;
+  rootCauseId?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  ticketNumber: string;
+  rootCause: any;
+  reporter: any;
+  assignee: any;
 }
 
 @Injectable({

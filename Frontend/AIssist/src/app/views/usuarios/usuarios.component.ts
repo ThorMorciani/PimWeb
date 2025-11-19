@@ -22,8 +22,7 @@ interface Usuario extends UserResponse {
   selector: 'app-usuarios',
   standalone: true,
   imports: [CommonModule, ButtonComponent, MatTableModule, MatIconModule, MatDialogModule, 
-            UserEditDialogComponent, MatTooltipModule, ModalUserComponent,
-            booleanToStringPipe, FormatDatePipe, EnumTextPipe],
+            MatTooltipModule, ModalUserComponent, booleanToStringPipe, FormatDatePipe, EnumTextPipe],
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss']
 })
@@ -69,7 +68,7 @@ export class UsuariosComponent implements OnInit {
           const valuesToSearch = [
             data.name,
             data.username,
-            data.profile,
+            data.profile.profileName,
             data.active ? 'Ativo' : 'Inativo',
             new Date(data.updatedAt).toLocaleDateString('pt-BR')
           ];
@@ -83,7 +82,7 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  deleteUser(userId: number) {
+  inactivateItem(userId: number) {
     if (confirm('Tem certeza que deseja inativar este usuário?')) {
       this.userService.deleteUser(userId).subscribe({
         next: () => {
@@ -130,7 +129,7 @@ export class UsuariosComponent implements OnInit {
   executarAcao(event: { type: string; row: Usuario }) {
     switch(event.type) {
       case 'edit': this.openEditDialog(event.row); break;
-      case 'delete': this.deleteUser(event.row.id); break;
+      case 'delete': this.inactivateItem(event.row.id); break;
       case 'toggle': console.log('Alternar status de:', event.row); break;
       default: console.warn('Ação desconhecida:', event.type);
     }
