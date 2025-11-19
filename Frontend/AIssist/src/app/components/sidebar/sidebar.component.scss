@@ -37,6 +37,10 @@
 
 .logout-button {
   margin-top: auto;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .bottom {

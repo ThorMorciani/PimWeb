@@ -2,29 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-
-export interface LoginResponse {
-  accessToken: string;
-  refreshToken?: string; // se o backend enviar
-  user?: {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    profileId: number;
-    active: boolean;
-  };
-}
-
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = environment.baseUrl ; // URL da sua API
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { username: string; password: string }): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/Login/login`, credentials);
+  private apiUrl = environment.baseUrl;
+
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/Login`, data);
+  }
+
+  isLogged(): boolean {
+    if (typeof window === 'undefined') return false; // verifica se está no navegador
+    return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }
   }
 }

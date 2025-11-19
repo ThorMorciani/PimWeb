@@ -9,6 +9,8 @@ import { LoginComponent } from './views/login/login.component';
 import { RootCausesComponent } from './views/root-causes/root-causes.component';
 import { PerfisComponent } from './views/perfis/perfis.component';
 
+import { AuthGuard } from '../core/guards/auth.guard';
+
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
@@ -20,6 +22,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: HomeComponent },
       { path: 'usuarios', component: UsuariosComponent },
