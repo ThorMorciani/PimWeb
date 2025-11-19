@@ -67,9 +67,9 @@ export class UsuariosComponent implements OnInit {
         this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
           const filterValue = filter.trim().toLowerCase();
           const valuesToSearch = [
-            data.Name,
-            data.Username,
-            data.Profile,
+            data.name,
+            data.username,
+            data.profile,
             data.active ? 'Ativo' : 'Inativo',
             new Date(data.updatedAt).toLocaleDateString('pt-BR')
           ];
