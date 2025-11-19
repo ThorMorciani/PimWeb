@@ -13,13 +13,22 @@
     flex-direction: column;
     gap: 1rem;
 
-    select, textarea {
+    select,
+    textarea {
       width: 100%;
       padding: 0.5rem;
       border-radius: 4px;
       border: 1px solid $textbox-border;
       background: $default-background;
       color: #fff;
+      font-size: 1rem;
+    }
+
+    textarea {
+      min-height: 100px;
+      max-height: 200px; // limita a altura
+      resize: vertical;   // permite ajustar verticalmente, mas dentro do limite
+      overflow-y: auto;   // adiciona scroll se ultrapassar o max-height
     }
 
     .buttons {
@@ -35,22 +44,36 @@
     flex-direction: column;
     gap: 1rem;
 
+    .dicas-ia {
+      min-height: 150px;
+      max-height: 300px;  // limita altura das dicas da IA
+      padding: 10px;
+      border: 1px solid $textbox-border;
+      border-radius: 4px;
+      background-color: $default-background;
+      overflow-y: auto;
+      white-space: pre-wrap; // mantém quebras de linha
+    }
+
     textarea {
-        color: $title-text-color;
-        height: 200px;
-        background: $default-background;
-        border-radius: .5rem;
-        border: 1px solid $textbox-border;
+      color: $title-text-color;
+      min-height: 100px;
+      max-height: 200px; // limita altura
+      background: $default-background;
+      border-radius: 0.5rem;
+      border: 1px solid $textbox-border;
+      resize: vertical;
+      overflow-y: auto;
     }
 
     .feedback {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
 
-        span {
-            font-weight: bold;
-        }
+      span {
+        font-weight: bold;
+      }
     }
   }
 }

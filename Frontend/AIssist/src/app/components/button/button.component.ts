@@ -12,8 +12,10 @@ export class ButtonComponent {
   @Input() block: boolean = false;
   @Input() active: boolean = true;
   @Input() outlined: boolean = false;
+  @Input() disabled: boolean = false;
   @Input() size: 'small' | 'large' = 'large';
   @Input() type: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Input() bold: boolean = false;
 
   @Output() click = new EventEmitter<void>();
 
@@ -23,7 +25,8 @@ export class ButtonComponent {
       this.setDanger ? 'danger' : '',
       this.block ? 'block' : '',
       !this.active ? 'disabled' : '',
-      this.outlined ? 'outlined' : ''
+      this.outlined ? 'outlined' : '',
+      this.bold ? 'bold-button' : ''
     ];
     return classes.join(' ');
   }
