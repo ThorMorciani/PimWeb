@@ -5,6 +5,7 @@ using AIssist.Domain.Services.Interfaces;
 using System.Text.Json;
 using AutoMapper;
 using AIssist.Domain.Http.Response;
+using AIssist.Domain.Http.Response.RootCause;
 
 namespace AIssist.Application.Services
 {
@@ -66,14 +67,18 @@ namespace AIssist.Application.Services
             return response;
         }
 
-        public Task<List<RootCause>> Get()
+        public async Task<List<RootCauseResponse>> Get()
         {
-            return _rootCauseService.Get();
+            var result = await _rootCauseService.Get();
+            var mapped = _mapper.Map<List<RootCauseResponse>>(result);
+            return mapped;
         }
 
-        public Task<RootCause?> GetById(long rootCauseId)
+        public async Task<RootCauseResponse?> GetById(long rootCauseId)
         {
-            return _rootCauseService.GetById(rootCauseId);
+            var result = await _rootCauseService.GetById(rootCauseId);
+            var mapped = _mapper.Map<RootCauseResponse>(result);
+            return mapped;
         }
 
         public async Task<DefaultResponse> Update(RootCausePutRequest entity)

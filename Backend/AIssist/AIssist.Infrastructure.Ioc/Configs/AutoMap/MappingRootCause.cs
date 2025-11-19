@@ -1,5 +1,6 @@
 ﻿using AIssist.Domain.Entities;
 using AIssist.Domain.Http.Request.RootCause;
+using AIssist.Domain.Http.Response.RootCause;
 using AutoMapper;
 
 namespace AIssist.Infrastructure.Ioc.Configs.AutoMap
@@ -23,6 +24,8 @@ namespace AIssist.Infrastructure.Ioc.Configs.AutoMap
             .ForMember(p => p.UpdatedAt, o => o.MapFrom(p => DateTime.Now))
              .ForMember(p => p.CreatedAt, o => o.MapFrom(p => DateTime.Now))
             .ForMember(p => p.Active, o => o.MapFrom(p => true));
+
+            CreateMap<RootCause, RootCauseResponse>();
         }
     }
 }
