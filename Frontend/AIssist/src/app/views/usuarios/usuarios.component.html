@@ -74,5 +74,8 @@
           </tr>
         </table>
     </div>
-  <app-modal-user (formSubmitted)="onFormSubmit($event)"></app-modal-user>
+  <app-modal-user
+    #modalUser
+    (formSubmitted)="onFormSubmit($event)"
+  ></app-modal-user>
 </div>
