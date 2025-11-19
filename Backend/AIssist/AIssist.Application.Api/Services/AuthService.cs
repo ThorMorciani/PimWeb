@@ -80,7 +80,9 @@ namespace AIssist.Application.Api.Services
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Role, profile.ProfileName)
+                new Claim(ClaimTypes.Role, profile.ProfileName),
+                new Claim(ClaimTypes.GivenName, user.Name),
+                new Claim(ClaimTypes.Email, user.Email)
             };
 
             var key = new SymmetricSecurityKey(
