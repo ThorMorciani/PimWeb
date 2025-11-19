@@ -34,7 +34,7 @@ export class UsuariosComponent implements OnInit {
   totalPorPagina = 15;
   modalAberto = false;
   usuarioAtual: UserResponse | undefined;
-  @ViewChild(ModalUserComponent) modalUser!: ModalUserComponent;
+  @ViewChild('modalUser') modalUser!: ModalUserComponent;
   displayedColumns: string[] = ['Name','Username','Email','Profile', 'Active','CreatedAt', 'UpdatedAt', 'acoes'];
   dataSource = new MatTableDataSource<UserResponse>();
 
@@ -145,9 +145,25 @@ export class UsuariosComponent implements OnInit {
     this.modalAberto = false;
   }
 
-  onFormSubmit(event: { formData: any, confirmed: boolean }) {
-    console.log('Dados recebidos do modal:', event.formData);
-    console.log('Confirmado:', event.confirmed);
+  onFormSubmit(event: { formData: any; confirmed: boolean }) {
+    if (!event.confirmed) return;
+
+    this.userService.createUser({
+      name: event.formData.name,
+      username: event.formData.username,
+      password: event.formData.password,
+      email: event.formData.email,
+      profileId: event.formData.profileId
+    })
+    .subscribe({
+      next: res => {
+        console.log('Usuário criado:', res);
+        this.carregarUsuarios();
+      },
+      error: err => {
+        console.error('Erro ao criar usuário:', err);
+      }
+    });
   }
 
 }

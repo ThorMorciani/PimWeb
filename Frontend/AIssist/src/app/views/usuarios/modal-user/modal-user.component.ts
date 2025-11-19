@@ -26,14 +26,14 @@ export class ModalUserComponent implements OnChanges, OnInit{
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      active: [''],
-      profile: ['', Validators.required]
+      active: [true],
+      profileId: ['', Validators.required]
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formData'] && this.form) {
-      this.form.patchValue(this.form);
+      this.form.patchValue(this.formData);
     }
   }
 
