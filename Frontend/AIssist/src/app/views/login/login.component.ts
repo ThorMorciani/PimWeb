@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import type { AuthResponse } from '../../types/User';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class LoginComponent {
 
   onLogin() {
     this.authService.login(this.loginData).subscribe({
-      next: (res: any) => {
+      next: (res: AuthResponse) => {
         localStorage.setItem('token', res.accessToken);
         localStorage.setItem('user', JSON.stringify(res.user));
         this.router.navigate(['/']);

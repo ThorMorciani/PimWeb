@@ -64,11 +64,21 @@ namespace AIssist.Application.Api.Services
 
         private LoginResponse CreateTokenResponse(Users user)
         {
+            var profile = _profileService.GetById(user.ProfileId).Result;
+
             return new LoginResponse
             {
                 AccessToken = CreateToken(user),
                 RefreshToken = GenerateAndSaveRefreshTokenAsync(user).Result,
-                Username = user.Username
+                Username = user.Username,
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Username = user.Username,
+                    Email = user.Email,
+                    ProfileName = profile.ProfileName
+                }
             };
         }
 
