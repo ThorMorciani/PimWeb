@@ -18,10 +18,12 @@
 
   <div class="bottom">
     <div class="user">
-      <mat-icon>person</mat-icon>
+      <div class="user-avatar">
+        {{ getUserInitials() }}
+      </div>
       <div>
-        <p><strong>Murilo Câmara</strong></p>
-        <small>murilo.email&#64;gmail.com</small>
+        <p><strong>{{ user?.name }}</strong></p>
+        <small>{{ user?.email }}</small>
       </div>
     </div>
   </div>
