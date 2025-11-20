@@ -12,6 +12,7 @@ import { booleanToStringPipe } from '../../shared/pipes/booleanToString.pipe';
 import { FormatDatePipe } from '../../shared/pipes/formatDatePipe.pipe';
 import { EnumTextMap } from '../../shared/enums/enum-maps';
 import { EnumTextPipe } from '../../shared/pipes/enumToText.pipe';
+import { ConfirmModalComponent } from '../../shared/components/confirm-modal/confirm-modal.component';
 
 interface Usuario extends UserResponse {
   created_At?: string;
@@ -22,16 +23,20 @@ interface Usuario extends UserResponse {
   selector: 'app-usuarios',
   standalone: true,
   imports: [CommonModule, ButtonComponent, MatTableModule, MatIconModule, MatDialogModule, 
-            MatTooltipModule, ModalUserComponent, booleanToStringPipe, FormatDatePipe, EnumTextPipe],
+            MatTooltipModule, ModalUserComponent, booleanToStringPipe, FormatDatePipe, EnumTextPipe,
+            ConfirmModalComponent],
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
+  showModal = false;
+  textMessage = '';
   usuarios: Usuario[] = [];
   totalUsuarios = 0;
   paginaAtual = 1;
   totalPorPagina = 15;
   modalAberto = false;
+  selectedItem = null;
   usuarioAtual: UserResponse | undefined;
   @ViewChild('modalUser') modalUser!: ModalUserComponent;
   displayedColumns: string[] = ['Name','Username','Email','Profile', 'Active','CreatedAt', 'UpdatedAt', 'acoes'];
@@ -41,13 +46,21 @@ export class UsuariosComponent implements OnInit {
     private userService: UserService,
     private dialog: MatDialog
   ) {}
-
-  onEdit(_t49: any) {
-    throw new Error('Method not implemented.');
-    }
-    onDelete(_t49: any) {
-    throw new Error('Method not implemented.');
-    }
+  openModal(item: any, message: string) {
+    this.textMessage = message;
+    this.selectedItem = item;
+    this.showModal = true;
+  }
+  
+  onConfirmAction() {
+    this.inactivateItem(this.selectedItem);
+    this.showModal = false;
+  }
+  
+  onCancelAction() {
+    this.selectedItem = null;
+    this.showModal = false;
+  }
   ngOnInit() {
     this.carregarUsuarios();
   }
@@ -82,27 +95,19 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  inactivateItem(userId: number) {
-    if (confirm('Tem certeza que deseja inativar este usuário?')) {
-      this.userService.deleteUser(userId).subscribe({
-        next: () => {
-          this.usuarios = this.usuarios.filter(u => u.id !== userId);
-        },
-        error: err => {
-          console.error('Erro ao inativar usuário', err);
-        }
-      });
-    }
+  inactivateItem(element: any) {
+    this.userService.inactivateUser(element.id).subscribe({
+      next: (resp) => {
+        this.carregarUsuarios();
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
   }
 
   createUser() {
     this.modalUser.formData = null;
-    this.modalUser.open();
-  }
-
-  openEditDialog(user: UserResponse) {
-    
-    this.usuarioAtual = user;
     this.modalUser.open();
   }
 
@@ -114,25 +119,6 @@ export class UsuariosComponent implements OnInit {
     const horas = String(d.getHours()).padStart(2,'0');
     const minutos = String(d.getMinutes()).padStart(2,'0');
     return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
-  }
-
-  getProfileName(id: number): string {
-    const profiles: { [key: number]: string } = {
-      1: 'Administrador',
-      2: 'Gerente',
-      3: 'Usuário',
-      4: 'Visitante'
-    };
-    return profiles[id] || 'Desconhecido';
-  }
-
-  executarAcao(event: { type: string; row: Usuario }) {
-    switch(event.type) {
-      case 'edit': this.openEditDialog(event.row); break;
-      case 'delete': this.inactivateItem(event.row.id); break;
-      case 'toggle': console.log('Alternar status de:', event.row); break;
-      default: console.warn('Ação desconhecida:', event.type);
-    }
   }
 
   carregarPagina(p: number) {

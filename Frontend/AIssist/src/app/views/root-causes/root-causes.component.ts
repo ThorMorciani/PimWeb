@@ -30,21 +30,21 @@ export class RootCausesComponent implements OnInit{
 
   constructor(private rootCauseService: RootCauseService) {}
 
-openModal(item: any, message: string) {
-  this.textMessage = message;
-  this.selectedItem = item;
-  this.showModal = true;
-}
+  openModal(item: any, message: string) {
+    this.textMessage = message;
+    this.selectedItem = item;
+    this.showModal = true;
+  }
 
-onConfirmAction() {
-  this.inactivateItem(this.selectedItem);
-  this.showModal = false;
-}
+  onConfirmAction() {
+    this.inactivateItem(this.selectedItem);
+    this.showModal = false;
+  }
 
-onCancelAction() {
-  this.selectedItem = null;
-  this.showModal = false;
-}
+  onCancelAction() {
+    this.selectedItem = null;
+    this.showModal = false;
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -88,5 +88,5 @@ onCancelAction() {
         console.log(err)
       }
     });
-    }
+  }
 }

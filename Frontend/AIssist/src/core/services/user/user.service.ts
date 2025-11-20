@@ -22,7 +22,7 @@ export class UserService {
   createUser(userData: any): Observable<UserResponse> {
     return this.http.post<UserResponse>(this.apiUrl, userData);
   }
-  deleteUser(userId: number): Observable<void> {
+  inactivateUser(userId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${userId}`);
   }
   updateUser(userData: any): Observable<any> {

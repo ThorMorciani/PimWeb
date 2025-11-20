@@ -87,10 +87,6 @@ throw new Error('Method not implemented.');
     }
   }
 
-  openEditDialog(ticket: TicketResponse) {
-    console.log('Editar ticket:', ticket);
-  }
-
   private formatarDataLocal(data: string): string {
     const d = new Date(data);
     const dia = String(d.getDate()).padStart(2, '0');
@@ -99,19 +95,6 @@ throw new Error('Method not implemented.');
     const horas = String(d.getHours()).padStart(2, '0');
     const minutos = String(d.getMinutes()).padStart(2, '0');
     return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
-  }
-
-  executarAcao(event: { type: string; row: TicketResponse }) {
-    switch (event.type) {
-      case 'edit':
-        this.openEditDialog(event.row);
-        break;
-      case 'delete':
-        this.deleteTicket(event.row.id);
-        break;
-      default:
-        console.warn('Ação desconhecida:', event.type);
-    }
   }
 
   carregarPagina(p: number) {
