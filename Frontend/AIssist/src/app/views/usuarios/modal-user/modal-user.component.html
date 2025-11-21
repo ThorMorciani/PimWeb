@@ -13,8 +13,8 @@
             <label>Usuário</label>
             <input type="text" formControlName="username" required />
 
-            <label>Senha</label>
-            <input type="password" formControlName="password" required />
+            <label *ngIf="!this.isEdit">Senha</label>
+            <input *ngIf="!this.isEdit" type="password" formControlName="password" required />
 
             <label>Perfil</label>
             <select formControlName="profileId">

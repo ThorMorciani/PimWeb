@@ -30,6 +30,7 @@ interface Usuario extends UserResponse {
 })
 export class UsuariosComponent implements OnInit {
   showModal = false;
+  showOkButton = false;
   textMessage = '';
   usuarios: Usuario[] = [];
   totalUsuarios = 0;
@@ -46,7 +47,7 @@ export class UsuariosComponent implements OnInit {
     private userService: UserService,
     private dialog: MatDialog
   ) {}
-  openModal(item: any, message: string) {
+  openConfirmationModal(item: any, message: string, showOkButton: boolean = false) {
     this.textMessage = message;
     this.selectedItem = item;
     this.showModal = true;
@@ -60,9 +61,10 @@ export class UsuariosComponent implements OnInit {
   onCancelAction() {
     this.selectedItem = null;
     this.showModal = false;
+    this.showOkButton = false;
   }
   ngOnInit() {
-    this.carregarUsuarios();
+    this.loadUsers();
   }
 
   applyFilter(event: Event) {
@@ -70,7 +72,7 @@ export class UsuariosComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  carregarUsuarios() {
+  loadUsers() {
     this.userService.getUsers().subscribe({
       next: (res: UserResponse[]) => {
         this.totalUsuarios = res.length;
@@ -98,7 +100,7 @@ export class UsuariosComponent implements OnInit {
   inactivateItem(element: any) {
     this.userService.inactivateUser(element.id).subscribe({
       next: (resp) => {
-        this.carregarUsuarios();
+        this.loadUsers();
       },
       error: (err) => {
         console.log(err)
@@ -106,8 +108,11 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  createUser() {
-    this.modalUser.formData = null;
+  openUserModal(isEdit: boolean, element: any = null) {
+    this.selectedItem = null;
+    if (isEdit)
+      this.selectedItem = element;
+
     this.modalUser.open();
   }
 
@@ -123,32 +128,64 @@ export class UsuariosComponent implements OnInit {
 
   carregarPagina(p: number) {
     this.paginaAtual = p;
-    this.carregarUsuarios();
+    this.loadUsers();
   }
 
   fecharModal(): void {
     this.modalAberto = false;
   }
 
-  onFormSubmit(event: { formData: any; confirmed: boolean }) {
-    if (!event.confirmed) return;
+  onFormSubmit(event: { formData: any, isEdit: boolean }) {
+    let user: any;
+    if (event.isEdit) {
+      user = {
+        id: event.formData.id,
+        name: event.formData.name,
+        username: event.formData.username,
+        email: event.formData.email,
+        profileId: event.formData.profileId
+      };
+      this.editUser(user);
+    } else {
+      user = {
+        name: event.formData.name,
+        username: event.formData.username,
+        email: event.formData.email,
+        profileId: event.formData.profileId,
+        password: event.formData.password
+      };
+      this.createUser(user);
+    }
+  }
 
-    this.userService.createUser({
-      name: event.formData.name,
-      username: event.formData.username,
-      password: event.formData.password,
-      email: event.formData.email,
-      profileId: event.formData.profileId
-    })
-    .subscribe({
-      next: res => {
-        console.log('Usuário criado:', res);
-        this.carregarUsuarios();
+  createUser(user: any) {
+    this.userService.createUser(user).subscribe({
+      next: (resp) => {
+        this.loadUsers();
+        this.showOkButton = true;
+        this.showModal = true;
       },
-      error: err => {
-        console.error('Erro ao criar usuário:', err);
+      error: (err) => {
+        this.loadUsers();
+        this.showOkButton = true;
+        this.showModal = true;
       }
     });
   }
-
+  editUser(user: any) {
+    this.userService.updateUser(user).subscribe({
+      next: (resp) => {
+        this.loadUsers();
+        this.showOkButton = true;
+        this.textMessage = "Usuário editado com sucesso."
+        this.showModal = true;
+      },
+      error: (err) => {
+        this.loadUsers();
+        this.showOkButton = true;
+        this.textMessage = "Erro ao editar usuário."
+        this.showModal = true;
+      }
+    });
+  }
 }

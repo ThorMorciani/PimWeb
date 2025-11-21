@@ -2,10 +2,10 @@ export interface RootCause {
   id: number;
   rootCauseName: string;
   criticality: number;
-  createdAt: string;   // ISO string do backend
+  createdAt: string;
   createdBy: string;
-  updatedAt: string;   // ISO string do backend
+  updatedAt: string;
   updatedBy: string;
   active: boolean;
-  tickets: any | null; // pode ser um array de tickets ou null
+  tickets: any | null;
 }

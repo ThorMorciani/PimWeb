@@ -8,9 +8,12 @@
             <p>{{ message }}</p>
         </div>
 
-        <div style="display: flex; justify-content: space-between; margin-top: 16px;">
+        <div class="bottom-div" *ngIf="!this.showOkBuuton">
             <button class="submit-button" type="submit" (click)="onConfirm()">Salvar</button>
             <button class="cancel-button" type="button" (click)="onCancel()">Cancelar</button>
+        </div>
+        <div class="bottom-div" *ngIf="this.showOkBuuton">
+            <button class="submit-button" type="button" (click)="onCancel()">Ok</button>
         </div>
     </div>
 </div>
