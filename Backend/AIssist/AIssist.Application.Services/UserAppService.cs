@@ -131,6 +131,14 @@ namespace AIssist.Application.Services
 
             return response;
         }
+
+        public async Task<List<UserResponse>> GetTechnicians()
+        {
+            var technicians = await _userService.GetTechnicians();
+            return _mapper.Map<List<UserResponse>>(technicians);
+        }
+
+
     }
 
 }

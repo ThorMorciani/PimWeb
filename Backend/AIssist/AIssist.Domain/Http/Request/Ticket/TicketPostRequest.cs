@@ -6,7 +6,8 @@
 		public string? Solution { get; set; }		
 		public long ReporterId { get; set; }
 		public long RootCauseId { get; set; }
-		public long Status { get; set; }
+        public long? AssigneeId { get; set; }
+        public long Status { get; set; }
 	}
 }
 

@@ -1,0 +1,283 @@
+@import '../../../../styles/variables';
+
+// =======================================
+//  CONTAINER PRINCIPAL
+// =======================================
+
+.ticket-page {
+  display: flex;
+  gap: 40px;
+  color: $text-primary-color;
+  background: $modal-background;
+  height: 100vh;
+  padding: 0 2rem;
+}
+
+// =======================================
+//  COLUNA PRINCIPAL
+// =======================================
+
+.main-column {
+  flex: 1;
+  padding: 2rem 2rem;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: $text-secondary-color;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+
+  mat-icon {
+    font-size: 18px;
+  }
+}
+
+.user-name {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.descricao,
+.observacoes {
+  margin-bottom: 25px;
+
+  h3 {
+    font-size: 18px;
+    color: $title-text-color;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $information-text-color;
+    line-height: 1.5;
+  }
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  background: $input-background-color;
+  border: 1px solid $textbox-border;
+  border-radius: 10px;
+  padding: 15px;
+  color: $text-primary-color;
+  font-size: 15px;
+  resize: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.btn {
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+
+  &.primary {
+    background: $primary-button-background;
+    color: $primary-button-text;
+
+    &:hover {
+      background: $primary-button-background-hover;
+    }
+  }
+
+  &.danger {
+    background: $seconday-button-background;
+    color: $primary-button-text;
+
+    &:hover {
+      background: $canceled-ticket-background-hover;
+    }
+  }
+}
+
+// =======================================
+//  COLUNA LATERAL
+// =======================================
+
+.details-column {
+  width: 350px;
+  height: 100%;
+  border-left: 1px solid $input-border-color;
+  padding: 2rem 2rem;
+}
+
+.titulo {
+  font-size: 26px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.details-card {
+  background: $modal-background;
+  padding: 25px;
+  border-radius: 12px;
+  
+  span.text-secondary {
+    color: $text-secondary-color;
+  }
+
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: $title-text-color;
+  }
+
+  p {
+    font-size: 14px;
+    margin-bottom: 6px;
+
+    strong {
+      color: $information-text-color;
+    }
+  }
+}
+
+
+// =======================================
+//  BADGES DE STATUS
+// =======================================
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 0.6rem;
+  font-size: 12px;
+  display: inline-block;
+
+  &.open {
+    background: $badge-ticket-status-aberto-background;
+    color: $badge-ticket-status-aberto-text;
+  }
+
+  &.assigned {
+    background: $badge-ticket-status-atribuido-background;
+    color: $badge-ticket-status-atribuido-text;
+  }
+
+  &.in-progress {
+    background: $badge-ticket-status-atendimento-background;
+    color: $badge-ticket-status-atendimento-text;
+  }
+
+  &.waiting {
+    background: $badge-ticket-status-validacao-background;
+    color: $badge-ticket-status-validacao-text;
+  }
+
+  &.resolved {
+    background: $badge-ticket-status-fechado-background;
+    color: $badge-ticket-status-fechado-text;
+  }
+
+  &.canceled {
+    background: $badge-ticket-status-cancelado-background;
+    color: $badge-ticket-status-cancelado-text;
+  }
+}
+
+// =======================================
+//  PRIORIDADE (CORREÇÃO)
+// =======================================
+
+.priority {
+  padding: 4px 10px;
+  border-radius: 0.6rem;
+  font-size: 12px;
+  display: inline-block;
+
+  &.low {
+    background: $badge-ticket-baixo-background;
+    color: $badge-ticket-baixo-text;
+  }
+
+  &.medium {
+    background: $badge-ticket-medio-background;
+    color: $badge-ticket-medio-text;
+  }
+
+  &.high {
+    background: $badge-ticket-alto-background;
+    color: $badge-ticket-alto-text;
+  }
+
+  &.critical {
+    background: $badge-ticket-critico-background;
+    color: $badge-ticket-critico-text;
+  }
+}
+
+// =======================================
+//  USUÁRIO
+// =======================================
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  .edit-icon {
+  font-size: 16px;
+  margin-left: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+  color: $primary-button-background;
+
+  &:hover {
+    color: $primary-button-background-hover;
+  }
+}
+
+.user-box select {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid $textbox-border;
+}
+
+.user-box .btn {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    padding: 0.4rem;
+    color: white;
+    font-weight: 500;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: $low-ticket-background;
+  }
+
+  .infos {
+    .name {
+      font-weight: 500;
+      color: $title-text-color;
+    }
+
+    .email {
+      font-size: 12px;
+      color: $information-text-color;
+    }
+  }
+}

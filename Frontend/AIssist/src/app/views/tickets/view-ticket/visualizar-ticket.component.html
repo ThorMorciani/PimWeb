@@ -1,0 +1,111 @@
+<div class="ticket-page">
+
+  <!-- COLUNA PRINCIPAL -->
+  <div class="main-column">
+
+    <button class="back-btn" (click)="voltar()">
+      <mat-icon>arrow_back</mat-icon> Voltar
+    </button>
+
+    <h2 class="user-name">Ticket - {{ ticket.ticketNumber }}</h2>
+
+    <section class="descricao">
+      <h3>Descrição</h3>
+      <p>{{ ticket.description }}</p>
+    </section>
+
+    <section class="observacoes">
+      <h3>Solução</h3>
+      <textarea
+        placeholder="Inserir texto..."
+        [(ngModel)]="solution"
+        [readonly]="ticket.statusId === 5">
+      </textarea>
+    </section>
+
+    <div class="buttons">
+      <button class="btn danger">Arquivar</button>
+      <button class="btn primary" (click)="salvarTicket()">Salvar</button>
+    </div>
+
+  </div>
+
+  <!-- COLUNA LATERAL (DETALHES) -->
+  <div class="details-column">
+
+    <h2 class="titulo">Detalhes</h2>
+
+    <div class="details-card">
+
+      <h3>Informações</h3>
+
+      <p><span class="text-secondary">Ticket ID:</span> {{ ticket.ticketNumber }}</p>
+      <p><span class="text-secondary">Assunto:</span> {{ ticket.rootCause?.rootCauseName }}</p>
+
+      <p>
+        <span class="text-secondary">Status: </span>
+        <span class="badge" [ngClass]="obterClasseStatus(ticket.statusId)">
+          {{ obterTextoStatus(ticket.statusId) }}
+        </span>
+      </p>
+
+      <p>
+        <span class="text-secondary">Prioridade: </span>
+        <span class="badge priority high">Alto</span>
+      </p>
+
+      <p>
+        <span class="text-secondary">Criado em: </span>
+        {{ ticket.createdAt | date:'dd MMMM yyyy' }}
+      </p>
+
+      <h3>Responsável</h3>
+      <div class="user-box" *ngIf="ticket.assignee">
+
+        <div class="avatar">
+          {{ getUserInitials(ticket.assignee?.name) }}
+        </div>
+
+        <div class="infos">
+          <p class="name">
+            {{ ticket.assignee.name }}
+
+            <!-- Lápis só para admins e gerentes -->
+            <mat-icon 
+              *ngIf="isAdminOrManager()" 
+              class="edit-icon" 
+              (click)="editarResponsavel = !editarResponsavel">
+              edit
+            </mat-icon>
+          </p>
+          <p class="email">{{ ticket.assignee.email }}</p>
+
+          <!-- Select para alterar responsável -->
+          <div *ngIf="editarResponsavel">
+            <select [(ngModel)]="assigneeSelecionado">
+              <option *ngFor="let tecnico of tecnicos" [value]="tecnico.id">
+                {{ tecnico.name }}
+              </option>
+            </select>
+            <button class="btn primary" (click)="definirResponsavel()">Salvar</button>
+            <button class="btn danger" (click)="editarResponsavel=false">Cancelar</button>
+          </div>
+        </div>
+
+      </div>
+
+      <h3>Aberto por</h3>
+      <div class="user-box">
+        <div class="avatar">
+          {{ getUserInitials(ticket.reporter?.name) }}
+        </div>
+        <div class="infos">
+          <p class="name">{{ ticket.reporter.name }}</p>
+          <p class="email">{{ ticket.reporter.email }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

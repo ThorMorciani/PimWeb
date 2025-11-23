@@ -8,6 +8,7 @@ import { TicketService } from '../../../../core/services/ticket/ticket.service';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RootCause } from '../../../types/RootCauses';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-novo-ticket',
@@ -29,13 +30,17 @@ export class NovoTicketComponent implements OnInit {
 
   rootCauses: RootCause[] = [];
 
+  sugestaoIA: string = '';
+  iaUtil: boolean | null = null;
+
   private converter = new showdown.Converter();
 
   constructor(
     private ticketService: TicketService,
     private sanitizer: DomSanitizer,
     private http: HttpClient,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -71,6 +76,7 @@ export class NovoTicketComponent implements OnInit {
     this.dicasIA = this.sanitizer.bypassSecurityTrustHtml('Gerando sugestão...');
     this.iaUsada = true;
     this.feedbackAtivo = true;
+    this.iaUtil = null; // reset feedback
 
     try {
       const response = await fetch(`${environment.baseUrl}/GeminiAi/suggestion`, {
@@ -80,7 +86,8 @@ export class NovoTicketComponent implements OnInit {
       });
 
       const data = await response.json();
-      const html = this.converter.makeHtml(data.outputText ?? '');
+      this.sugestaoIA = data.outputText ?? '';
+      const html = this.converter.makeHtml(this.sugestaoIA);
       this.dicasIA = this.sanitizer.bypassSecurityTrustHtml(html);
     } catch {
       this.dicasIA = this.sanitizer.bypassSecurityTrustHtml(
@@ -89,31 +96,11 @@ export class NovoTicketComponent implements OnInit {
     }
   }
 
-  async feedbackIA(util: boolean) {
+  feedbackIA(util: boolean) {
     alert(util ? "Obrigado pelo feedback!" : "Obrigado, vamos melhorar.");
+    this.iaUtil = util; // salva se IA foi útil
     this.feedbackAtivo = false;
-
-    try {
-      const response = await fetch(`${environment.baseUrl}/GeminiAi/priority`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ description: this.descricao })
-      });
-
-      const data = await response.json();
-      const prioridade = data.priority?.toLowerCase();
-
-      this.complexidadeTicket =
-        prioridade === 'alta' ? 'ALTO' :
-        prioridade === 'normal' ? 'BAIXO' :
-        'MÉDIO';
-
-      this.criarTicketAtivo = true;
-
-    } catch {
-      this.complexidadeTicket = 'MÉDIO';
-      this.criarTicketAtivo = true;
-    }
+    this.criarTicketAtivo = true;
   }
 
   criarTicket() {
@@ -122,11 +109,24 @@ export class NovoTicketComponent implements OnInit {
       return;
     }
 
+    const usuarioLogado = this.authService.getUsuarioAtual(); 
+    const reporterId = usuarioLogado?.id ?? 0;
+
+    let status = 1; // padrão = aberto
+    let solution: string | null = null;
+
+    if (this.iaUsada && this.iaUtil !== null) {
+      status = this.iaUtil ? 5 : 1; // 5 se IA foi útil, 1 se não
+      solution = this.iaUtil ? this.sugestaoIA : null;
+    }
+
     const ticketData = {
       description: this.descricao,
-      solution: null,
-      reporterId: 1,
-      rootCauseId: Number(this.assunto) // ← garante TIPO NUMBER
+      solution: solution ?? "Aguardando análise",
+      reporterId: reporterId,
+      assigneeId: 2,
+      rootCauseId: Number(this.assunto),
+      status: status
     };
 
     this.ticketService.createTicket(ticketData).subscribe({
@@ -137,6 +137,7 @@ export class NovoTicketComponent implements OnInit {
       error: () => alert('Erro ao criar ticket')
     });
   }
+
 
   resetForm() {
     this.assunto = null;
