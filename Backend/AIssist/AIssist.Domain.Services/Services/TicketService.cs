@@ -76,7 +76,9 @@ namespace AIssist.Domain.Services
         {
             try
             {
-                var entity = await _context.Tickets.FindAsync(ticketNumber);
+                var entity = await _context.Tickets
+                    .FirstOrDefaultAsync(t => t.TicketNumber == ticketNumber);
+
                 if (entity == null)
                     return false;
 
