@@ -31,6 +31,10 @@ export class TicketService {
     return this.http.get<TicketResponse[]>(this.apiUrl);
   }
 
+  getTicketByTicketNumber(ticketNumber: string): Observable<TicketResponse> {
+    return this.http.get<TicketResponse>(`${this.apiUrl}/${ticketNumber}`);
+  }
+
   createTicket(ticketData: any): Observable<TicketResponse> {
     return this.http.post<TicketResponse>(this.apiUrl, ticketData);
   }
@@ -41,5 +45,9 @@ export class TicketService {
 
   deleteTicket(ticketId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${ticketId}`);
+  }
+
+  updateAssignee(body: { ticketNumber: string; assigneeId: number }): Observable<void> {
+    return this.http.put<void>(`${environment.baseUrl}/assignee`, body);
   }
 }

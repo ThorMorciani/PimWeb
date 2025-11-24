@@ -20,19 +20,17 @@
     <div class="buttons">
       <app-button
         texto="Criar Ticket"
-        (click)="criarTicket()"
+        (onClick)="criarTicket()"
         [active]="criarTicketAtivo"
         [bold]="true"
-      >
-      </app-button>
+      ></app-button>
 
       <app-button
         texto="Ajuda IA"
-        (click)="ajudaIA()"
+        (onClick)="ajudaIA()"
         [active]="true"
         [bold]="true"
-      >
-      </app-button>
+      ></app-button>
     </div>
   </div>
 
@@ -44,21 +42,20 @@
     <div class="feedback">
       <span>Foi útil?</span>
 
+      
       <app-button
         texto="Sim"
-        (click)="feedbackIA(true)"
+        (onClick)="feedbackIA(true)"
         [active]="feedbackAtivo"
         [bold]="true"
-      >
-      </app-button>
+      ></app-button>
 
       <app-button
         texto="Não"
-        (click)="feedbackIA(false)"
+        (onClick)="feedbackIA(false)"
         [active]="feedbackAtivo"
         [bold]="true"
-      >
-      </app-button>
+      ></app-button>
     </div>
   </div>
 </div>

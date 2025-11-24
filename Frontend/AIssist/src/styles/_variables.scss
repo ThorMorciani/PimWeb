@@ -26,6 +26,7 @@ $title-text-size: 32px;
 $information-text-size: 14px;
 
 $text-primary-color: #e6e6e6;
+$text-secondary-color: #B8B8B8;
 
 $input-background-color: #131517;
 $input-border-color: #979797;
@@ -46,3 +47,37 @@ $badge-yellow-text: rgb(255, 237, 132);
 
 $badge-purple-background: rgba(79, 82, 233, 0.2);
 $badge-purple-text: rgb(122, 124, 255);
+
+// =======================================
+//  BADGES TICKETS
+// =======================================
+$badge-ticket-baixo-background: rgba(46, 172, 46, 0.2);
+$badge-ticket-baixo-text: rgb(46, 172, 46);
+
+$badge-ticket-medio-background: rgba(79, 82, 233, 0.2);
+$badge-ticket-medio-text: rgb(122, 124, 255);
+
+$badge-ticket-alto-background: rgba(233, 210, 79, 0.2);
+$badge-ticket-alto-text: rgb(255, 237, 132);
+
+$badge-ticket-critico-background: rgba(233, 79, 84, 0.2);
+$badge-ticket-critico-text: rgb(255, 114, 118);
+
+
+$badge-ticket-status-aberto-background: rgba(79, 82, 233, 0.2);
+$badge-ticket-status-aberto-text: rgb(122, 124, 255);
+
+$badge-ticket-status-atribuido-background: rgba(233, 210, 79, 0.2);
+$badge-ticket-status-atribuido-text: rgb(255, 237, 132);
+
+$badge-ticket-status-atendimento-background: rgba(46, 172, 162, 0.2);
+$badge-ticket-status-atendimento-text: rgb(46, 172, 162);
+
+$badge-ticket-status-validacao-background: rgba(46, 172, 46, 0.2);
+$badge-ticket-status-validacao-text: rgb(46, 172, 46);
+
+$badge-ticket-status-fechado-background: rgba(66, 70, 73, 0.2);
+$badge-ticket-status-fechado-text: rgb(235, 235, 235);
+
+$badge-ticket-status-cancelado-background: rgba(233, 79, 84, 0.2);
+$badge-ticket-status-cancelado-text: rgb(255, 114, 118);

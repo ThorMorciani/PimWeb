@@ -1,4 +1,5 @@
 ﻿using AIssist.Domain.Entities;
+using AIssist.Domain.Http.Response.Users;
 
 namespace AIssist.Domain.Services.Interfaces
 {
@@ -11,6 +12,7 @@ namespace AIssist.Domain.Services.Interfaces
         Task<bool> Inactivate(long entityId);
         Task<Users?> GetByUsername(string username);
         Task<bool> UpdateRefreshToken(Users entity);
+        Task<List<Users>> GetTechnicians();
     }
 }
 

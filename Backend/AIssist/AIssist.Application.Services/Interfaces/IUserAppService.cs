@@ -12,6 +12,7 @@ namespace AIssist.Application.Services.Interfaces
         Task<DefaultResponse> Update(UserPutRequest userRequest);
         Task<List<UserResponse>> Get();
         Task<DefaultResponse> Inactivate(long entityId);
+        Task<List<UserResponse>> GetTechnicians();
     }
 }
 

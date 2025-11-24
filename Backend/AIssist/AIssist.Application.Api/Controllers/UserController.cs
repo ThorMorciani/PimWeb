@@ -97,6 +97,14 @@ namespace AIssist.Application.Api.Controllers
                 return StatusCode(500, new { ex.Message });
             }
         }
+
+        [HttpGet("technicians")]
+        public async Task<IActionResult> GetTechnicians()
+        {
+            var result = await _userAppService.GetTechnicians();
+            return Ok(result);
+        }
+
     }
 }
 

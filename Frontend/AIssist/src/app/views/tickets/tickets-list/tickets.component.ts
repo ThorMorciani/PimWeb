@@ -17,12 +17,15 @@ import { FormatDatePipe } from '../../../shared/pipes/formatDatePipe.pipe';
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
-onDelete(_t76: any) {
-throw new Error('Method not implemented.');
-}
-onEdit(_t76: any) {
-throw new Error('Method not implemented.');
-}
+
+  onDelete(_t76: any) {
+  throw new Error('Method not implemented.');
+  }
+
+  onEdit(ticket: TicketResponse) {
+    this.router.navigate(['/tickets', ticket.ticketNumber]);
+  }
+
   tickets: TicketResponse[] = [];
   totalTickets = 0;
   paginaAtual = 1;

@@ -100,6 +100,14 @@ namespace AIssist.Domain.Services
                 return false;
             }
         }
+
+        public async Task<List<Users>> GetTechnicians()
+        {
+            return await _context.Users
+                .Where(u => u.ProfileId == 4)
+                .ToListAsync();
+        }
+
     }
 }
 
