@@ -17,7 +17,7 @@ export class ButtonComponent {
   @Input() type: 'primary' | 'secondary' | 'tertiary' = 'primary';
   @Input() bold: boolean = false;
 
-  @Output() click = new EventEmitter<void>();
+@Output() onClick = new EventEmitter<void>();
 
   get buttonClasses(): string {
     const classes = [
@@ -30,9 +30,9 @@ export class ButtonComponent {
     ];
     return classes.join(' ');
   }
-  onClick() {
+  emitClick() {
     if (this.active) {
-      this.click.emit();
+      this.onClick.emit();
     }
   }
 }

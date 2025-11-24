@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-
+import type { Technician } from '../../../app/types/User';
 export interface UserResponse {
   id: number;
   name: string;
@@ -30,6 +30,9 @@ export class UserService {
   }
   getUsers(): Observable<UserResponse[]> {
     return this.http.get<UserResponse[]>(this.apiUrl);
+  }
+  getTechnicians() {
+    return this.http.get<Technician[]>(`${this.apiUrl}/technicians`);
   }
 
 }
