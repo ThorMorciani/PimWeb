@@ -96,8 +96,8 @@ export class VisualizarTicketComponent implements OnInit {
   }
 
   isAdminOrManager(): boolean {
-    return this.usuarioAtual?.profile === 'Administrador' 
-        || this.usuarioAtual?.profile === 'Gerente';
+    return this.usuarioAtual?.profile === 'administrador' 
+        || this.usuarioAtual?.profile === 'gerente';
   }
 
   assumirTicket() {
