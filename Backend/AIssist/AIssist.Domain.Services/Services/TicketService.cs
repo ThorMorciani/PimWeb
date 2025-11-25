@@ -45,7 +45,17 @@ namespace AIssist.Domain.Services
                     .Include(t => t.RootCause)
                     .Include(t => t.Assignee)
                     .Include(t => t.Reporter)
-            .FirstOrDefaultAsync(rc => rc.TicketNumber == ticketNumber);
+                    .FirstOrDefaultAsync(rc => rc.TicketNumber == ticketNumber);
+        }
+
+        public async Task<List<Tickets>> GetByReporterId(long reporterId)
+        {
+            return await _context.Tickets
+                    .Include(t => t.RootCause)
+                    .Include(t => t.Assignee)
+                    .Include(t => t.Reporter)
+                    .Where(t => t.ReporterId == reporterId)
+                    .ToListAsync();
         }
 
         public async Task<bool> UpdateStatus(string ticketNumber, long newStatus)

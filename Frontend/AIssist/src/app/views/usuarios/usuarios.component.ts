@@ -162,6 +162,7 @@ export class UsuariosComponent implements OnInit {
     this.userService.createUser(user).subscribe({
       next: (resp) => {
         this.loadUsers();
+        this.textMessage = 'Usuário criado com sucesso.';
         this.showOkButton = true;
         this.showModal = true;
       },

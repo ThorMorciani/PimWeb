@@ -48,6 +48,21 @@ namespace AIssist.Application.Api.Controllers
             }
         }
 
+        [HttpGet("/byReporter/{reporterId}")]
+        public async Task<IActionResult> GetByReporterId(long reporterId)
+        {
+            try
+            {
+                var result = await _ticketAppService.GetByReporterId(reporterId);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { ex.Message });
+            }
+        }
+
         [HttpGet()]
         public async Task<IActionResult> Get()
         {

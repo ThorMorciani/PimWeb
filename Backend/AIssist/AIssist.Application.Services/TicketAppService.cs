@@ -59,6 +59,13 @@ namespace AIssist.Application.Services
             return mapped;
         }
 
+        public async Task<List<TicketResponse>> GetByReporterId(long reporterId)
+        {
+            var result = await _ticketService.GetByReporterId(reporterId);
+            var mapped = _mapper.Map<List<TicketResponse>>(result);
+            return mapped;
+        }
+
         public async Task<DefaultResponse> Update(TicketPutRequest entity)
         {
             var response = new DefaultResponse();
