@@ -11,28 +11,80 @@ import { RootCausesComponent } from './views/root-causes/root-causes.component';
 import { PerfisComponent } from './views/perfis/perfis.component';
 
 import { AuthGuard } from '../core/guards/auth.guard';
+import { RoleGuard } from '../core/guards/role.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  
   {
-    path: 'auth',
-    children: [
-      { path: 'login', component: LoginComponent }
-    ],
+    path: 'not-authorized',
+    loadComponent: () =>
+      import('./views/not-authorized/not-authorized.component').then(
+        (m) => m.NotAuthorizedComponent
+      ),
   },
+
   {
     path: '',
     component: DashboardLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'usuarios', component: UsuariosComponent },
-      { path: 'tickets', component: TicketsComponent },
-      { path: 'tickets/novo', component: NovoTicketComponent },
-      { path: 'tickets/:ticketNumber', component: VisualizarTicketComponent },
-      { path: 'assuntos', component: RootCausesComponent },
-      { path: 'relatorios', component: RelatoriosComponent },
-      { path: 'perfis', component: PerfisComponent },
+      { 
+        path: '', 
+        component: HomeComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador', 'Gerente', 'Tecnico', 'Usuario'] }
+      },
+
+      {
+        path: 'usuarios',
+        component: UsuariosComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador'] }
+      },
+
+      {
+        path: 'tickets',
+        component: TicketsComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador', 'Gerente', 'Tecnico', 'Usuario'] }
+      },
+
+      {
+        path: 'tickets/novo',
+        component: NovoTicketComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador', 'Gerente', 'Tecnico', 'Usuario'] }
+      },
+
+      {
+        path: 'tickets/:ticketNumber',
+        component: VisualizarTicketComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador', 'Gerente', 'Tecnico', 'Usuario'] }
+      },
+
+      {
+        path: 'assuntos',
+        component: RootCausesComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador'] }
+      },
+
+      {
+        path: 'relatorios',
+        component: RelatoriosComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador', 'Gerente'] }
+      },
+
+      {
+        path: 'perfis',
+        component: PerfisComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador', 'Gerente' ] }
+      },
     ],
   },
+  { path: '**', redirectTo: '' },
 ];
