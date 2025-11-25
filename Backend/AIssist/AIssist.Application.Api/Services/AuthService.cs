@@ -80,12 +80,14 @@ namespace AIssist.Application.Api.Services
 
         private string CreateToken(Users user)
         {
+            var profile = _profileService.GetById(user.ProfileId).Result;
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),               
                 new Claim(ClaimTypes.GivenName, user.Name),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, profile.ProfileName)
             };
 
             var key = new SymmetricSecurityKey(
