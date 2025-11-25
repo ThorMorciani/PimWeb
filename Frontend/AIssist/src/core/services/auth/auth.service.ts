@@ -32,10 +32,42 @@ export class AuthService {
     if (!userJson) return null;
 
     try {
-      return JSON.parse(userJson) as User;
+      const user = JSON.parse(userJson) as User;
+
+      user.profile = this.normalizeRole(user.profile);
+
+      return user;
     } catch (error) {
-      console.error('Erro ao ler usuário logado do localStorage:', error);
+      console.error('Erro ao ler usuario logado do localStorage:', error);
       return null;
     }
+  }
+
+  // Remove acentos dos cargos e joga para minusculo
+  normalizeRole(role: string): string {
+    return role
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
+
+  getRole(): string {
+    return this.getUsuarioAtual()?.profile || '';
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'administrador';
+  }
+
+  isGerente(): boolean {
+    return this.getRole() === 'gerente';
+  }
+
+  isTecnico(): boolean {
+    return this.getRole() === 'tecnico';
+  }
+
+  isUsuario(): boolean {
+    return this.getRole() === 'usuario';
   }
 }

@@ -1,48 +1,36 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../../core/services/auth/auth.service';
-import type { User } from '../../types/User';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [
-    RouterModule,
-    MatIconModule
-  ],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
 
-  user: User | null = null;
-  
-  constructor(private auth: AuthService) {
-    this.loadUserFromStorage();
-  }
+  user = this.auth.getUsuarioAtual();
 
-  get logged() {
-    return this.auth.isLogged();
-  }
+  constructor(private auth: AuthService) {}
 
   logout() {
     this.auth.logout();
     window.location.href = '/login';
   }
 
-  getUserInitials(): string {
-    if (!this.user || !this.user.name) return '';
-    const names = this.user.name.trim().split(' ');
-    const firstInitial = names[0].charAt(0);
-    const lastInitial = names.length > 1 ? names[names.length - 1].charAt(0) : '';
-    return (firstInitial + lastInitial).toUpperCase();
-  }
+  // Permissões
+  isAdmin() { return this.auth.isAdmin(); }
+  isGerente() { return this.auth.isGerente(); }
+  isTecnico() { return this.auth.isTecnico(); }
+  isUsuario() { return this.auth.isUsuario(); }
 
-  private loadUserFromStorage() {
-    const userJson = localStorage.getItem('user');
-    if (userJson) {
-      this.user = JSON.parse(userJson) as User;
-    }
+  getUserInitials(): string {
+    if (!this.user) return '';
+    const parts = this.user.name.split(' ');
+    return (parts[0][0] + (parts[1]?.[0] ?? '')).toUpperCase();
   }
 }
