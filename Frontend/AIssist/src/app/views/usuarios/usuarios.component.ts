@@ -168,6 +168,7 @@ export class UsuariosComponent implements OnInit {
       },
       error: (err) => {
         this.loadUsers();
+        this.textMessage = 'Falha ao criar usuário.';
         this.showOkButton = true;
         this.showModal = true;
       }
@@ -184,7 +185,7 @@ export class UsuariosComponent implements OnInit {
       error: (err) => {
         this.loadUsers();
         this.showOkButton = true;
-        this.textMessage = "Erro ao editar usuário."
+        this.textMessage = "Falha ao editar usuário."
         this.showModal = true;
       }
     });
