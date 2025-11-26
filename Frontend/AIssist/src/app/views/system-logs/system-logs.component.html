@@ -1,0 +1,34 @@
+<div class="container-dashboard">
+    <div class="dashboard-header">
+          <div>
+              <h2 class="page-title">Logs do sistema</h2>
+          </div>
+      </div>
+  
+      <div class="table-container">
+        <input type="text" (keyup)="applyFilter($event)" placeholder="Digite sua busca..." />
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Ação </th>
+              <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+            </ng-container>
+
+            <ng-container style="max-width: 60px;" matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Descrição </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+              </ng-container>
+  
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef> Criado Em </th>
+              <td mat-cell *matCellDef="let element"> {{element.createdAt | formatDateBr}} </td>
+            </ng-container>
+              
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">Nenhum resultado encontrado.</td>
+            </tr>
+          </table>
+      </div>
+  </div>
