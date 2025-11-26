@@ -17,12 +17,12 @@ namespace AIssist.Application.Services
             _mapper = mapper;
         }
 
-        public Task<List<LogResponse>> Get()
+        public async Task<List<LogResponse>> Get()
         {
-            var result = _logService.Get();
+            var result = await _logService.Get();
             var mappedResult = _mapper.Map<List<LogResponse>>(result);
 
-            return Task.FromResult(mappedResult);
+            return mappedResult;
         }
 
         public Task Add(string action, string descrip)

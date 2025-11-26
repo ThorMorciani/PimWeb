@@ -4,7 +4,7 @@
 	{
         public string? Action { get; set; }
         public string? Description { get; set; }
-        public DateTime Created_At { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
 

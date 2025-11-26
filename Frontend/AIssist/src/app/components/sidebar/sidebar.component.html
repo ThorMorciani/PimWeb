@@ -3,45 +3,42 @@
     <h1 class="logo">AIssist</h1>
     <ul>
       <div>
-
         <li>
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             <mat-icon>home</mat-icon>Home
           </a>
         </li>
-
         <li *ngIf="isAdmin()">
           <a routerLink="/usuarios" routerLinkActive="active">
             <mat-icon>group</mat-icon> Usuários
           </a>
         </li>
-
         <li *ngIf="isAdmin() || isGerente() || isTecnico() || isUsuario()">
           <a routerLink="/tickets" routerLinkActive="active">
             <mat-icon>confirmation_number</mat-icon> Tickets
           </a>
         </li>
-
         <li *ngIf="isAdmin() || isGerente()">
           <a routerLink="/relatorios" routerLinkActive="active">
             <mat-icon>analytics</mat-icon> Relatórios
           </a>
         </li>
-
         <li *ngIf="isAdmin()">
           <a routerLink="/assuntos" routerLinkActive="active">
             <mat-icon>topic</mat-icon> Assuntos
           </a>
         </li>
-
         <li *ngIf="isAdmin()">
           <a routerLink="/perfis" routerLinkActive="active">
             <mat-icon>group</mat-icon> Perfis de Usuário
           </a>
         </li>
-
+        <li *ngIf="isAdmin()">
+          <a routerLink="/logs" routerLinkActive="active">
+            <mat-icon>list</mat-icon> Logs do sistema
+          </a>
+        </li>
       </div>
-
       <li class="logout-button">
         <a (click)="logout()">
           <mat-icon>logout</mat-icon> Logout

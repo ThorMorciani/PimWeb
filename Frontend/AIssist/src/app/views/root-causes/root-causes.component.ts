@@ -52,10 +52,10 @@ export class RootCausesComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.carregarCausasRaiz();
+    this.loadRootCauses();
   }
 
-  carregarCausasRaiz() {
+  loadRootCauses() {
     this.rootCauseService.getRootCauses().subscribe({
       next: (resp) => {
         console.log(resp);
@@ -82,7 +82,7 @@ export class RootCausesComponent implements OnInit{
   inactivateItem(element: any) {
     this.rootCauseService.inactivateRootCause(element.id).subscribe({
       next: (resp) => {
-        this.carregarCausasRaiz();
+        this.loadRootCauses();
       },
       error: (err) => {
         console.log(err)

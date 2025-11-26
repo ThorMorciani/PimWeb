@@ -11,7 +11,7 @@ namespace AIssist.Infrastructure.Ioc.Configs.AutoMap
             CreateMap<Logs, LogResponse>()
             .ForMember(p => p.Action, o => o.MapFrom(p => p.Action))
             .ForMember(p => p.Description, o => o.MapFrom(p => p.Description))
-            .ForMember(p => p.Created_At, o => o.MapFrom(p => p.CreatedAt));
+            .ForMember(p => p.CreatedAt, o => o.MapFrom(p => p.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")));
         }
 	}
 }

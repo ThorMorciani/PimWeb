@@ -12,6 +12,7 @@ import { PerfisComponent } from './views/perfis/perfis.component';
 
 import { AuthGuard } from '../core/guards/auth.guard';
 import { RoleGuard } from '../core/guards/role.guard';
+import { LogsComponent } from './views/logs/logs.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -83,6 +84,12 @@ export const routes: Routes = [
         component: PerfisComponent,
         canActivate: [RoleGuard],
         data: { roles: ['Administrador', 'Gerente' ] }
+      },
+      {
+        path: 'logs',
+        component: LogsComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Administrador'] }
       },
     ],
   },
