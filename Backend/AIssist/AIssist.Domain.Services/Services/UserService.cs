@@ -56,13 +56,15 @@ namespace AIssist.Domain.Services
         public async Task<Users?> GetById(long userId)
         {
             return await _context.Users
-            .FirstOrDefaultAsync(rc => rc.Id == userId);
+                .Include(p => p.Profile)
+                .FirstOrDefaultAsync(rc => rc.Id == userId);
         }
 
         public async Task<Users?> GetByUsername(string username)
         {
             return await _context.Users
-            .FirstOrDefaultAsync(rc => rc.Username == username);
+                .Include(p => p.Profile)
+                .FirstOrDefaultAsync(rc => rc.Username == username);
         }
 
         public async Task<bool> Update(Users user)
@@ -104,6 +106,7 @@ namespace AIssist.Domain.Services
         public async Task<List<Users>> GetTechnicians()
         {
             return await _context.Users
+                .Include(p => p.Profile)
                 .Where(u => u.ProfileId == 4)
                 .ToListAsync();
         }
