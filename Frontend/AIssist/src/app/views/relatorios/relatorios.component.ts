@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, UserResponse } from '../../../core/services/user/user.service';
+import { UserService } from '../../../core/services/user/user.service';
+import { TicketService } from '../../../core/services/ticket/ticket.service';
+import { RootCauseService } from '../../../core/services/rootCause/root-cause.service';
+
 import { Chart, registerables } from 'chart.js';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../components/button/button.component';
+
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 Chart.register(...registerables);
 
@@ -14,69 +20,217 @@ Chart.register(...registerables);
   styleUrls: ['./relatorios.component.scss']
 })
 export class RelatoriosComponent implements OnInit {
-  totalUsuarios = 0;
-  chart: any;
 
-  constructor(private userService: UserService) {}
+  totalUsuarios = 0;
+  totalTickets = 0;
+  totalAssuntos = 0;
+
+  constructor(
+    private userService: UserService,
+    private ticketService: TicketService,
+    private assuntoService: RootCauseService
+  ) {}
 
   ngOnInit() {
     this.carregarUsuarios();
+    this.carregarTickets();
+    this.carregarAssuntos();
   }
 
+  // GERAR DIAS DO MÊS
+  gerarDiasMes(): string[] {
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = hoje.getMonth() + 1;
+
+    const ultimoDia = new Date(ano, mes, 0).getDate();
+    const dias: string[] = [];
+
+    for (let d = 1; d <= ultimoDia; d++) {
+      const dia = d.toString().padStart(2, '0');
+      const mesStr = mes.toString().padStart(2, '0');
+      dias.push(`${dia}/${mesStr}`);
+    }
+
+    return dias;
+  }
+
+  // USUÁRIOS
   carregarUsuarios() {
     this.userService.getUsers().subscribe({
-      next: (usuarios: UserResponse[]) => {
+      next: (usuarios) => {
         this.totalUsuarios = usuarios.length;
-
-        // Agrupa usuários por dia
-        const usuariosPorDia: { [key: string]: number } = {};
-        usuarios.forEach(u => {
-          const createdRaw = (u as any).created_At || (u as any).createdAt;
-          if (createdRaw) {
-            const data = new Date(createdRaw);
-            const dia = `${data.getDate().toString().padStart(2,'0')}/${
-              (data.getMonth()+1).toString().padStart(2,'0')}/${data.getFullYear()}`;
-            usuariosPorDia[dia] = (usuariosPorDia[dia] || 0) + 1;
-          }
-        });
-
-        const labels = Object.keys(usuariosPorDia).sort((a,b) => {
-          const [d1,m1,y1] = a.split('/').map(Number);
-          const [d2,m2,y2] = b.split('/').map(Number);
-          return new Date(y1,m1-1,d1).getTime() - new Date(y2,m2-1,d2).getTime();
-        });
-        const data = labels.map(l => usuariosPorDia[l]);
-
-        this.criarGrafico(labels, data);
+        this.criarGraficoUsuariosPorDia(usuarios);
       },
-      error: err => {
-        console.error('Erro ao buscar usuários:', err);
-      }
+      error: err => console.error(err)
     });
   }
 
-  criarGrafico(labels: string[], data: number[]) {
-  const ctx: any = document.getElementById('usuariosChart');
-  if (this.chart) this.chart.destroy();
+  criarGraficoUsuariosPorDia(usuarios: any[]) {
+  const diasMes = this.gerarDiasMes();
 
-  this.chart = new Chart(ctx, {
+  const mapa: Record<string, number> = diasMes.reduce((acc, dia) => {
+    acc[dia] = 0;
+    return acc;
+  }, {} as Record<string, number>);
+
+  usuarios.forEach(u => {
+    const data = new Date(u.createdAt);
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const chave = `${dia}/${mes}`;
+
+    if (mapa[chave] !== undefined) {
+      mapa[chave]++;
+    }
+  });
+
+  new Chart('usuariosPorDia', {
     type: 'bar',
     data: {
-      labels,
+      labels: diasMes,
       datasets: [{
         label: 'Usuários criados por dia',
-        data,
-        backgroundColor: '#055DFC',
-        borderColor: '#055DFC',
-        borderWidth: 1
+        data: Object.values(mapa),
+        backgroundColor: '#055DFC'
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { position: 'top' } },
-      scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+      devicePixelRatio: 2
     }
   });
 }
+
+
+  // TICKETS
+  carregarTickets() {
+    this.ticketService.getTickets().subscribe({
+      next: (tickets) => {
+        this.totalTickets = tickets.length;
+
+        this.criarGraficoAbertosFechados(tickets);
+        this.criarGraficoTicketsPorDia(tickets);
+        this.criarGraficoTicketsPorAssunto(tickets);
+      }
+    });
+  }
+
+  criarGraficoAbertosFechados(tickets: any[]) {
+    const abertos = tickets.filter(t => t.status === "Aberto").length;
+    const fechados = tickets.filter(t => t.status === "Fechado").length;
+
+    new Chart('ticketsAbertosFechados', {
+      type: 'doughnut',
+      data: {
+        labels: ['Abertos', 'Fechados'],
+        datasets: [{
+          data: [abertos, fechados],
+          backgroundColor: ['#FF3D00', '#2ECC71']
+        }]
+      }
+    });
+  }
+
+  criarGraficoTicketsPorDia(tickets: any[]) {
+    const diasMes = this.gerarDiasMes();
+
+    const mapa: Record<string, number> = diasMes.reduce((acc, dia) => {
+      acc[dia] = 0;
+      return acc;
+    }, {} as Record<string, number>);
+
+    tickets.forEach(t => {
+      const data = new Date(t.createdAt);
+      const dia = data.getDate().toString().padStart(2, '0');
+      const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+      const chave = `${dia}/${mes}`;
+
+      if (mapa[chave] !== undefined) {
+        mapa[chave]++;
+      }
+    });
+
+    new Chart('ticketsPorDia', {
+      type: 'bar',
+      data: {
+        labels: diasMes,
+        datasets: [{
+          label: 'Tickets criados por dia',
+          data: Object.values(mapa),
+          backgroundColor: '#055DFC'
+        }]
+      },
+      options: {
+        responsive: true,
+        devicePixelRatio: 2
+      }
+    });
+  }
+
+  // ASSUNTOS
+  carregarAssuntos() {
+    this.assuntoService.getRootCauses().subscribe({
+      next: (assuntos) => this.totalAssuntos = assuntos.length
+    });
+  }
+
+  criarGraficoTicketsPorAssunto(tickets: any[]) {
+    const porCausa: Record<string, number> = {};
+
+    tickets.forEach(t => {
+      const nome = t.rootCause?.rootCauseName || 'Não informado';
+      porCausa[nome] = (porCausa[nome] || 0) + 1;
+    });
+
+    new Chart('ticketsPorAssunto', {
+      type: 'pie',
+      data: {
+        labels: Object.keys(porCausa),
+        datasets: [{
+          data: Object.values(porCausa),
+          backgroundColor: [
+            '#055DFC', '#2ECC71', '#FF3D00',
+            '#F1C40F', '#8E44AD', '#16A085'
+          ]
+        }]
+      }
+    });
+  }
+
+  exportarPDF() {
+    const element = document.querySelector('.container-dashboard') as HTMLElement;
+
+    if (!element) return;
+
+    html2canvas(element, { scale: 2, useCORS: true })
+      .then(canvas => {
+        const imgData = canvas.toDataURL('image/png', 1.0);
+
+        const pdf = new jsPDF('p', 'mm', 'a4');
+
+        const pageWidth = 210;
+        const pageHeight = 295;
+
+        const imgWidth = pageWidth;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        let heightLeft = imgHeight;
+        let position = 0;
+        
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft > 0) {
+          position = heightLeft - imgHeight;
+
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+
+          heightLeft -= pageHeight;
+        }
+
+        pdf.save('relatorio.pdf');
+      });
+  }
 }

@@ -4,24 +4,46 @@
       <h2 class="page-title">Relatórios</h2>
     </div>
     <div class="dashboard-header-buttons">
-      <app-button
-        texto="+ Adicionar Filtro"
-        size="large"
-        type="primary"
-        [outlined]="true"
-      ></app-button>
-      <app-button
-        texto="Exportar Relatório"
-        size="large"
-        type="primary"
-      ></app-button>
+      <app-button texto="Exportar Relatório" size="large" type="primary" (click)="exportarPDF()"></app-button>
     </div>
   </div>
 
-  <div class="relatorios-container">
-    <div class="chart-container-med">
-        <canvas id="usuariosChart"></canvas>
+  <!-- CARDS SUPERIORES -->
+  <div class="cards-container">
+    <div class="card">
+      <h3>Total de Tickets</h3>
+      <p>{{ totalTickets }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Total de Usuários</h3>
+      <p>{{ totalUsuarios }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Total de Assuntos</h3>
+      <p>{{ totalAssuntos }}</p>
     </div>
   </div>
-  
+
+  <!-- GRÁFICOS -->
+  <div class="charts-grid">
+
+    <div class="chart-box">
+      <canvas id="ticketsAbertosFechados" class="chartPie"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <canvas id="ticketsPorDia"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <canvas id="usuariosPorDia"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <canvas id="ticketsPorAssunto" class="chartPie"></canvas>
+    </div>
+
+  </div>
 </div>
