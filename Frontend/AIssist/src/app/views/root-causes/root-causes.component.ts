@@ -22,6 +22,7 @@ import { ConfirmModalComponent } from '../../shared/components/confirm-modal/con
 export class RootCausesComponent implements OnInit{
   showModal = false;
   textMessage = '';
+  modalTitleMessage = '';
   paginaAtual = 1;
   totalPorPagina = 15;
   selectedItem = null;
@@ -31,6 +32,7 @@ export class RootCausesComponent implements OnInit{
   constructor(private rootCauseService: RootCauseService) {}
 
   openModal(item: any, message: string) {
+    this.modalTitleMessage = 'Confirmação';
     this.textMessage = message;
     this.selectedItem = item;
     this.showModal = true;

@@ -167,4 +167,9 @@ export class NovoTicketComponent implements OnInit {
     this.criarTicketAtivo = false;
     this.complexidadeTicket = '';
   }
+
+  onCancelAction() {
+    this.showModal = false;
+    this.showOkButton = false;
+  }
 }

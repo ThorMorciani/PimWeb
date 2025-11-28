@@ -53,7 +53,8 @@
   </div>
   <app-confirm-modal
     [open]="showModal"
+    [title]="modalTitleMessage"
     message="{{textMessage}}"
-    (confirm)="onConfirmAction()"
+    [showOkBuuton]="showOkButton"
     (cancel)="onCancelAction()">
-  </app-confirm-modal>
+</app-confirm-modal>

@@ -129,8 +129,13 @@
         (click)="assumirTicket()">
         Atribuir a mim
       </button>
-
     </div>
   </div>
-
 </div>
+<app-confirm-modal
+    [open]="showModal"
+    [title]="modalTitleMessage"
+    message="{{textMessage}}"
+    [showOkBuuton]="showOkButton"
+    (cancel)="onCancelAction()">
+</app-confirm-modal>

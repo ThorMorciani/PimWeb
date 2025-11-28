@@ -7,11 +7,12 @@ import { AuthService } from '../../../../core/services/auth/auth.service';
 import { UserService } from '../../../../core/services/user/user.service';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfirmModalComponent } from '../../../shared/components/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-visualizar-ticket',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonComponent, MatIconModule],
+  imports: [CommonModule, FormsModule, ButtonComponent, MatIconModule, ConfirmModalComponent],
   templateUrl: './visualizar-ticket.component.html',
   styleUrls: ['./visualizar-ticket.component.scss']
 })
