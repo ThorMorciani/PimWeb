@@ -1,24 +1,156 @@
-input {
-    width: 25%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #333;
-    border-radius: 8px;
-    background-color: #121212;
-    color: #fff;
-    font-size: 1rem;
-    box-sizing: border-box;
+@import '../../../styles/variables';
+
+.container-dashboard {
+  padding: 1.5rem;
+  color: #fff;
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .page-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    .page-subtitle {
+      margin-top: 4px;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    .dashboard-header-buttons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+
+      app-button {
+        min-width: 160px;
+      }
+    }
   }
-  
-  ::ng-deep .mat-mdc-table {
-      background: transparent !important;
-      box-shadow: none !important;
-      border: none !important;
+
+  .table-container {
+    margin-top: 20px;
+    width: 100%;
+    overflow-x: auto;
+
+    input {
+      width: 25%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background-color: #121212;
+      color: #fff;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #666;
+      }
     }
-    
-  ::ng-deep .mat-mdc-cell, 
-  ::ng-deep .mat-mdc-header-cell {
-      background: transparent !important;
-      color: inherit !important;
-      font-family: inherit !important;
+  }
+
+  .acoes {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: 0.2s ease;
+
+      mat-icon {
+        font-size: 22px;
+        color: #fff;
+      }
+
+      &.edit:hover mat-icon {
+        color: #4fc3f7;
+      }
+
+      &.delete:hover mat-icon {
+        color: #ef5350;
+      }
+
+      &.toogle:hover mat-icon {
+        color: #9ccc65;
+      }
     }
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .container-dashboard {
+    padding: 1rem;
+
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
+
+      .dashboard-header-buttons {
+        width: 100%;
+
+        app-button {
+          width: 100%;
+        }
+      }
+    }
+
+    .table-container {
+      overflow-x: auto;
+
+      input {
+        width: 100%;
+      }
+    }
+
+    .acoes {
+      flex-direction: row;
+      gap: 6px;
+    }
+  }
+}
+
+/*  DESKTOP */
+@media (min-width: 769px) {
+  .table-container {
+    width: 100%;
+  }
+}
+
+::ng-deep .mat-mdc-table {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+::ng-deep .mat-mdc-cell,
+::ng-deep .mat-mdc-header-cell {
+  background: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  padding: 12px 16px !important;
+}
+
+::ng-deep .mat-row td.mat-cell {
+  text-align: center;
+}
+
+::ng-deep td.mat-mdc-cell:nth-child(3) {
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

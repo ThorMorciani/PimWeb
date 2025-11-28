@@ -1,3 +1,37 @@
+/* CONTAINER GERAL */
+.container-dashboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin: 0;
+}
+
+.page-subtitle {
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* BOTÕES DO HEADER */
+.dashboard-header-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* INPUT DE BUSCA */
 input {
   width: 25%;
   padding: 12px;
@@ -8,15 +42,47 @@ input {
   color: #fff;
   font-size: 1rem;
   box-sizing: border-box;
+  transition: 0.2s;
 }
+
+/* MOBILE */
+@media (max-width: 768px) {
   
+  input {
+    width: 100%;
+  }
+
+  .ellipsis {
+    max-width: 150px;
+  }
+
+  .description {
+    max-width: 120px;
+  }
+
+  .page-subtitle {
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 769px) {
+}
+
+/* TABELA WRAPPER */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
+}
+
 ::ng-deep .mat-mdc-table {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
-    
-::ng-deep .mat-mdc-cell, 
+
+::ng-deep .mat-mdc-cell,
 ::ng-deep .mat-mdc-header-cell {
   background: transparent !important;
   color: inherit !important;
@@ -33,4 +99,21 @@ input {
 
 .description {
   max-width: 180px;
+}
+
+/* AÇÕES */
+.acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.btn mat-icon {
+  font-size: 20px;
 }

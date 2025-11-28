@@ -22,3 +22,49 @@ input {
       color: inherit !important;
       font-family: inherit !important;
     }
+
+    /* Responsividade geral */
+@media (max-width: 1024px) {
+  input {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  input {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 600px;
+  }
+
+  th.mat-header-cell, td.mat-cell {
+    padding: 12px 8px;
+    font-size: 0.9rem;
+  }
+
+  .acoes button {
+    margin: 0 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  input {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  th.mat-header-cell, td.mat-cell {
+    font-size: 0.8rem;
+  }
+
+  .acoes button mat-icon {
+    font-size: 18px;
+  }
+}

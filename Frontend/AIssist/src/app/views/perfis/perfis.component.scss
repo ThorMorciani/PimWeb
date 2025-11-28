@@ -8,17 +8,74 @@ input {
   color: #fff;
   font-size: 1rem;
   box-sizing: border-box;
+  transition: 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #666;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  input {
+    width: 100%;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+  .table-container {
+    width: 100%;
+  }
 }
 
 ::ng-deep .mat-mdc-table {
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-  }
-  
-::ng-deep .mat-mdc-cell, 
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+::ng-deep .mat-mdc-cell,
 ::ng-deep .mat-mdc-header-cell {
-    background: transparent !important;
-    color: inherit !important;
-    font-family: inherit !important;
+  background: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  padding: 12px 16px !important;
+}
+
+::ng-deep .mat-row td.mat-cell {
+  text-align: center;
+}
+
+.acoes {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    font-size: 22px;
   }
+}
+
+.btn.edit:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn.delete:hover {
+  background: rgba(255, 80, 80, 0.2);
+}
