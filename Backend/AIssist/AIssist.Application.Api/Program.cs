@@ -4,8 +4,9 @@ using AIssist.Application.Services;
 using AIssist.Application.Services.Interfaces;
 using AIssist.Infrastructure.Data;
 using AIssist.Infrastructure.Ioc;
-using Microsoft.EntityFrameworkCore;
 using Google.GenAI;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,13 @@ builder.Services.AddCors(options =>
               .AllowCredentials();
     });
 });
+
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    });
+
 
 var app = builder.Build();
 
