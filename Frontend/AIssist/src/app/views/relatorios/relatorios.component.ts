@@ -117,8 +117,8 @@ export class RelatoriosComponent implements OnInit {
   }
 
   criarGraficoAbertosFechados(tickets: any[]) {
-    const abertos = tickets.filter(t => t.status === "Aberto").length;
-    const fechados = tickets.filter(t => t.status === "Fechado").length;
+    const abertos = tickets.filter(t => t.status !== "Fechado" && t.status !== "Cancelado").length;
+    const fechados = tickets.filter(t => t.status === "Fechado" || t.status === "Cancelado").length;
 
     new Chart('ticketsAbertosFechados', {
       type: 'doughnut',
