@@ -62,7 +62,6 @@
     align-items: center;
 
     .btn {
-      background: transparent;
       border: none;
       cursor: pointer;
       padding: 6px;
@@ -72,18 +71,6 @@
       mat-icon {
         font-size: 22px;
         color: #fff;
-      }
-
-      &.edit:hover mat-icon {
-        color: #4fc3f7;
-      }
-
-      &.delete:hover mat-icon {
-        color: #ef5350;
-      }
-
-      &.toogle:hover mat-icon {
-        color: #9ccc65;
       }
     }
   }
