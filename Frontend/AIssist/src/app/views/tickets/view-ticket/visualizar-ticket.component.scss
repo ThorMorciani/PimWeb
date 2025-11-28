@@ -208,24 +208,25 @@ textarea {
   }
 }
 
-//  USUÁRIO
+.edit-icon {
+  font-size: 16px;
+  margin-left: 8px;
+  cursor: pointer;
+  color: $primary-button-background;
 
+  &:hover {
+    color: $primary-button-background-hover;
+  }
+}
+
+//  USUÁRIO
 .user-box {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
 
-  .edit-icon {
-    font-size: 16px;
-    margin-left: 8px;
-    cursor: pointer;
-    color: $primary-button-background;
-
-    &:hover {
-      color: $primary-button-background-hover;
-    }
-  }
+  
 
   select {
     margin-top: 5px;

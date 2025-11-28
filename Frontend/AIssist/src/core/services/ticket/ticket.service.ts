@@ -31,6 +31,10 @@ export class TicketService {
     return this.http.get<TicketResponse[]>(this.apiUrl);
   }
 
+  getTicketsByReporterId(reporterId: any): Observable<TicketResponse[]> {
+    return this.http.get<TicketResponse[]>(`${environment.baseUrl}/byReporter/${reporterId}`);
+  }
+
   getTicketByTicketNumber(ticketNumber: string): Observable<TicketResponse> {
     return this.http.get<TicketResponse>(`${this.apiUrl}/${ticketNumber}`);
   }
@@ -49,5 +53,9 @@ export class TicketService {
 
   updateAssignee(body: { ticketNumber: string; assigneeId: number }): Observable<void> {
     return this.http.put<void>(`${environment.baseUrl}/assignee`, body);
+  }
+
+  updateTicketStatus(body: { ticketNumber: string; status: number }): Observable<void> {
+    return this.http.put<void>(`${environment.baseUrl}/status`, body);
   }
 }

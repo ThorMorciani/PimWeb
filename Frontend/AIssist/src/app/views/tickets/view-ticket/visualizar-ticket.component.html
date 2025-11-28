@@ -19,13 +19,13 @@
       <textarea
         placeholder="Inserir texto..."
         [(ngModel)]="solution"
-        [readonly]="ticket.statusId === 5">
+        [readonly]="ticket.statusId === 5 || isUser()"
+      >
       </textarea>
     </section>
 
     <div class="buttons">
-      <button class="btn danger">Arquivar</button>
-      <button class="btn primary" (click)="salvarTicket()">Salvar</button>
+      <button class="btn primary" (click)="salvarTicket()" *ngIf="!isUser()" >Salvar</button>
     </div>
 
   </div>
@@ -47,7 +47,25 @@
         <span class="badge" [ngClass]="obterClasseStatus(ticket.statusId)">
           {{ obterTextoStatus(ticket.statusId) }}
         </span>
+
+        <mat-icon 
+          *ngIf="!isUser()"
+          class="edit-icon"
+          (click)="editarStatus = !editarStatus">
+          edit
+        </mat-icon>
       </p>
+
+      <div *ngIf="editarStatus" class="status-editor">
+        <select [(ngModel)]="statusSelecionado">
+          <option *ngFor="let status of listaStatus" [value]="status.id">
+            {{ status.nome }}
+          </option>
+        </select>
+
+        <button class="btn primary" (click)="definirStatus()">Salvar</button>
+        <button class="btn danger" (click)="editarStatus=false">Cancelar</button>
+      </div>
 
       <p>
         <span class="text-secondary">Prioridade: </span>
@@ -68,7 +86,7 @@
 
         <div class="infos">
           <p class="name">
-            {{ ticket.assignee.name }}
+            {{ ticket.assignee?.name ?? 'Não Atribuído' }}
 
             <!-- Lápis só para admins e gerentes -->
             <mat-icon 
@@ -104,6 +122,13 @@
           <p class="email">{{ ticket.reporter.email }}</p>
         </div>
       </div>
+
+      <button 
+        class="btn primary" 
+        *ngIf="!isUser() && !assigneeSelecionado"
+        (click)="assumirTicket()">
+        Atribuir a mim
+      </button>
 
     </div>
   </div>

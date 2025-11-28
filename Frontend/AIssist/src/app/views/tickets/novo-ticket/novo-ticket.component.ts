@@ -76,7 +76,7 @@ export class NovoTicketComponent implements OnInit {
     this.dicasIA = this.sanitizer.bypassSecurityTrustHtml('Gerando sugestão...');
     this.iaUsada = true;
     this.feedbackAtivo = true;
-    this.iaUtil = null; // reset feedback
+    this.iaUtil = null;
 
     try {
       const response = await fetch(`${environment.baseUrl}/GeminiAi/suggestion`, {
@@ -98,7 +98,7 @@ export class NovoTicketComponent implements OnInit {
 
   feedbackIA(util: boolean) {
     alert(util ? "Obrigado pelo feedback!" : "Obrigado, vamos melhorar.");
-    this.iaUtil = util; // salva se IA foi útil
+    this.iaUtil = util;
     this.feedbackAtivo = false;
     this.criarTicketAtivo = true;
   }
@@ -112,11 +112,11 @@ export class NovoTicketComponent implements OnInit {
     const usuarioLogado = this.authService.getUsuarioAtual(); 
     const reporterId = usuarioLogado?.id ?? 0;
 
-    let status = 1; // padrão = aberto
+    let status = 1;
     let solution: string | null = null;
 
     if (this.iaUsada && this.iaUtil !== null) {
-      status = this.iaUtil ? 5 : 1; // 5 se IA foi útil, 1 se não
+      status = this.iaUtil ? 5 : 1;
       solution = this.iaUtil ? this.sugestaoIA : null;
     }
 
@@ -124,7 +124,7 @@ export class NovoTicketComponent implements OnInit {
       description: this.descricao,
       solution: solution ?? "Aguardando análise",
       reporterId: reporterId,
-      assigneeId: 2,
+      assigneeId: null,
       rootCauseId: Number(this.assunto),
       status: status
     };
@@ -133,11 +133,12 @@ export class NovoTicketComponent implements OnInit {
       next: () => {
         alert('Ticket criado com sucesso!');
         this.resetForm();
+
+        this.location.back();
       },
       error: () => alert('Erro ao criar ticket')
-    });
+    });    
   }
-
 
   resetForm() {
     this.assunto = null;
