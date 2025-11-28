@@ -2,6 +2,8 @@
 
 .ticket-create-container {
   display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
   gap: 2rem;
   padding: 2rem;
   color: #fff;
@@ -26,15 +28,16 @@
 
     textarea {
       min-height: 100px;
-      max-height: 200px; // limita a altura
-      resize: vertical;   // permite ajustar verticalmente, mas dentro do limite
-      overflow-y: auto;   // adiciona scroll se ultrapassar o max-height
+      max-height: 200px;
+      resize: vertical;
+      overflow-y: auto;
     }
 
     .buttons {
       display: flex;
       gap: 1rem;
       margin-top: 1rem;
+      flex-wrap: wrap;
     }
   }
 
@@ -46,19 +49,19 @@
 
     .dicas-ia {
       min-height: 150px;
-      max-height: 300px;  // limita altura das dicas da IA
+      max-height: 300px;
       padding: 10px;
       border: 1px solid $textbox-border;
       border-radius: 4px;
       background-color: $default-background;
       overflow-y: auto;
-      white-space: pre-wrap; // mantém quebras de linha
+      white-space: pre-wrap;
     }
 
     textarea {
       color: $title-text-color;
       min-height: 100px;
-      max-height: 200px; // limita altura
+      max-height: 200px;
       background: $default-background;
       border-radius: 0.5rem;
       border: 1px solid $textbox-border;
@@ -75,5 +78,46 @@
         font-weight: bold;
       }
     }
+  }
+}
+
+/* MOBILE*/
+@media (max-width: 768px) {
+  .ticket-create-container {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .form-section {
+    width: 100% !important;
+  }
+
+  .ia-section {
+    width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+
+    app-button {
+      width: 100%;
+    }
+  }
+}
+
+/* DESKTOP*/
+@media (min-width: 769px) {
+  .ticket-create-container {
+    flex-direction: row;
+  }
+
+  .form-section {
+    width: 60%;
+  }
+
+  .ia-section {
+    width: 40%;
   }
 }

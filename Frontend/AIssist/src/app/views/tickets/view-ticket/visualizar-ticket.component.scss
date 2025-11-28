@@ -1,21 +1,18 @@
 @import '../../../../styles/variables';
 
-// =======================================
 //  CONTAINER PRINCIPAL
-// =======================================
 
 .ticket-page {
   display: flex;
+  flex-direction: row;
   gap: 40px;
   color: $text-primary-color;
   background: $modal-background;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0 2rem;
 }
 
-// =======================================
 //  COLUNA PRINCIPAL
-// =======================================
 
 .main-column {
   flex: 1;
@@ -25,7 +22,6 @@
 .back-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
   background: transparent;
   border: none;
@@ -104,15 +100,12 @@ textarea {
   }
 }
 
-// =======================================
 //  COLUNA LATERAL
-// =======================================
 
 .details-column {
   width: 350px;
-  height: 100%;
-  border-left: 1px solid $input-border-color;
   padding: 2rem 2rem;
+  border-left: 1px solid $input-border-color;
 }
 
 .titulo {
@@ -125,7 +118,7 @@ textarea {
   background: $modal-background;
   padding: 25px;
   border-radius: 12px;
-  
+
   span.text-secondary {
     color: $text-secondary-color;
   }
@@ -147,10 +140,7 @@ textarea {
   }
 }
 
-
-// =======================================
 //  BADGES DE STATUS
-// =======================================
 
 .badge {
   padding: 4px 10px;
@@ -189,9 +179,7 @@ textarea {
   }
 }
 
-// =======================================
-//  PRIORIDADE (CORREÇÃO)
-// =======================================
+//  PRIORIDADE
 
 .priority {
   padding: 4px 10px;
@@ -220,9 +208,7 @@ textarea {
   }
 }
 
-// =======================================
 //  USUÁRIO
-// =======================================
 
 .user-box {
   display: flex;
@@ -231,29 +217,27 @@ textarea {
   margin-bottom: 12px;
 
   .edit-icon {
-  font-size: 16px;
-  margin-left: 8px;
-  cursor: pointer;
-  vertical-align: middle;
-  color: $primary-button-background;
+    font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
+    color: $primary-button-background;
 
-  &:hover {
-    color: $primary-button-background-hover;
+    &:hover {
+      color: $primary-button-background-hover;
+    }
   }
-}
 
-.user-box select {
-  margin-top: 5px;
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid $textbox-border;
-}
+  select {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid $textbox-border;
+  }
 
-.user-box .btn {
-  margin-top: 5px;
-  margin-right: 5px;
-}
-
+  .btn {
+    margin-top: 5px;
+    margin-right: 5px;
+  }
 
   .avatar {
     width: 30px;
@@ -281,3 +265,34 @@ textarea {
     }
   }
 }
+
+// MOBILE
+
+@media (max-width: 768px) {
+
+  .ticket-page {
+    flex-direction: column;
+    gap: 20px;
+    padding: 1rem;
+  }
+
+  .main-column {
+    padding: 1rem 0;
+  }
+
+  .details-column {
+    width: 100%;
+    padding: 1rem 0;
+    border-left: none;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+

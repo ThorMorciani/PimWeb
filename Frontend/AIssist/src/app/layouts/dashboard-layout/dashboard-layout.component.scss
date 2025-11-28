@@ -3,14 +3,48 @@
 .dashboard-container {
   background: $modal-background;
   width: 100%;
+  min-height: 100vh;
   display: flex;
-  height: 100vh;
+  overflow: visible;
 }
 
 .content {
   flex: 1;
   color: white;
   overflow-y: auto;
-  width: 100%;
-  height: 100vh;
+  padding: 20px;
+}
+
+/* Mobile (sidebar overlay) */
+@media (max-width: 768px) {
+
+  .dashboard-container {
+    display: block;
+  }
+
+  .content {
+    padding: 15px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    background: transparent;
+    border: none;
+    color: white;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 28px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .content {
+    margin-left: 0 !important;
+  }
 }

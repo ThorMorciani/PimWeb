@@ -1,9 +1,6 @@
 @import '../../../styles/variables';
 
-// =======================================
 // CONTAINER PRINCIPAL
-// =======================================
-
 .relatorios-page {
   padding: 2rem;
   background: $modal-background;
@@ -11,10 +8,7 @@
   min-height: 100vh;
 }
 
-// =======================================
 // CARDS SUPERIORES
-// =======================================
-
 .cards-container {
   display: flex;
   gap: 1.5rem;
@@ -40,14 +34,11 @@
     font-size: 2rem;
     font-weight: bold;
     margin-top: .5rem;
-    color: $text-primary-color; 
+    color: $text-primary-color;
   }
 }
 
-// =======================================
 // GRADE DE GRÁFICOS
-// =======================================
-
 .charts-grid {
   margin-top: 2rem;
   display: grid;
@@ -56,12 +47,20 @@
 }
 
 .chart-box {
-  height: 250px;
+  position: relative; 
+  width: 100%;
+  height: auto;
   background: $modal-background;
   padding: 0.7rem;
   border-radius: 12px;
   border: 1px solid $input-border-color;
   box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 250px;
+  }
 
   .chart-title {
     margin-bottom: 8px;
@@ -69,10 +68,71 @@
     color: $title-text-color;
     font-weight: 500;
   }
+
   .chartPie {
     display: block !important;
     margin: 0 auto !important;
     position: relative;
   }
+}
 
+// TABLET LANDSCAPE
+@media (max-width: 1024px) {
+
+  .chart-box {
+    height: 200px;
+  }
+
+  .cards-container {
+    gap: 1rem;
+  }
+
+  .card p {
+    font-size: 1.6rem;
+  }
+}
+
+// TABLET / MOBILE GRANDE
+@media (max-width: 768px) {
+
+  .cards-container {
+    flex-direction: column;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-box {
+    height: 260px;
+
+    canvas {
+      max-height: 300px !important;
+    }
+  }
+}
+
+// MOBILE PEQUENO
+@media (max-width: 480px) {
+
+  .relatorios-page {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+
+    p {
+      font-size: 1.5rem;
+    }
+  }
+
+  .chart-box {
+    height: 240px;
+    padding: 0.5rem;
+  }
+
+  .chart-title {
+    font-size: 13px;
+  }
 }

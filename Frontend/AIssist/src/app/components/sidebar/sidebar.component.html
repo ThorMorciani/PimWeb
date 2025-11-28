@@ -1,46 +1,53 @@
-<div class="sidebar">
+<div class="sidebar" [class.open]="mobileOpen">
   <div>
     <h1 class="logo">AIssist</h1>
     <ul>
       <div>
         <li>
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="close()">
             <mat-icon>home</mat-icon>Home
           </a>
         </li>
+
         <li *ngIf="isAdmin()">
-          <a routerLink="/usuarios" routerLinkActive="active">
+          <a routerLink="/usuarios" routerLinkActive="active" (click)="close()">
             <mat-icon>group</mat-icon> Usuários
           </a>
         </li>
+
         <li *ngIf="isAdmin() || isGerente() || isTecnico() || isUsuario()">
-          <a routerLink="/tickets" routerLinkActive="active">
+          <a routerLink="/tickets" routerLinkActive="active" (click)="close()">
             <mat-icon>confirmation_number</mat-icon> Tickets
           </a>
         </li>
+
         <li *ngIf="isAdmin() || isGerente()">
-          <a routerLink="/relatorios" routerLinkActive="active">
+          <a routerLink="/relatorios" routerLinkActive="active" (click)="close()">
             <mat-icon>analytics</mat-icon> Relatórios
           </a>
         </li>
+
         <li *ngIf="isAdmin()">
-          <a routerLink="/assuntos" routerLinkActive="active">
+          <a routerLink="/assuntos" routerLinkActive="active" (click)="close()">
             <mat-icon>topic</mat-icon> Assuntos
           </a>
         </li>
+
         <li *ngIf="isAdmin()">
-          <a routerLink="/perfis" routerLinkActive="active">
+          <a routerLink="/perfis" routerLinkActive="active" (click)="close()">
             <mat-icon>group</mat-icon> Perfis de Usuário
           </a>
         </li>
+
         <li *ngIf="isAdmin()">
-          <a routerLink="/logs" routerLinkActive="active">
+          <a routerLink="/logs" routerLinkActive="active" (click)="close()">
             <mat-icon>list</mat-icon> Logs do sistema
           </a>
         </li>
       </div>
+
       <li class="logout-button">
-        <a (click)="logout()">
+        <a (click)="logout(); close()">
           <mat-icon>logout</mat-icon> Logout
         </a>
       </li>
@@ -49,9 +56,7 @@
 
   <div class="bottom">
     <div class="user">
-      <div class="user-avatar">
-        {{ getUserInitials() }}
-      </div>
+      <div class="user-avatar">{{ getUserInitials() }}</div>
       <div>
         <p><strong>{{ user?.name }}</strong></p>
         <small>{{ user?.email }}</small>
@@ -59,3 +64,6 @@
     </div>
   </div>
 </div>
+
+<!-- OVERLAY -->
+<div *ngIf="mobileOpen" class="sidebar-overlay" (click)="close()"></div>

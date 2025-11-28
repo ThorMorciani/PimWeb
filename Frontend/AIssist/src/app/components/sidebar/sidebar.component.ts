@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +12,9 @@ import { AuthService } from '../../../core/services/auth/auth.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+
+  @Input() mobileOpen: boolean = false;
+  @Output() closeSidebar = new EventEmitter<void>();
 
   user = this.auth.getUsuarioAtual();
 
@@ -32,5 +35,9 @@ export class SidebarComponent {
     if (!this.user) return '';
     const parts = this.user.name.split(' ');
     return (parts[0][0] + (parts[1]?.[0] ?? '')).toUpperCase();
+  }
+
+  close() {
+    this.closeSidebar.emit();
   }
 }
