@@ -23,10 +23,21 @@ export class VisualizarTicketComponent implements OnInit {
   tecnicos: any[] = [];
 
   assigneeSelecionado: number | null = null;
-  carregando = false;
+  statusSelecionado: number | null = null;
 
+  carregando = false;
   solution: string = '';
-  editarResponsavel: boolean = false;
+  editarResponsavel = false;
+  editarStatus = false;
+
+  listaStatus = [
+    { id: 1, nome: 'Aberto' },
+    { id: 2, nome: 'Atribuído' },
+    { id: 3, nome: 'Em Atendimento' },
+    { id: 4, nome: 'Em Validação' },
+    { id: 5, nome: 'Fechado' },
+    { id: 6, nome: 'Cancelado' }
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -54,6 +65,8 @@ export class VisualizarTicketComponent implements OnInit {
       next: (res) => {
         this.ticket = res;
         this.solution = res.solution ?? '';
+        this.statusSelecionado = res.statusId ?? null;
+        this.assigneeSelecionado = res.assignee?.id ?? null;
       },
       error: (err) => console.error('Erro ao carregar ticket:', err)
     });
@@ -100,26 +113,27 @@ export class VisualizarTicketComponent implements OnInit {
         || this.usuarioAtual?.profile === 'gerente';
   }
 
+  isUser():boolean {
+    return this.usuarioAtual?.profile === 'usuario'
+  }
+
   assumirTicket() {
     if (!this.ticket) return;
 
     const updateData = {
-      ...this.ticket,
+      ticketNumber: this.ticket.ticketNumber,
       assigneeId: this.usuarioAtual?.id
     };
 
     this.carregando = true;
 
-    this.ticketService.updateTicket(updateData).subscribe({
+    this.ticketService.updateAssignee(updateData).subscribe({
       next: () => {
         alert('Ticket assumido com sucesso!');
-        this.ticket.assignee = { name: this.usuarioAtual.name };
-        this.carregando = false;
+        this.editarResponsavel = false;
+        this.carregarTicket(this.ticket.ticketNumber);
       },
-      error: () => {
-        alert('Erro ao assumir ticket');
-        this.carregando = false;
-      }
+      error: () => alert('Erro ao assumir ticket')
     });
   }
 
@@ -144,8 +158,28 @@ export class VisualizarTicketComponent implements OnInit {
     });
   }
 
-  salvarTicket() {
+  definirStatus() {
+    if (!this.statusSelecionado) {
+      alert('Selecione um status!');
+      return;
+    }
 
+    const body = {
+      ticketNumber: this.ticket.ticketNumber,
+      status: this.statusSelecionado
+    };
+
+    this.ticketService.updateTicketStatus(body).subscribe({
+      next: () => {
+        alert('Status atualizado com sucesso!');
+        this.editarStatus = false;
+        this.carregarTicket(this.ticket.ticketNumber);
+      },
+      error: () => alert('Erro ao atualizar status.')
+    });
+  }
+
+  salvarTicket() {
     const updateData = {
       ticketNumber: this.ticket.ticketNumber,
       description: this.ticket.description,
