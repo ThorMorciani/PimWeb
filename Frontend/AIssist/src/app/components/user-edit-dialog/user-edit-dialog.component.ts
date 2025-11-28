@@ -21,6 +21,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   ]
 })
 export class UserEditDialogComponent {
+  showModal = false;
+  showOkButton = false;
+  modalMessage = '';
+  modalTitleMessage = '';
   form: FormGroup;
   @Input() aberto = false;
   @Input() user: UserResponse | undefined;
@@ -43,8 +47,18 @@ export class UserEditDialogComponent {
     if (!updatedUser.password) delete updatedUser.password;
 
     this.userService.updateUser(updatedUser).subscribe({
-      next: () => console.log('Usuário atualizado'),
-      error: err => console.error('Erro ao atualizar usuário:', err)
+      next: () => {
+        this.modalMessage = 'Usuário atualizado com sucesso.';
+        this.modalTitleMessage = 'Sucesso';
+        this.showOkButton = true;
+        this.showModal = true;
+      },
+      error: err => {
+        this.modalMessage = 'Erro ao atualizar usuário.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
+      }
     });
   }
 

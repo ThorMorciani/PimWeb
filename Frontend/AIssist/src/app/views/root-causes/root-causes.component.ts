@@ -58,7 +58,6 @@ export class RootCausesComponent implements OnInit{
   loadRootCauses() {
     this.rootCauseService.getRootCauses().subscribe({
       next: (resp) => {
-        console.log(resp);
         this.dataSource = new MatTableDataSource(resp);
         this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
           const filterValue = filter.trim().toLowerCase();

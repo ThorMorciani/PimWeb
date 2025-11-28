@@ -12,3 +12,10 @@
     </form>
   </div>
 </div>
+<app-confirm-modal
+    [open]="showModal"
+    [message]="modalMessage"
+    [title]="modalTitleMessage"
+    [showOkBuuton]="showOkButton"
+    (cancel)="onCancelAction()">
+</app-confirm-modal>

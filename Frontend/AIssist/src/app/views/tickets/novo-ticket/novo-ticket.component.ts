@@ -18,18 +18,18 @@ import { AuthService } from '../../../../core/services/auth/auth.service';
   styleUrls: ['./novo-ticket.component.scss'],
 })
 export class NovoTicketComponent implements OnInit {
-
+  showModal = false;
+  showOkButton = false;
+  modalMessage = '';
+  modalTitleMessage = '';
   assunto: number | null = null;
   descricao: string = '';
   dicasIA: SafeHtml = '';
   complexidadeTicket: string = '';
-
   iaUsada: boolean = false;
   feedbackAtivo: boolean = false;
   criarTicketAtivo: boolean = false;
-
   rootCauses: RootCause[] = [];
-
   sugestaoIA: string = '';
   iaUtil: boolean | null = null;
 
@@ -97,7 +97,15 @@ export class NovoTicketComponent implements OnInit {
   }
 
   feedbackIA(util: boolean) {
-    alert(util ? "Obrigado pelo feedback!" : "Obrigado, vamos melhorar.");
+    if(util) {
+      this.modalMessage = 'Obrigado pelo feedback!';
+      this.modalTitleMessage = 'Confirmação';
+    } else {
+      this.modalMessage = 'Obrigado, vamos melhorar.';
+      this.modalTitleMessage = 'Confirmação';
+    }
+    this.showOkButton = true;
+    this.showModal = true;
     this.iaUtil = util;
     this.feedbackAtivo = false;
     this.criarTicketAtivo = true;
@@ -105,7 +113,10 @@ export class NovoTicketComponent implements OnInit {
 
   criarTicket() {
     if (!this.assunto || !this.descricao) {
-      alert('Preencha todos os campos obrigatórios!');
+      this.modalMessage = 'Preencha os campos obrigatórios.';
+      this.modalTitleMessage = 'Erro';
+      this.showOkButton = true;
+      this.showModal = true;
       return;
     }
 
@@ -131,12 +142,19 @@ export class NovoTicketComponent implements OnInit {
 
     this.ticketService.createTicket(ticketData).subscribe({
       next: () => {
-        alert('Ticket criado com sucesso!');
+        this.modalMessage = 'Ticket criado com sucesso.';
+        this.modalTitleMessage = 'Sucesso';
+        this.showOkButton = true;
+        this.showModal = true;
         this.resetForm();
-
         this.location.back();
       },
-      error: () => alert('Erro ao criar ticket')
+      error: () => {
+        this.modalMessage = 'Erro ao criar ticket.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
+      }
     });    
   }
 

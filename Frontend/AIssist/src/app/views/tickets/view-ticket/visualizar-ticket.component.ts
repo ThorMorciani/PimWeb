@@ -16,11 +16,14 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./visualizar-ticket.component.scss']
 })
 export class VisualizarTicketComponent implements OnInit {
-
   ticket!: TicketResponse;
   usuarioAtual: any;
   cargo = '';
   tecnicos: any[] = [];
+  showModal = false;
+  showOkButton = false;
+  modalMessage = '';
+  modalTitleMessage = '';
 
   assigneeSelecionado: number | null = null;
   statusSelecionado: number | null = null;
@@ -68,14 +71,24 @@ export class VisualizarTicketComponent implements OnInit {
         this.statusSelecionado = res.statusId ?? null;
         this.assigneeSelecionado = res.assignee?.id ?? null;
       },
-      error: (err) => console.error('Erro ao carregar ticket:', err)
+      error: (err) => {
+        this.modalMessage = 'Falha ao listar tickets.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
+      }
     });
   }
 
   carregarTecnicos() {
     this.userService.getTechnicians().subscribe({
       next: lista => this.tecnicos = lista,
-      error: () => alert('Erro ao carregar técnicos.')
+      error: () => {
+        this.modalMessage = 'Falha ao listar técnicos.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
+      }
     });
   }
 
@@ -129,17 +142,28 @@ export class VisualizarTicketComponent implements OnInit {
 
     this.ticketService.updateAssignee(updateData).subscribe({
       next: () => {
-        alert('Ticket assumido com sucesso!');
+        this.modalMessage = 'Ticket atribuído com sucesso.';
+        this.modalTitleMessage = 'Sucesso';
+        this.showOkButton = true;
+        this.showModal = true;
         this.editarResponsavel = false;
         this.carregarTicket(this.ticket.ticketNumber);
       },
-      error: () => alert('Erro ao assumir ticket')
+      error: () => {
+        this.modalMessage = 'Falha ao atribuir ticket.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
+      }
     });
   }
 
   definirResponsavel() {
     if (!this.assigneeSelecionado) {
-      alert('Selecione um técnico!');
+      this.modalMessage = 'Selecione um técnico.';
+      this.modalTitleMessage = 'Erro';
+      this.showOkButton = true;
+      this.showModal = true;
       return;
     }
 
@@ -150,17 +174,28 @@ export class VisualizarTicketComponent implements OnInit {
 
     this.ticketService.updateAssignee(body).subscribe({
       next: () => {
-        alert('Responsável atualizado com sucesso!');
+        this.modalMessage = 'Responsável atualizado com sucesso.';
+        this.modalTitleMessage = 'Sucesso';
+        this.showOkButton = true;
+        this.showModal = true;
         this.editarResponsavel = false;
         this.carregarTicket(this.ticket.ticketNumber);
       },
-      error: () => alert('Erro ao atualizar responsável')
+      error: () => {
+        this.modalMessage = 'Erro ao atualizar responsável.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
+      }
     });
   }
 
   definirStatus() {
     if (!this.statusSelecionado) {
-      alert('Selecione um status!');
+      this.modalMessage = 'Selecione um técnico.';
+      this.modalTitleMessage = 'Erro';
+      this.showOkButton = true;
+      this.showModal = true;
       return;
     }
 
@@ -171,11 +206,19 @@ export class VisualizarTicketComponent implements OnInit {
 
     this.ticketService.updateTicketStatus(body).subscribe({
       next: () => {
-        alert('Status atualizado com sucesso!');
+        this.modalMessage = 'Status atualizado com sucesso.';
+        this.modalTitleMessage = 'Sucesso';
+        this.showOkButton = true;
+        this.showModal = true;
         this.editarStatus = false;
         this.carregarTicket(this.ticket.ticketNumber);
       },
-      error: () => alert('Erro ao atualizar status.')
+      error: () => {
+        this.modalMessage = 'Erro ao atualizar status.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
+      }
     });
   }
 
@@ -187,8 +230,18 @@ export class VisualizarTicketComponent implements OnInit {
     };
 
     this.ticketService.updateTicket(updateData).subscribe({
-      next: () => alert('Descrição salva com sucesso!'),
-      error: () => alert('Erro ao salvar descrição.')
+      next: () => {
+        this.modalMessage = 'Descrição salva com sucesso.';
+        this.modalTitleMessage = 'Sucesso';
+        this.showOkButton = true;
+        this.showModal = true;
+      },
+      error: () => {
+        this.modalMessage = 'Erro ao salvar descrição.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
+      }
     });
   }
 
@@ -198,5 +251,10 @@ export class VisualizarTicketComponent implements OnInit {
     const firstInitial = names[0].charAt(0);
     const lastInitial = names.length > 1 ? names[names.length - 1].charAt(0) : '';
     return (firstInitial + lastInitial).toUpperCase();
+  }
+
+  onCancelAction() {
+    this.showModal = false;
+    this.showOkButton = false;
   }
 }

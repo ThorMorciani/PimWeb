@@ -12,6 +12,7 @@ export class ConfirmModalComponent {
 
   @Input() open: boolean = false;
   @Input() message: string = '';
+  @Input() title: string = '';
   @Input() showOkBuuton: boolean = false;
 
   @Output() confirm = new EventEmitter<void>();

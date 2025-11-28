@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import type { User } from '../../types/User';
 import type { AuthResponse } from '../../types/Auth';
+import { ConfirmModalComponent } from '../../shared/components/confirm-modal/confirm-modal.component';
 
 
 @Component({
@@ -15,11 +16,16 @@ import type { AuthResponse } from '../../types/Auth';
   standalone: true,
   imports: [
     FormsModule,
-    RouterModule
+    RouterModule,
+    ConfirmModalComponent
   ],
 })
 export class LoginComponent {
   loginData = { username: '', password: '' };
+  showModal = false;
+  showOkButton = false;
+  modalMessage = '';
+  modalTitleMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -39,8 +45,16 @@ export class LoginComponent {
         this.router.navigate(['/']);
       },
       error: () => {
-        alert('Usuário ou senha inválidos');
+        this.modalMessage = 'Falha ao criar usuário.';
+        this.modalTitleMessage = 'Erro';
+        this.showOkButton = true;
+        this.showModal = true;
       },
     });
+  }
+
+  onCancelAction() {
+    this.showModal = false;
+    this.showOkButton = false;
   }
 }
